@@ -1,0 +1,17 @@
+{
+  "name": "labor",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Tomás Cuevas",
+  "license": "MIT",
+  "private": "true",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "install:client": "yarn --cwd client install",
+    "install:server": "yarn --cwd server install",
+    "dev:server": "yarn --cwd server start:dev"
+  }
+}
