@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:14.4
+    restart: always
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    container_name: laborDB
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
