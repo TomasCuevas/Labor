@@ -2,6 +2,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+//* modules *//
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -22,6 +26,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
             }
           : (false as any),
     }),
+
+    AuthModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],
