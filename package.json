@@ -6,12 +6,12 @@
   "license": "MIT",
   "private": "true",
   "workspaces": [
-    "server",
-    "client"
+    "packages/*"
   ],
   "scripts": {
-    "install:client": "yarn --cwd client install",
     "install:server": "yarn --cwd server install",
-    "dev:server": "yarn --cwd server start:dev"
+    "install:client": "yarn --cwd client install",
+    "dev:server": "yarn --cwd packages/server start:dev",
+    "dev:client": "yarn --cwd packages/client dev"
   }
 }
