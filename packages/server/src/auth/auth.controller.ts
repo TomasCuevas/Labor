@@ -30,10 +30,10 @@ export class AuthController {
     return this.authService.login(loginUserDto);
   }
 
-  //! revalidate controller
-  @Get('revalidate')
+  //! check controller
+  @Get('check')
   @UseGuards(AuthGuard('jwt'))
-  async revalidate(@GetUser() user: User) {
-    return this.authService.revalidate(user);
+  async check(@GetUser() user: User) {
+    return this.authService.check(user);
   }
 }

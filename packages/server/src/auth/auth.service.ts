@@ -31,7 +31,7 @@ export class AuthService {
 
     return {
       token: this.getJwtToken({ id: user.id }),
-      ...user,
+      user,
     };
   }
 
@@ -54,15 +54,15 @@ export class AuthService {
 
     return {
       token: this.getJwtToken({ id: user.id }),
-      ...user,
+      user,
     };
   }
 
-  //! revalidate service
-  async revalidate(user: User) {
+  //! check service
+  async check(user: User) {
     return {
       token: this.getJwtToken({ id: user.id }),
-      ...user,
+      user,
     };
   }
 
