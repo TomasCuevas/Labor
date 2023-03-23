@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcryptjs from 'bcryptjs';
@@ -19,6 +19,13 @@ export class UsersService {
   async create(createUserDto: CreateUserDto): Promise<User> {
     const { password, ...userData } = createUserDto;
 
+    const existUser = await this.findByEmail(userData.email);
+    if (existUser) {
+      throw new BadRequestException([
+        'El correo electrónico ingresado, ya se encuentra registrado.',
+      ]);
+    }
+
     const user = await this.userRepository.create({
       ...userData,
       password: bcryptjs.hashSync(password, bcryptjs.genSaltSync()),
@@ -28,5 +35,10 @@ export class UsersService {
     delete user.password;
 
     return user;
+  }
+
+  //! find user by email service
+  async findByEmail(email: string) {
+    return await this.userRepository.findOneBy({ email });
   }
 }
