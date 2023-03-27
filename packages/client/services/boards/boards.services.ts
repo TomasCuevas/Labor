@@ -5,13 +5,15 @@ import { boardsApi } from "../../api";
 import { IBoard } from "../../interfaces";
 
 //! create board service
-export const createBoardService = async (name: string) => {
+export const createBoardService = async (
+  name: string
+): Promise<{ ok: boolean; board?: IBoard }> => {
   try {
     const { data } = await boardsApi.post("/create", { name });
 
     return {
       ok: true,
-      data,
+      board: data,
     };
   } catch (error) {
     console.log(error);
@@ -30,5 +32,22 @@ export const getAllBoardsService = async (): Promise<IBoard[]> => {
   } catch (error) {
     console.log(error);
     throw new Error("Error al obtener los tableros.");
+  }
+};
+
+//! get board by name service
+export const getBoardByName = async (
+  boardName: string
+): Promise<{ ok: boolean; board?: IBoard }> => {
+  try {
+    const { data } = await await boardsApi.get(`/${boardName}`);
+
+    return {
+      ok: true,
+      board: data,
+    };
+  } catch (error: any) {
+    console.log(error);
+    return { ok: false };
   }
 };
