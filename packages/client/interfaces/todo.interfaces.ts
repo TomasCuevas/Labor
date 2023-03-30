@@ -1,8 +1,20 @@
 export interface ITodo {
-  _id: string;
-  description: string;
-  status: ITodoStatus;
+  id: string;
+  description?: string;
   lastUpdate: number;
+  status: ITodoStatus;
+  title: string;
+}
+
+export interface ITodoForCreate {
+  status: ITodoStatus;
+  title: string;
+}
+
+export interface ITodoForUpdate {
+  description?: string;
+  status?: ITodoStatus;
+  title?: string;
 }
 
 export type ITodoStatus = "pending" | "in-progress" | "completed";

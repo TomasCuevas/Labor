@@ -1,4 +1,4 @@
 export * from "./auth.interfaces";
-export * from "./board.interface";
+export * from "./board.interfaces";
 export * from "./todo.interfaces";
-export * from "./header.interface";
+export * from "./header.interfaces";
