@@ -1,6 +1,9 @@
+import { IBoard } from "./board.interfaces";
+
 export interface ITodo {
-  id: string;
+  board: IBoard;
   description?: string;
+  id: string;
   lastUpdate: number;
   status: ITodoStatus;
   title: string;
