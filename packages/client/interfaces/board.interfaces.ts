@@ -1,5 +1,5 @@
 //* interfaces *//
-import { IUser } from "./";
+import { IUser } from ".";
 
 export interface IBoard {
   id: string;
