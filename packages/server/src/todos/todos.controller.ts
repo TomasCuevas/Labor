@@ -39,13 +39,13 @@ export class TodosController {
 
   //! find one todo by id [controller]
   @Get(':id')
-  findOne(@Param('id') id: string, @GetUser() user: User) {
+  async findOne(@Param('id') id: string, @GetUser() user: User) {
     return this.todosService.findOne(id, user.id);
   }
 
   //! update todo [controller]
-  @Patch(':id')
-  update(
+  @Patch('update/:id')
+  async update(
     @Param('id') id: string,
     @Body() updateTodoDto: UpdateTodoDto,
     @GetUser() user: User,
@@ -53,8 +53,9 @@ export class TodosController {
     return this.todosService.update(id, updateTodoDto, user.id);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.todosService.remove(+id);
+  //! remove todo [controller]
+  @Delete('delete/:id')
+  async remove(@Param('id') id: string, @GetUser() user: User): Promise<void> {
+    return this.todosService.remove(id, user.id);
   }
 }

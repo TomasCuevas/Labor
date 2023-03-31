@@ -50,7 +50,6 @@ export class TodosService {
 
   //! find one todo by id [service]
   async findOne(id: string, userId: string): Promise<Todo> {
-    console.log('hola');
     const todo = await this.TodoReposity.findOneBy({
       id,
       user: { id: userId },
@@ -79,7 +78,11 @@ export class TodosService {
     return await this.TodoReposity.save(todo);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} todo`;
+  //! remove todo [service]
+  async remove(id: string, userId: string): Promise<void> {
+    const todo = await this.findOne(id, userId);
+    await this.TodoReposity.remove(todo);
+
+    return;
   }
 }
