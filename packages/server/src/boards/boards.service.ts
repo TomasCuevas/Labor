@@ -16,7 +16,7 @@ export class BoardsService {
     private readonly boardsRepository: Repository<Board>,
   ) {}
 
-  //! create board service
+  //! create board [service]
   async create(createBoardDto: CreateBoardDto, createBy: User): Promise<Board> {
     const newBoard = await this.boardsRepository.create({
       ...createBoardDto,
@@ -26,15 +26,25 @@ export class BoardsService {
     return await this.boardsRepository.save(newBoard);
   }
 
-  //! get all boards service
+  //! get all boards by user [service]
   async findAll(userId: string): Promise<Board[]> {
     return await this.boardsRepository.find({
       where: { user: { id: userId } },
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} board`;
+  //! get one board by id [service]
+  async findOneById(boardId: string, userId: string): Promise<Board> {
+    return await this.boardsRepository.findOne({
+      where: { id: boardId, user: { id: userId } },
+    });
+  }
+
+  //! get board by name [service]
+  async findOneByName(name: string, userId: string): Promise<Board> {
+    return await this.boardsRepository.findOne({
+      where: { user: { id: userId }, name: name },
+    });
   }
 
   update(id: number, updateBoardDto: UpdateBoardDto) {
