@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { BoardsModule } from './boards/boards.module';
 import { UsersModule } from './users/users.module';
 import { TodosModule } from './todos/todos.module';
+import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { TodosModule } from './todos/todos.module';
     BoardsModule,
     UsersModule,
     TodosModule,
+    SearchModule,
   ],
   controllers: [],
   providers: [],
