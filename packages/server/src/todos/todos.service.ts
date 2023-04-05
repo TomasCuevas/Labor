@@ -48,6 +48,16 @@ export class TodosService {
     });
   }
 
+  //! find all todos by search [service]
+  async findAllBySearch(search: string, userId: string): Promise<Todo[]> {
+    return this.TodoReposity.createQueryBuilder()
+      .where(`"userId" = :userId`, { userId })
+      .andWhere('LOWER(title) like :title', {
+        title: `%${search.toLowerCase()}%`,
+      })
+      .getMany();
+  }
+
   //! find one todo by id [service]
   async findOne(id: string, userId: string): Promise<Todo> {
     const todo = await this.TodoReposity.findOneBy({
