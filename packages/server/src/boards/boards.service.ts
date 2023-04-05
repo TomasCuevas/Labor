@@ -33,6 +33,17 @@ export class BoardsService {
     });
   }
 
+  //! get all boards by search [service]
+  async findAllBySearch(search: string, userId: string): Promise<Board[]> {
+    return this.boardsRepository
+      .createQueryBuilder()
+      .where(`"userId" = :userId`, { userId })
+      .andWhere('LOWER(name) like :name', {
+        name: `%${search.toLowerCase()}%`,
+      })
+      .getMany();
+  }
+
   //! get one board by id [service]
   async findOneById(boardId: string, userId: string): Promise<Board> {
     return await this.boardsRepository.findOne({
