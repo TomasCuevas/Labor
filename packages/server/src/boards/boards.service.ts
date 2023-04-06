@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 //* dtos *//
-import { CreateBoardDto, UpdateBoardDto } from './dto';
+import { CreateBoardDto } from './dto';
 
 //* entities *//
 import { Board } from './entities';
@@ -56,13 +56,5 @@ export class BoardsService {
     return await this.boardsRepository.findOne({
       where: { user: { id: userId }, name: name },
     });
-  }
-
-  update(id: number, updateBoardDto: UpdateBoardDto) {
-    return `This action updates a #${id} board`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} board`;
   }
 }

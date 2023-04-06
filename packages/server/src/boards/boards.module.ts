@@ -11,10 +11,10 @@ import { BoardsService } from './boards.service';
 import { Board } from './entities/board.entity';
 
 //* modules *//
-import { TodosModule } from '../todos/todos.module';
+import { CardsModule } from '../cards/cards.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Board]), TodosModule],
+  imports: [TypeOrmModule.forFeature([Board]), CardsModule],
   controllers: [BoardsController],
   providers: [BoardsService],
   exports: [TypeOrmModule, BoardsService],

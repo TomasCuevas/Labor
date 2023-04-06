@@ -1,4 +1,4 @@
-import { Todo } from 'src/todos/entities';
+import { Card } from 'src/cards/entities';
 import {
   BeforeUpdate,
   Column,
@@ -19,8 +19,8 @@ export class Board {
   @ManyToOne(() => User, (user) => user.id, { eager: true })
   user: User;
 
-  @OneToMany(() => Todo, (todo) => todo.id)
-  todos: Todo[];
+  @OneToMany(() => Card, (todo) => todo.id)
+  cards: Card[];
 
   @Column({
     type: 'text',

@@ -16,14 +16,14 @@ import { GetUser } from '../auth/decorators';
 
 //* services *//
 import { BoardsService } from './boards.service';
-import { TodosService } from '../todos/todos.service';
+import { CardsService } from '../cards/cards.service';
 
 //* dtos *//
-import { CreateBoardDto, UpdateBoardDto } from './dto';
+import { CreateBoardDto } from './dto';
 
 //* entities *//
 import { Board } from './entities';
-import { Todo } from '../todos/entities';
+import { Card } from '../cards/entities';
 import { User } from '../users/entities';
 
 @Controller('boards')
@@ -31,7 +31,7 @@ import { User } from '../users/entities';
 export class BoardsController {
   constructor(
     private readonly boardsService: BoardsService,
-    private readonly todosService: TodosService,
+    private readonly cardsService: CardsService,
   ) {}
 
   //! create board [controller]
@@ -58,22 +58,12 @@ export class BoardsController {
     return await this.boardsService.findOneByName(name, user.id);
   }
 
-  //! get all todos by board [controller]
-  @Get(':boardId/todos')
+  //! get all cards by board [controller]
+  @Get(':boardId/cards')
   async findAllTodos(
     @Param('boardId', ParseUUIDPipe) boardId: string,
     @GetUser() user: User,
-  ): Promise<Todo[]> {
-    return await this.todosService.findAllByBoard(boardId, user.id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBoardDto: UpdateBoardDto) {
-    return this.boardsService.update(+id, updateBoardDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.boardsService.remove(+id);
+  ): Promise<Card[]> {
+    return await this.cardsService.findAllByBoard(boardId, user.id);
   }
 }

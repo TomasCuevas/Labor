@@ -9,7 +9,7 @@ import { SearchService } from './search.service';
 
 //* entity *//
 import { Board } from '../boards/entities';
-import { Todo } from '../todos/entities';
+import { Card } from '../cards/entities';
 import { User } from '../users/entities';
 
 @Controller('search')
@@ -22,7 +22,7 @@ export class SearchController {
   searchAll(
     @Param('search') search: string,
     @GetUser() user: User,
-  ): Promise<{ todos: Todo[]; boards: Board[] }> {
+  ): Promise<{ cards: Card[]; boards: Board[] }> {
     return this.searchService.findAll(search, user.id);
   }
 }

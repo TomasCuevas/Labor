@@ -5,9 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 //* modules *//
 import { AuthModule } from './auth/auth.module';
 import { BoardsModule } from './boards/boards.module';
-import { UsersModule } from './users/users.module';
-import { TodosModule } from './todos/todos.module';
+import { CardsModule } from './cards/cards.module';
 import { SearchModule } from './search/search.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -32,9 +32,9 @@ import { SearchModule } from './search/search.module';
 
     AuthModule,
     BoardsModule,
-    UsersModule,
-    TodosModule,
+    CardsModule,
     SearchModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],

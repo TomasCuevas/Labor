@@ -7,11 +7,11 @@ import { SearchController } from './search.controller';
 import { SearchService } from './search.service';
 
 //* modules *//
-import { TodosModule } from '../todos/todos.module';
 import { BoardsModule } from '../boards/boards.module';
+import { CardsModule } from '../cards/cards.module';
 
 @Module({
-  imports: [TodosModule, BoardsModule],
+  imports: [CardsModule, BoardsModule],
   controllers: [SearchController],
   providers: [SearchService],
 })
