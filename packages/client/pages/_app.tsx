@@ -8,7 +8,7 @@ import {
   AuthProvider,
   BoardsProvider,
   HeaderProvider,
-  TodosProvider,
+  CardProvider,
 } from "../context";
 
 //* styles *//
@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <SnackbarProvider maxSnack={3}>
         <AuthProvider>
           <BoardsProvider>
-            <TodosProvider>
+            <CardProvider>
               <HeaderProvider>
                 <Head>
                   <link
@@ -34,7 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 </Head>
                 <Component {...pageProps} />
               </HeaderProvider>
-            </TodosProvider>
+            </CardProvider>
           </BoardsProvider>
         </AuthProvider>
       </SnackbarProvider>

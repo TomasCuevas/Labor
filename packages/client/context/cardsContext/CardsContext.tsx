@@ -4,74 +4,74 @@ import { useSnackbar } from "notistack";
 
 //* services *//
 import {
-  createTodoService,
-  removeTodoService,
-  updateTodoService,
+  createCardService,
+  removeCardService,
+  updateCardService,
 } from "../../services";
 
 //* interfaces
-import { ITodo, ITodoForCreate, ITodoForUpdate } from "../../interfaces";
+import { ICard, ICardForCreate, ICardForUpdate } from "../../interfaces";
 
 //* CONTEXT *//
 //* CONTEXT *//
-interface TodosContextProps {
-  isTodoDragging: boolean;
-  todoModal: ITodo | undefined;
-  onCreateTodo(todo: ITodoForCreate, boardId: string): Promise<void>;
-  onToggleTodoDragging(newValue: boolean): void;
-  onDeleteTodo(todoId: string, boardId: string): Promise<void>;
-  onUpdateTodo(
-    todoToUpdate: ITodoForUpdate,
-    todoId: string,
+interface CardsContextProps {
+  isCardDragging: boolean;
+  cardModal: ICard | undefined;
+  onCreateCard(todo: ICardForCreate, boardId: string): Promise<void>;
+  onToggleCardDragging(newValue: boolean): void;
+  onDeleteCard(todoId: string, boardId: string): Promise<void>;
+  onUpdateCard(
+    cardToUpdate: ICardForUpdate,
+    cardId: string,
     boardId: string
   ): Promise<void>;
-  onClearTodoModal(): void;
-  onSetTodoModal(todo: ITodo): void;
+  onClearCardModal(): void;
+  onSetCardModal(card: ICard): void;
 }
 
-export const TodosContext = createContext({} as TodosContextProps);
+export const CardContext = createContext({} as CardsContextProps);
 
 //* PROVIDER *//
 //* PROVIDER *//
-interface TodosProviderProps {
+interface Props {
   children: React.ReactNode;
 }
 
-export const TodosProvider: React.FC<TodosProviderProps> = ({ children }) => {
-  const [isTodoDragging, setIsTodoDragging] = useState<boolean>(false);
-  const [todoModal, setTodoModal] = useState<ITodo>();
+export const CardProvider: React.FC<Props> = ({ children }) => {
+  const [isCardDragging, setIsCardDragging] = useState<boolean>(false);
+  const [cardModal, setCardModal] = useState<ICard>();
   const queryClient = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
 
   //! toggle dragging
-  const onToggleTodoDragging = (newValue: boolean) => {
-    return setIsTodoDragging(newValue);
+  const onToggleCardDragging = (newValue: boolean) => {
+    return setIsCardDragging(newValue);
   };
 
-  //! set todo on popup
-  const onSetTodoModal = (todo: ITodo) => setTodoModal(todo);
+  //! set card on popup
+  const onSetCardModal = (todo: ICard) => setCardModal(todo);
 
-  //! clear todo on popup
-  const onClearTodoModal = () => setTodoModal(undefined);
+  //! clear card on popup
+  const onClearCardModal = () => setCardModal(undefined);
 
-  //! create todo
-  const onCreateTodo = async (
-    todo: ITodoForCreate,
+  //! create card
+  const onCreateCard = async (
+    card: ICardForCreate,
     boardId: string
   ): Promise<void> => {
-    const result = await createTodoService(todo, boardId);
+    const result = await createCardService(card, boardId);
     if (result.ok) {
       queryClient.invalidateQueries([`/boards/${boardId}/todos`]);
     }
   };
 
-  //! update todo
-  const onUpdateTodo = async (
-    todoToUpdate: ITodoForUpdate,
-    todoId: string,
+  //! update card
+  const onUpdateCard = async (
+    cardToUpdate: ICardForUpdate,
+    cardId: string,
     boardId: string
   ) => {
-    const result = await updateTodoService(todoToUpdate, todoId);
+    const result = await updateCardService(cardToUpdate, cardId);
     if (result.ok) {
       queryClient.invalidateQueries([`/boards/${boardId}/todos`]);
       enqueueSnackbar("Tarjeta actualizada", {
@@ -94,9 +94,9 @@ export const TodosProvider: React.FC<TodosProviderProps> = ({ children }) => {
     }
   };
 
-  //! delete todo
-  const onDeleteTodo = async (todoId: string, boardId: string) => {
-    const result = await removeTodoService(todoId);
+  //! delete card
+  const onDeleteCard = async (cardId: string, boardId: string) => {
+    const result = await removeCardService(cardId);
 
     if (result.ok) {
       queryClient.invalidateQueries([`/boards/${boardId}/todos`]);
@@ -121,22 +121,22 @@ export const TodosProvider: React.FC<TodosProviderProps> = ({ children }) => {
   };
 
   return (
-    <TodosContext.Provider
+    <CardContext.Provider
       value={{
         //? getters
-        isTodoDragging,
-        todoModal,
+        isCardDragging,
+        cardModal,
 
         //? methods
-        onClearTodoModal,
-        onCreateTodo,
-        onDeleteTodo,
-        onSetTodoModal,
-        onToggleTodoDragging,
-        onUpdateTodo,
+        onClearCardModal,
+        onCreateCard,
+        onDeleteCard,
+        onSetCardModal,
+        onToggleCardDragging,
+        onUpdateCard,
       }}
     >
       {children}
-    </TodosContext.Provider>
+    </CardContext.Provider>
   );
 };
