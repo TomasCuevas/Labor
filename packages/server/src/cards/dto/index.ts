@@ -1,2 +1,2 @@
-export * from './create-todo.dto';
+export * from './create-card.dto';
 export * from './update-todo.dto';

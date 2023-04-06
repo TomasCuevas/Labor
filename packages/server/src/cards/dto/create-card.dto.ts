@@ -8,7 +8,7 @@ import {
   MinLength,
 } from 'class-validator';
 
-export class CreateTodoDto {
+export class CreateCardDto {
   @Matches(/^(?!\s)[\s\S]*(?<!\s)$/, {
     message:
       'El nombre del tablero, no puede tener espacios al principio ni al final.',

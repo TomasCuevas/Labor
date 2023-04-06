@@ -10,8 +10,8 @@ import {
 import { Board } from '../../boards/entities';
 import { User } from '../../users/entities';
 
-@Entity('todos')
-export class Todo {
+@Entity('cards')
+export class Card {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -44,8 +44,8 @@ export class Todo {
   })
   lastUpdate: number;
 
-  // @BeforeUpdate()
-  // updateLastUpdate() {
-  //   this.lastUpdate = new Date().getTime();
-  // }
+  @BeforeUpdate()
+  updateLastUpdate() {
+    this.lastUpdate = new Date().getTime();
+  }
 }
