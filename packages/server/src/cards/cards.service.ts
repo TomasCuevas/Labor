@@ -53,9 +53,10 @@ export class CardsService {
 
   //! find all cards by search [service]
   async findAllBySearch(search: string, userId: string): Promise<Card[]> {
-    return this.CardReposity.createQueryBuilder()
-      .where(`"userId" = :userId`, { userId })
-      .andWhere('LOWER(title) like :title', {
+    return this.CardReposity.createQueryBuilder('card')
+      .innerJoinAndSelect('card.board', 'board')
+      .where('card.userId = :userId', { userId })
+      .andWhere('LOWER(card.title) like :title', {
         title: `%${search.toLowerCase()}%`,
       })
       .getMany();
