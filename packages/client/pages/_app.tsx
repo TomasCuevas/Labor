@@ -14,17 +14,17 @@ import {
 //* styles *//
 import "../styles/globals.css";
 
-//* create a client
+//* create a client *//
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <BoardsProvider>
-          <TodosProvider>
-            <HeaderProvider>
-              <SnackbarProvider maxSnack={3}>
+      <SnackbarProvider maxSnack={3}>
+        <AuthProvider>
+          <BoardsProvider>
+            <TodosProvider>
+              <HeaderProvider>
                 <Head>
                   <link
                     rel="shortcut icon"
@@ -33,11 +33,11 @@ function MyApp({ Component, pageProps }: AppProps) {
                   />
                 </Head>
                 <Component {...pageProps} />
-              </SnackbarProvider>
-            </HeaderProvider>
-          </TodosProvider>
-        </BoardsProvider>
-      </AuthProvider>
+              </HeaderProvider>
+            </TodosProvider>
+          </BoardsProvider>
+        </AuthProvider>
+      </SnackbarProvider>
     </QueryClientProvider>
   );
 }
