@@ -1,8 +1,8 @@
 //* components *//
-import { TodoList } from "../todos";
+import { CardList } from "../cards";
 
 //* hooks *//
-import { useTodos } from "../../hooks";
+import { useCards } from "../../hooks";
 
 //* inteface *//
 interface Props {
@@ -10,27 +10,27 @@ interface Props {
 }
 
 export const Board: React.FC<Props> = ({ boardId }) => {
-  const { todos } = useTodos(boardId);
+  const { cards } = useCards(boardId);
 
   return (
     <div className="mt-4 flex max-h-[calc(100vh_-_64px)] w-full flex-nowrap overflow-y-hidden overflow-x-scroll">
-      <TodoList
+      <CardList
         boardId={boardId}
         status="pending"
         title="Pendientes"
-        todosProp={todos?.filter((todo) => todo.status === "pending")}
+        cardsProp={cards?.filter((card) => card.status === "pending")}
       />
-      <TodoList
+      <CardList
         boardId={boardId}
         status="in-progress"
         title="En progreso"
-        todosProp={todos?.filter((todo) => todo.status === "in-progress")}
+        cardsProp={cards?.filter((card) => card.status === "in-progress")}
       />
-      <TodoList
+      <CardList
         boardId={boardId}
         status="completed"
         title="Completadas"
-        todosProp={todos?.filter((todo) => todo.status === "completed")}
+        cardsProp={cards?.filter((card) => card.status === "completed")}
       />
     </div>
   );
