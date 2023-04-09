@@ -14,16 +14,18 @@ input:-webkit-autofill:active {
 /* Firefox */
 * {
   scrollbar-width: auto;
-  scrollbar-color: #a7c7ab #1f8675;
+  scrollbar-color: #a7c7ab #0000;
+  font-family: "Roboto";
 }
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
   width: 6px;
+  height: 8px;
 }
 
 *::-webkit-scrollbar-track {
-  background: #1f8675;
+  background: #0000;
 }
 
 *::-webkit-scrollbar-thumb {
