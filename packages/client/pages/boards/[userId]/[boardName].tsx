@@ -1,26 +1,32 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { NextPage, GetServerSideProps } from "next";
 import axios from "axios";
 
 //* components *//
 import { Board } from "../../../components/boards";
-import { TodoModal } from "../../../components/todos";
+import { CardModal } from "../../../components/cards";
 
 //* layout *//
 import { MainLayout } from "../../../layouts";
 
 //* context *//
-import { TodosContext } from "../../../context";
+import { CardContext } from "../../../context";
 
 //* interfaces *//
-import { IBoard } from "../../../interfaces";
+import { IBoard, ICard } from "../../../interfaces";
 
 interface Props {
   board: IBoard;
+  modalCard?: ICard;
 }
 
-const BoardPage: NextPage<Props> = ({ board }) => {
-  const { todoModal } = useContext(TodosContext);
+const BoardPage: NextPage<Props> = ({ board, modalCard }) => {
+  const { cardModal, onSetCardModal } = useContext(CardContext);
+
+  useEffect(() => {
+    if (!modalCard) return;
+    if (modalCard) onSetCardModal(modalCard);
+  }, []);
 
   return (
     <MainLayout
@@ -28,12 +34,13 @@ const BoardPage: NextPage<Props> = ({ board }) => {
       description={`Pagina dedicada al tablero ${board.name} creado por ${board.user.name}`}
     >
       <Board boardId={board.id} />
-      {todoModal && <TodoModal />}
+      {cardModal && <CardModal />}
     </MainLayout>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async ({
+  query,
   params,
   req: { cookies },
 }) => {
@@ -56,9 +63,24 @@ export const getServerSideProps: GetServerSideProps = async ({
     };
   }
 
+  const { modal } = query as { modal: string };
+
+  if (!modal) {
+    return {
+      props: {
+        board: data,
+      },
+    };
+  }
+
+  const { data: modalData } = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/cards/${modal}`
+  );
+
   return {
     props: {
       board: data,
+      modalCard: modalData,
     },
   };
 };
