@@ -1,4 +1,5 @@
-import { IBoard } from "./board.interfaces";
+//* interfaces *//
+import { IUser, IBoard } from "./";
 
 export interface ICard {
   board: IBoard;
@@ -7,6 +8,7 @@ export interface ICard {
   lastUpdate: number;
   status: ICardStatus;
   title: string;
+  user: IUser;
 }
 
 export interface ICardForCreate {
