@@ -5,6 +5,7 @@ export interface ICard {
   board: IBoard;
   description?: string;
   id: string;
+  labels: string[];
   lastUpdate: number;
   status: ICardStatus;
   title: string;
@@ -18,6 +19,7 @@ export interface ICardForCreate {
 
 export interface ICardForUpdate {
   description?: string;
+  labels: string[];
   status?: ICardStatus;
   title?: string;
 }
