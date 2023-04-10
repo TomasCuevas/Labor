@@ -1,4 +1,5 @@
 import {
+  IsArray,
   IsIn,
   IsOptional,
   IsString,
@@ -36,4 +37,12 @@ export class CreateCardDto {
   })
   @IsOptional()
   description?: string;
+
+  @IsArray({ message: 'El campo debe ser un array de strings.' })
+  @IsString({
+    each: true,
+    message: 'Cada elemento del array debe ser una cadena de caracteres.',
+  })
+  @IsOptional()
+  labels?: string[];
 }

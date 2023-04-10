@@ -39,6 +39,13 @@ export class Card {
   status: 'pending' | 'in-progress' | 'completed';
 
   @Column({
+    type: 'text',
+    array: true,
+    default: [],
+  })
+  labels: string[];
+
+  @Column({
     type: 'numeric',
     default: new Date().getTime(),
   })
