@@ -26,31 +26,6 @@ export const useRadioInputs = (
     }
   };
 
-  // const [selectedInputs, setSelectedInputs] = useState<Record<string, boolean>>(
-  //   inputNames.reduce((object: Record<string, boolean>, input) => {
-  //     object[input] = inputChecked && inputChecked === input ? true : false;
-  //     return object;
-  //   }, {})
-  // );
-
-  // const onRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
-  //   const { name, checked } = event.target;
-
-  //   if (allowMultipleSelections) {
-  //     setSelectedInputs((prevSelectedInputs) => ({
-  //       ...prevSelectedInputs,
-  //       [name]: checked,
-  //     }));
-  //   } else {
-  //     setSelectedInputs((prevObj) => ({
-  //       ...Object.fromEntries(
-  //         Object.entries(prevObj).map(([obj]) => [obj, false])
-  //       ),
-  //       [name]: checked,
-  //     }));
-  //   }
-  // };
-
   return {
     //? getters
     selectedInputs,
