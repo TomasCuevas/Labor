@@ -1,7 +1,9 @@
 //* interfaces *//
-import { IBoard, ITodo } from "./";
+import { IBoard, ICard } from "./";
 
 export interface ISearch {
-  cards?: ITodo[];
+  cards?: ICard[];
   boards?: IBoard[];
+  onSearch(search: string): void;
+  clearData(): void;
 }
