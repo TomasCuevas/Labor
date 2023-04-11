@@ -1,17 +1,18 @@
 import { createContext, useReducer } from "react";
 
 //* interfaces *//
-import { CreateMenuState, IHeaderState } from "../../interfaces";
+import { CreateMenuState, IHeader } from "../../interfaces";
 
 //* reducer *//
 import { headerReducer } from "./headerReducer";
 
 //* CONTEXT *//
 //* CONTEXT *//
-interface HeaderContextProps extends IHeaderState {
-  closeAllPops(): void;
-  setCreatePop(): void;
+interface HeaderContextProps extends IHeader {
   setAccountPop(): void;
+  setCreatePop(): void;
+  setSearchPop(): void;
+  closeAllPops(): void;
   onChangeCreateMenuState(state: CreateMenuState): void;
 }
 
@@ -25,8 +26,9 @@ interface HeaderProviderProps {
 
 export const HeaderProvider: React.FC<HeaderProviderProps> = ({ children }) => {
   const [headerStatus, dispatch] = useReducer(headerReducer, {
-    createMenu: false,
     accountMenu: false,
+    createMenu: false,
+    searchMenu: false,
     createMenuState: "nothing",
   });
 
@@ -35,6 +37,9 @@ export const HeaderProvider: React.FC<HeaderProviderProps> = ({ children }) => {
 
   //! set create pop
   const setCreatePop = () => dispatch({ type: "create" });
+
+  //! set search pop
+  const setSearchPop = () => dispatch({ type: "search" });
 
   //! close all pop
   const closeAllPops = () => dispatch({ type: "closeAll" });
@@ -51,9 +56,10 @@ export const HeaderProvider: React.FC<HeaderProviderProps> = ({ children }) => {
         ...headerStatus,
 
         //? methods
-        closeAllPops,
-        setCreatePop,
         setAccountPop,
+        setCreatePop,
+        setSearchPop,
+        closeAllPops,
         onChangeCreateMenuState,
       }}
     >

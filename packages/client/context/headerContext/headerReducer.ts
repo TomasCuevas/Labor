@@ -1,33 +1,44 @@
 //* interfaces *//
-import { CreateMenuState, IHeaderState } from "../../interfaces";
+import { CreateMenuState, IHeader } from "../../interfaces";
 
 export interface HeaderActions {
-  type: "account" | "create" | "closeAll" | CreateMenuState;
+  type: "account" | "create" | "search" | "closeAll" | CreateMenuState;
 }
 
 export const headerReducer = (
-  state: IHeaderState,
+  state: IHeader,
   action: HeaderActions
-): IHeaderState => {
+): IHeader => {
   switch (action.type) {
     case "account":
       return {
-        createMenu: false,
         accountMenu: true,
+        createMenu: false,
+        searchMenu: false,
         createMenuState: "nothing",
       };
 
     case "create":
       return {
-        createMenu: true,
         accountMenu: false,
+        createMenu: true,
+        searchMenu: false,
+        createMenuState: "nothing",
+      };
+
+    case "search":
+      return {
+        accountMenu: false,
+        createMenu: false,
+        searchMenu: true,
         createMenuState: "nothing",
       };
 
     case "closeAll":
       return {
-        createMenu: false,
         accountMenu: false,
+        createMenu: false,
+        searchMenu: false,
         createMenuState: "nothing",
       };
 
