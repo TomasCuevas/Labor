@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 //* icons *//
 import { RiCloseFill } from "react-icons/ri";
@@ -9,28 +9,25 @@ import { SearchCard, SearchBoard } from "./";
 //* hooks *//
 import { useForm } from "../../hooks";
 
-//* services *//
-import { searchAll } from "../../services";
-
-//* interfaces *//
-import { ISearch } from "../../interfaces";
+//* store *//
+import { useSearchStore } from "../../store";
 
 export const SearchContainer: React.FC = () => {
-  const [searches, setSearches] = useState<ISearch>({ boards: [], cards: [] });
+  const { boards, cards } = useSearchStore();
+  const { clearData, onSearch } = useSearchStore();
+
   const { search, reset, onInputChange } = useForm({
     search: "",
   });
 
   useEffect(() => {
-    if (search.length === 0) {
-      setSearches({ boards: [], cards: [] });
+    if (search.length < 1) {
+      clearData();
       return;
     }
 
     const timer = setTimeout(async () => {
-      const result = await searchAll(search);
-      if (!result.ok) return;
-      setSearches({ boards: result.boards, cards: result.cards });
+      onSearch(search);
     }, 500);
 
     return () => clearTimeout(timer);
@@ -55,21 +52,21 @@ export const SearchContainer: React.FC = () => {
           value={search}
         />
       </div>
-      {searches.cards!.length > 0 && (
+      {cards!.length > 0 && (
         <div className="mt-3">
           <h3 className="text-[17px] font-bold text-light">Tarjetas</h3>
-          <div className="flex flex-col gap-1">
-            {searches.cards!.map((card) => (
+          <div className="flex flex-col pt-1">
+            {cards!.map((card) => (
               <SearchCard key={card.id} card={card} />
             ))}
           </div>
         </div>
       )}
-      {searches.boards!.length > 0 && (
+      {boards!.length > 0 && (
         <div className="mt-3">
           <h3 className="text-[17px] font-bold text-light">Tableros</h3>
-          <div className="flex flex-col gap-1">
-            {searches.boards!.map((board) => (
+          <div className="flex flex-col pt-1">
+            {boards!.map((board) => (
               <SearchBoard key={board.id} board={board} />
             ))}
           </div>
