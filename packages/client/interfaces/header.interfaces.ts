@@ -1,6 +1,7 @@
-export interface IHeaderState {
-  createMenu: boolean;
+export interface IHeader {
   accountMenu: boolean;
+  createMenu: boolean;
+  searchMenu: boolean;
   createMenuState: CreateMenuState;
 }
 
