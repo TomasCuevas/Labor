@@ -5,7 +5,11 @@ import { useRouter } from "next/router";
 //* components *//
 import { Header } from "../components/header";
 import { FullLoader } from "../components/ui";
-import { AccountMenuPopover, CreateMenuPopover } from "../components/popovers";
+import {
+  AccountMenuPopover,
+  CreateMenuPopover,
+  SearchMenuPopover,
+} from "../components/popovers";
 
 //* context *//
 import { AuthContext } from "../context";
@@ -37,6 +41,7 @@ export const MainLayout: React.FC<Props> = ({
         <Header />
         <AccountMenuPopover />
         <CreateMenuPopover />
+        <SearchMenuPopover />
 
         <main className="mt-11 flex min-h-[calc(100vh_-_44px)] w-full bg-dark">
           {children}
