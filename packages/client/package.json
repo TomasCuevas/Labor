@@ -10,29 +10,26 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "11.10.4",
-    "@emotion/styled": "11.10.4",
-    "@mui/icons-material": "5.10.3",
-    "@mui/material": "5.10.4",
+    "@emotion/react": "11.10.6",
+    "@emotion/styled": "11.10.6",
+    "@mui/material": "5.11.16",
     "@tanstack/react-query": "4.28.0",
     "axios": "0.27.2",
     "date-fns": "2.29.3",
     "js-cookie": "3.0.1",
-    "mongoose": "6.6.1",
     "next": "12.3.0",
     "notistack": "2.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "4.8.0",
     "sweetalert2": "11.7.3",
-    "uuid": "9.0.0"
+    "zustand": "4.3.7"
   },
   "devDependencies": {
     "@types/js-cookie": "3.0.3",
     "@types/node": "18.7.16",
     "@types/react": "18.0.19",
     "@types/react-dom": "18.0.6",
-    "@types/uuid": "8.3.4",
     "autoprefixer": "10.4.14",
     "eslint": "8.23.1",
     "eslint-config-next": "12.3.0",
