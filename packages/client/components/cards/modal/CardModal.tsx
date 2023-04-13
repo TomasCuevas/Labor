@@ -12,11 +12,14 @@ import {
 } from "react-icons/ri";
 import { MdSaveAlt, MdOutlineRemove } from "react-icons/md";
 
+//* data *//
+import { labelColors } from "../../../data";
+
 //* components *//
-import { ModalActionButtom } from "../";
+import { LabelInput, ModalActionButtom, RadioInput } from "../";
 
 //* hooks *//
-import { useForm, useRadioInputs } from "../../../hooks";
+import { useForm, useMultipleCheckboxes, useRadioInputs } from "../../../hooks";
 
 //* context *//
 import { CardContext } from "../../../context";
@@ -36,11 +39,27 @@ export const CardModal: React.FC = () => {
     [cardModal!.status],
     false
   );
+  const { checkboxes, handleCheckboxChange } = useMultipleCheckboxes({
+    blue: cardModal!.labels.includes("blue"),
+    green: cardModal!.labels.includes("green"),
+    orange: cardModal!.labels.includes("orange"),
+    red: cardModal!.labels.includes("red"),
+    violet: cardModal!.labels.includes("violet"),
+    yellow: cardModal!.labels.includes("yellow"),
+  });
 
   //! start update todo
   const startUpdateTodo = async () => {
+    const labels = [];
+
+    for (const label in checkboxes) {
+      if (checkboxes[label] === true) labels.push(label);
+    }
+
+    console.log(labels);
+
     await onUpdateCard(
-      { title, description, status: selectedInputs[0] as ICardStatus },
+      { title, description, status: selectedInputs[0] as ICardStatus, labels },
       cardModal!.id,
       cardModal!.board.id
     );
@@ -91,9 +110,9 @@ export const CardModal: React.FC = () => {
             <div className="flex items-center">
               <button
                 onClick={onClearCardModal}
-                className="rounded-full p-1 hover:bg-dark/20"
+                className="rounded-full hover:bg-dark/20"
               >
-                <RiCloseFill className="text-2xl text-dark" />
+                <RiCloseFill className="text-[27px] text-dark" />
               </button>
             </div>
           </div>
@@ -114,35 +133,68 @@ export const CardModal: React.FC = () => {
             <h3 className="mt-[2px] text-dark">Estado</h3>
           </div>
           <form className="flex flex-wrap items-center gap-3 pl-9">
-            <label className="flex items-center gap-1">
-              <input
-                type="radio"
-                name="pending"
-                checked={selectedInputs.includes("pending")}
-                onChange={onRadioChange}
-              />
-              <span className="mt-[1px] text-sm text-gray-600">Pendiente</span>
-            </label>
-            <label className="flex items-center gap-1">
-              <input
-                type="radio"
-                name="in-progress"
-                checked={selectedInputs.includes("in-progress")}
-                onChange={onRadioChange}
-              />
-              <span className="mt-[1px] text-sm text-gray-600">
-                En progreso
-              </span>
-            </label>
-            <label className="flex items-center gap-1">
-              <input
-                type="radio"
-                name="completed"
-                checked={selectedInputs.includes("completed")}
-                onChange={onRadioChange}
-              />
-              <span className="mt-[1px] text-sm text-gray-600">Completada</span>
-            </label>
+            <RadioInput
+              checked={selectedInputs.includes("pending")}
+              inputName="pending"
+              label="Pendiente"
+              onChange={onRadioChange}
+            />
+            <RadioInput
+              checked={selectedInputs.includes("in-progress")}
+              inputName="in-progress"
+              label="En progreso"
+              onChange={onRadioChange}
+            />
+            <RadioInput
+              checked={selectedInputs.includes("completed")}
+              inputName="completed"
+              label="Completada"
+              onChange={onRadioChange}
+            />
+          </form>
+        </section>
+        <section className="flex flex-col gap-1">
+          <div className="flex items-center gap-2">
+            <RiBookmarkLine className="text-xl text-dark" />
+            <h3 className="mt-[2px] text-dark">Etiqueta</h3>
+          </div>
+          <form className="flex flex-col gap-1 pl-9">
+            <LabelInput
+              color={labelColors.blue}
+              name="blue"
+              value={checkboxes.blue}
+              onChange={handleCheckboxChange}
+            />
+            <LabelInput
+              color={labelColors.green}
+              name="green"
+              onChange={handleCheckboxChange}
+              value={checkboxes.green}
+            />
+            <LabelInput
+              color={labelColors.orange}
+              name="orange"
+              onChange={handleCheckboxChange}
+              value={checkboxes.orange}
+            />
+            <LabelInput
+              color={labelColors.red}
+              name="red"
+              onChange={handleCheckboxChange}
+              value={checkboxes.red}
+            />
+            <LabelInput
+              color={labelColors.violet}
+              name="violet"
+              onChange={handleCheckboxChange}
+              value={checkboxes.violet}
+            />
+            <LabelInput
+              color={labelColors.yellow}
+              name="yellow"
+              onChange={handleCheckboxChange}
+              value={checkboxes.yellow}
+            />
           </form>
         </section>
         <section className="flex flex-col gap-1">
