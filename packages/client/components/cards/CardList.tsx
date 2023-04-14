@@ -1,13 +1,13 @@
-import { useContext, DragEvent } from "react";
+import { DragEvent } from "react";
 
 //* components *//
 import { NewCard, Card } from ".";
 
-//* contexts *//
-import { CardContext } from "../../context";
-
 //* styles *//
 import Styles from "./TodoList.module.css";
+
+//* store *//
+import { useCardsStore } from "../../store";
 
 //* interfaces *//
 import { ICard, ICardStatus } from "../../interfaces";
@@ -26,7 +26,7 @@ export const CardList: React.FC<Props> = ({
   cardsProp,
 }) => {
   const { isCardDragging, onToggleCardDragging, onUpdateCard } =
-    useContext(CardContext);
+    useCardsStore();
 
   const allowDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();

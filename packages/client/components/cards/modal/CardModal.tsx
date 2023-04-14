@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import Swal from "sweetalert2";
 
 //* icons *//
@@ -21,15 +20,15 @@ import { LabelInput, ModalActionButtom, RadioInput } from "../";
 //* hooks *//
 import { useForm, useMultipleCheckboxes, useRadioInputs } from "../../../hooks";
 
-//* context *//
-import { CardContext } from "../../../context";
+//* store *//
+import { useCardsStore } from "../../../store";
 
 //* interfaces *//
 import { ICardStatus } from "../../../interfaces";
 
 export const CardModal: React.FC = () => {
-  const { cardModal, onClearCardModal, onUpdateCard, onDeleteCard } =
-    useContext(CardContext);
+  const { cardModal, onToggleCardModal, onUpdateCard, onDeleteCard } =
+    useCardsStore();
 
   const { description, title, onInputChange } = useForm({
     title: cardModal!.title,
@@ -64,7 +63,7 @@ export const CardModal: React.FC = () => {
       cardModal!.board.id
     );
 
-    onClearCardModal();
+    onToggleCardModal(undefined);
   };
 
   //! start delete todo
@@ -81,7 +80,7 @@ export const CardModal: React.FC = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         onDeleteCard(cardModal!.id, cardModal!.board.id);
-        onClearCardModal();
+        onToggleCardModal(undefined);
       }
     });
   };
@@ -89,7 +88,7 @@ export const CardModal: React.FC = () => {
   return (
     <div
       className="absolute top-0 left-0 flex h-screen w-screen items-start justify-center bg-dark/90 py-12"
-      onClick={onClearCardModal}
+      onClick={() => onToggleCardModal(undefined)}
     >
       <div
         onClick={(event) => event.stopPropagation()}
@@ -109,7 +108,7 @@ export const CardModal: React.FC = () => {
             </div>
             <div className="flex items-center">
               <button
-                onClick={onClearCardModal}
+                onClick={() => onToggleCardModal(undefined)}
                 className="rounded-full hover:bg-dark/20"
               >
                 <RiCloseFill className="text-[27px] text-dark" />

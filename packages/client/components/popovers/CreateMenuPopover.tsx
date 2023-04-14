@@ -1,20 +1,22 @@
-import { useContext, useState } from "react";
-
 //* components *//
 import { PopoverCreateItem, CreateBoard } from "./";
 
-//* context *//
-import { HeaderContext } from "../../context";
+//* store *//
+import { useHeaderStore } from "../../store";
 
 export const CreateMenuPopover: React.FC = () => {
-  const { createMenu, closeAllPops, createMenuState, onChangeCreateMenuState } =
-    useContext(HeaderContext);
+  const {
+    menuOpen,
+    createMenuState,
+    onChangeMenuOpen,
+    onChangeCreateMenuState,
+  } = useHeaderStore();
 
-  if (createMenu) {
+  if (menuOpen === "create") {
     return (
       <div
         className="fixed top-0 left-0 z-10 h-screen w-screen"
-        onClick={closeAllPops}
+        onClick={() => onChangeMenuOpen("nothing")}
       >
         <section
           onClick={(event) => event.stopPropagation()}

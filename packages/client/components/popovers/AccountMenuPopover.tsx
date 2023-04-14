@@ -1,22 +1,22 @@
-import { useContext } from "react";
 import { useRouter } from "next/router";
 
 //* components *//
 import { PopoverItem } from "./";
 
-//* context *//
-import { AuthContext, HeaderContext } from "../../context";
+//* store *//
+import { useAuthStore, useHeaderStore } from "../../store";
 
 export const AccountMenuPopover: React.FC = () => {
-  const { user, onLogout } = useContext(AuthContext);
-  const { accountMenu, closeAllPops } = useContext(HeaderContext);
+  const { user, setLogout } = useAuthStore();
+  const { menuOpen, onChangeMenuOpen } = useHeaderStore();
+
   const router = useRouter();
 
-  if (accountMenu) {
+  if (menuOpen === "account") {
     return (
       <div
         className="fixed top-0 left-0 z-10 h-screen w-screen"
-        onClick={closeAllPops}
+        onClick={() => onChangeMenuOpen("nothing")}
       >
         <section className="absolute left-2 top-12 flex flex-col rounded-md border border-dark/10 bg-white pt-5 drop-shadow-md">
           <h2 className="mb-2 px-4 text-xs font-bold text-emerald">CUENTA</h2>
@@ -38,7 +38,7 @@ export const AccountMenuPopover: React.FC = () => {
                 onClick={() => router.push("/settings")}
                 text="Ajustes"
               />
-              <PopoverItem onClick={onLogout} text="Cerrar sesión" />
+              <PopoverItem onClick={setLogout} text="Cerrar sesión" />
             </ul>
           </div>
         </section>

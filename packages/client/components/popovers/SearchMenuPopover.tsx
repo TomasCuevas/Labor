@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { useRouter } from "next/router";
 
 //* icons *//
@@ -7,23 +6,20 @@ import { RiSearch2Line } from "react-icons/ri";
 //* components *//
 import { SearchBoard, SearchCard } from "../search";
 
-//* context *//
-import { HeaderContext } from "../../context";
-
 //* store *//
-import { useSearchStore } from "../../store";
+import { useHeaderStore, useSearchStore } from "../../store";
 
 export const SearchMenuPopover = () => {
-  const { searchMenu, closeAllPops } = useContext(HeaderContext);
+  const { menuOpen, onChangeMenuOpen } = useHeaderStore();
   const { boards, cards } = useSearchStore();
 
   const { push } = useRouter();
 
-  if (searchMenu) {
+  if (menuOpen === "search") {
     return (
       <div
         className="fixed top-0 left-0 z-10 hidden h-screen w-screen sm:block"
-        onClick={closeAllPops}
+        onClick={() => onChangeMenuOpen("nothing")}
       >
         <section className="absolute right-14 top-12 flex w-[464px] flex-col rounded-md bg-slate-800 shadow-xl shadow-slate-500/10">
           {cards!.length > 0 && (

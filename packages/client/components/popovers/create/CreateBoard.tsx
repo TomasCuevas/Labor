@@ -1,4 +1,4 @@
-import { FormEvent, useContext } from "react";
+import { FormEvent } from "react";
 
 //* icons *//
 import { RiArrowLeftSLine, RiCloseFill } from "react-icons/ri";
@@ -9,20 +9,19 @@ import { PopoverButton, PopoverInput } from "../";
 //* hooks *//
 import { useForm } from "../../../hooks/useForm";
 
-//* context *//
-import { BoardsContext, HeaderContext } from "../../../context";
+//* store *//
+import { useBoardsStore, useHeaderStore } from "../../../store";
 
 export const CreateBoard: React.FC = () => {
-  const { closeAllPops, onChangeCreateMenuState } = useContext(HeaderContext);
-  const { onCreateBoard } = useContext(BoardsContext);
+  const { onChangeMenuOpen, onChangeCreateMenuState } = useHeaderStore();
+  const { onCreateBoard } = useBoardsStore();
+
   const { boardTitle, onInputChange } = useForm({ boardTitle: "" });
 
   //! start create board
   const startCreateBoard = async (event: FormEvent) => {
     event.preventDefault();
-
     const result = await onCreateBoard(boardTitle);
-    console.log(result);
   };
 
   return (
@@ -35,7 +34,10 @@ export const CreateBoard: React.FC = () => {
         >
           <RiArrowLeftSLine />
         </button>
-        <button className="t absolute right-0 text-lg" onClick={closeAllPops}>
+        <button
+          className="t absolute right-0 text-lg"
+          onClick={() => onChangeMenuOpen("nothing")}
+        >
           <RiCloseFill />
         </button>
       </header>

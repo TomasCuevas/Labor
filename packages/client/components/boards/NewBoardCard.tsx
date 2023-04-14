@@ -1,19 +1,17 @@
-import { useContext } from "react";
-
 //* icons *//
 import { RiAddLine } from "react-icons/ri";
 
-//* contexts *//
-import { HeaderContext } from "../../context";
+//* store *//
+import { useHeaderStore } from "../../store";
 
 export const NewBoardCard: React.FC = () => {
-  const { setCreatePop, onChangeCreateMenuState } = useContext(HeaderContext);
+  const { onChangeMenuOpen, onChangeCreateMenuState } = useHeaderStore();
 
   return (
     <li className="h-20 w-full">
       <button
         onClick={() => {
-          setCreatePop();
+          onChangeMenuOpen("create");
           onChangeCreateMenuState("board");
         }}
         className="flex h-full w-full items-center justify-center gap-2 rounded-md bg-emerald/20 p-4 hover:bg-emerald/70"

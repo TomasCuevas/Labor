@@ -1,4 +1,4 @@
-import { MouseEvent, useContext, useState } from "react";
+import { MouseEvent, useState } from "react";
 
 //* icons *//
 import { RiAddLine, RiCloseFill } from "react-icons/ri";
@@ -6,8 +6,8 @@ import { RiAddLine, RiCloseFill } from "react-icons/ri";
 //* hooks *//
 import { useForm } from "../../hooks";
 
-//* context *//
-import { CardContext } from "../../context";
+//* store *//
+import { useCardsStore } from "../../store";
 
 //* interface *//
 import { ICardStatus } from "../../interfaces";
@@ -18,13 +18,15 @@ interface Props {
 }
 
 export const NewCard: React.FC<Props> = ({ boardId, status }) => {
-  const { onCreateCard } = useContext(CardContext);
+  const { onCreateCard } = useCardsStore();
   const [isInputOpen, setIsInputOpen] = useState<boolean>(false);
+
   const { title, onInputChange, reset } = useForm({
     title: "",
   });
 
-  const startCreateTodo = async (event: MouseEvent<HTMLButtonElement>) => {
+  //! start create card
+  const startCreateCard = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     await onCreateCard({ title, status }, boardId);
@@ -50,7 +52,7 @@ export const NewCard: React.FC<Props> = ({ boardId, status }) => {
         <div className="mt-1 flex items-center gap-2">
           <button
             type="submit"
-            onClick={startCreateTodo}
+            onClick={startCreateCard}
             className="cursor-pointer rounded-md bg-emerald p-2 px-4 text-sm text-white hover:bg-emerald/80"
           >
             Añadir tarjeta
