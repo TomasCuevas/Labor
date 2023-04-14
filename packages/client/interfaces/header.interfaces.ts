@@ -1,8 +1,8 @@
 export interface IHeader {
-  accountMenu: boolean;
-  createMenu: boolean;
-  searchMenu: boolean;
+  menuOpen: MenuOpen;
   createMenuState: CreateMenuState;
 }
 
 export type CreateMenuState = "nothing" | "board";
+
+export type MenuOpen = "account" | "create" | "search" | "nothing";

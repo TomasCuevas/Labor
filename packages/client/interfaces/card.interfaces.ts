@@ -19,7 +19,7 @@ export interface ICardForCreate {
 
 export interface ICardForUpdate {
   description?: string;
-  labels: string[];
+  labels?: string[];
   status?: ICardStatus;
   title?: string;
 }
