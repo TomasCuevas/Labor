@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 
 //* services *//
 import { searchAll } from "../services";
@@ -9,7 +9,7 @@ import { ISearch } from "../interfaces";
 export const useSearchStore = create<ISearch>((set) => ({
   boards: [],
   cards: [],
-  onSearch: async (search: string) => {
+  async onSearch(search: string) {
     const result = await searchAll(search);
     if (!result.ok) return;
 
@@ -19,7 +19,7 @@ export const useSearchStore = create<ISearch>((set) => ({
       cards: result.cards,
     }));
   },
-  clearData: () => {
+  clearData() {
     set(() => ({
       boards: [],
       cards: [],
