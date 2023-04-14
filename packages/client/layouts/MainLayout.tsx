@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
@@ -11,8 +10,8 @@ import {
   SearchMenuPopover,
 } from "../components/popovers";
 
-//* context *//
-import { AuthContext } from "../context";
+//* store *//
+import { useAuthStore } from "../store";
 
 //* interface
 interface Props {
@@ -26,7 +25,7 @@ export const MainLayout: React.FC<Props> = ({
   description,
   title,
 }) => {
-  const { status } = useContext(AuthContext);
+  const { status } = useAuthStore();
   const router = useRouter();
 
   if (status === "not-authenticated") router.replace("/auth/login");

@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
@@ -6,7 +5,7 @@ import Head from "next/head";
 import { FullLoader } from "../components/ui";
 
 //* context *//
-import { AuthContext } from "../context";
+import { useAuthStore } from "../store";
 
 //* interface *//
 interface Props {
@@ -20,7 +19,7 @@ export const AuthLayout: React.FC<Props> = ({
   description,
   title,
 }) => {
-  const { status } = useContext(AuthContext);
+  const { status } = useAuthStore();
   const router = useRouter();
 
   if (status === "authenticated") router.replace("/");
@@ -31,7 +30,7 @@ export const AuthLayout: React.FC<Props> = ({
           <title>{title}</title>
           <meta name="description" content={description} />
         </Head>
-        <main className="flex h-screen bg-dark p-4">{children}</main>
+        <main className="flex h-screen bg-dark">{children}</main>
       </>
     );
   }
