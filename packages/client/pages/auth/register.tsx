@@ -1,4 +1,4 @@
-import { useContext, FormEvent } from "react";
+import { FormEvent } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
@@ -16,11 +16,12 @@ import { AuthLayout } from "../../layouts";
 //* hooks *//
 import { useForm } from "../../hooks/useForm";
 
-//* context *//
-import { AuthContext } from "../../context";
+//* store *//
+import { useAuthStore } from "../../store";
 
 const RegisterPage: NextPage = () => {
-  const { onRegister } = useContext(AuthContext);
+  const { onRegister } = useAuthStore();
+
   const {
     email,
     name,
@@ -56,44 +57,46 @@ const RegisterPage: NextPage = () => {
       title="Registrarse | Labor"
       description="Página para registrarse en Labor"
     >
-      <div className="flex w-full flex-col justify-center">
-        <RegisterLoginSwitch />
-        <form onSubmit={startRegister} className="flex w-full flex-col gap-2">
-          <FormAuthInput
-            inputChange={onInputChange}
-            inputName="email"
-            inputValue={email}
-            label="Correo electrónico"
-          />
-          <FormAuthInput
-            inputChange={onInputChange}
-            inputName="name"
-            inputValue={name}
-            label="Nombre completo"
-          />
-          <FormAuthInput
-            inputChange={onInputChange}
-            inputName="password"
-            inputValue={password}
-            inputType="password"
-            label="Contraseña"
-          />
-          <FormAuthInput
-            inputChange={onInputChange}
-            inputName="repeatPassword"
-            inputValue={repeatPassword}
-            inputType="password"
-            label="Repita la contraseña"
-          />
-          <FormAuthButton
-            isDisabled={
-              email.length < 1 || name.length < 1 || password.length < 6
-            }
-            label="Registrarme"
-            type="submit"
-          />
-          {error ? <FormErrorMessage message={error} /> : null}
-        </form>
+      <div className="mx-auto flex w-full max-w-[600px] flex-col items-center justify-center">
+        <div className="flex w-full flex-col justify-center px-4">
+          <RegisterLoginSwitch />
+          <form onSubmit={startRegister} className="flex w-full flex-col gap-2">
+            <FormAuthInput
+              inputChange={onInputChange}
+              inputName="email"
+              inputValue={email}
+              label="Correo electrónico"
+            />
+            <FormAuthInput
+              inputChange={onInputChange}
+              inputName="name"
+              inputValue={name}
+              label="Nombre completo"
+            />
+            <FormAuthInput
+              inputChange={onInputChange}
+              inputName="password"
+              inputValue={password}
+              inputType="password"
+              label="Contraseña"
+            />
+            <FormAuthInput
+              inputChange={onInputChange}
+              inputName="repeatPassword"
+              inputValue={repeatPassword}
+              inputType="password"
+              label="Repita la contraseña"
+            />
+            <FormAuthButton
+              isDisabled={
+                email.length < 1 || name.length < 1 || password.length < 6
+              }
+              label="Registrarme"
+              type="submit"
+            />
+            {error ? <FormErrorMessage message={error} /> : null}
+          </form>
+        </div>
       </div>
     </AuthLayout>
   );
