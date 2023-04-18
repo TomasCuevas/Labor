@@ -13,7 +13,7 @@ export const Board: React.FC<Props> = ({ boardId }) => {
   const { cards } = useCards(boardId);
 
   return (
-    <div className="mt-4 flex max-h-[calc(100vh_-_64px)] w-full flex-nowrap overflow-y-hidden overflow-x-scroll">
+    <div className="flex h-full w-full flex-nowrap overflow-y-hidden overflow-x-scroll">
       <CardList
         boardId={boardId}
         status="pending"

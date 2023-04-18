@@ -14,7 +14,7 @@ export const NewBoardCard: React.FC = () => {
           onChangeMenuOpen("create");
           onChangeCreateMenuState("board");
         }}
-        className="flex h-full w-full items-center justify-center gap-2 rounded-md bg-emerald/20 p-4 hover:bg-emerald/70"
+        className="flex h-full w-full items-center justify-center gap-2 rounded-md bg-dark/70 p-4 hover:bg-dark/90 lg:justify-start lg:px-8"
       >
         <RiAddLine className="text-4xl text-white lg:text-3xl" />
         <span className="hidden text-center text-white lg:block">
