@@ -47,8 +47,8 @@ const LoginPage: NextPage = () => {
       title="Iniciar sesión | Labor"
       description="Página para iniciar sesión en Labor"
     >
-      <div className="mx-auto flex w-full max-w-[600px] flex-col items-center justify-center">
-        <div className="flex w-full flex-col justify-center px-4">
+      <div className="mx-auto flex w-full max-w-[600px] flex-col items-center justify-center px-4 md:px-0">
+        <div className="flex w-full flex-col justify-center rounded-2xl bg-white/5 p-4 backdrop-blur-3xl sm:py-6 md:py-8 lg:py-10">
           <RegisterLoginSwitch />
           <form
             onSubmit={startLogin}
