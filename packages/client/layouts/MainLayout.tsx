@@ -42,7 +42,7 @@ export const MainLayout: React.FC<Props> = ({
         <CreateMenuPopover />
         <SearchMenuPopover />
 
-        <main className="mt-11 flex min-h-[calc(100vh_-_44px)] w-full bg-dark">
+        <main className="mt-11 flex min-h-[calc(100vh_-_44px)] w-full bg-[url('/backgrounds/auth_desktop_background.svg')]">
           {children}
         </main>
       </>
