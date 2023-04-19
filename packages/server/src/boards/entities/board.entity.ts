@@ -29,6 +29,18 @@ export class Board {
 
   @Column({
     type: 'text',
+    default: '',
+  })
+  description: string;
+
+  @Column({
+    type: 'text',
+    default: 'lightblue',
+  })
+  background: string;
+
+  @Column({
+    type: 'text',
     default: 'open',
   })
   status: 'open' | 'closed';
