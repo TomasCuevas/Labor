@@ -1,4 +1,10 @@
-import { Matches, MaxLength, MinLength } from 'class-validator';
+import {
+  IsOptional,
+  IsString,
+  Matches,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class CreateBoardDto {
   @Matches(/^(?!\s)[\s\S]*(?<!\s)$/, {
@@ -12,4 +18,18 @@ export class CreateBoardDto {
     message: 'El nombre del tablero debe tener máximo 50 caracteres.',
   })
   name: string;
+
+  @IsString({ message: 'La descripcion debe ser un texto.' })
+  @MinLength(1, { message: 'La descripción debe tener mínimo 1 carácter.' })
+  @MaxLength(300, {
+    message: 'La descripción debe tener máximo 300 carácteres.',
+  })
+  @IsOptional()
+  description?: string;
+
+  @IsString({
+    message: 'El nombre del background seleccionado, debe ser un string.',
+  })
+  @IsOptional()
+  background?: string;
 }
