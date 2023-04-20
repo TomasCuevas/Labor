@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 //* dtos *//
-import { CreateBoardDto } from './dto';
+import { CreateBoardDto, UpdateBoardDto } from './dto';
 
 //* entities *//
 import { Board } from './entities';
@@ -28,8 +28,8 @@ export class BoardsService {
 
   //! get all boards by user [service]
   async findAll(userId: string): Promise<Board[]> {
-    return await this.boardsRepository.find({
-      where: { user: { id: userId } },
+    return await this.boardsRepository.findBy({
+      user: { id: userId },
     });
   }
 
@@ -47,15 +47,33 @@ export class BoardsService {
 
   //! get one board by id [service]
   async findOneById(boardId: string, userId: string): Promise<Board> {
-    return await this.boardsRepository.findOne({
-      where: { id: boardId, user: { id: userId } },
+    return await this.boardsRepository.findOneBy({
+      id: boardId,
+      user: { id: userId },
     });
   }
 
   //! get board by name [service]
   async findOneByName(name: string, userId: string): Promise<Board> {
-    return await this.boardsRepository.findOne({
-      where: { user: { id: userId }, name: name },
+    return await this.boardsRepository.findOneBy({
+      user: { id: userId },
+      name: name,
     });
+  }
+
+  //! update board [service]
+  async update(
+    boardId: string,
+    updateBoardDto: UpdateBoardDto,
+    updateBy: User,
+  ): Promise<Board> {
+    await this.findOneById(boardId, updateBy.id);
+
+    const board = await this.boardsRepository.preload({
+      ...updateBoardDto,
+      id: boardId,
+    });
+
+    return await this.boardsRepository.save(board);
   }
 }

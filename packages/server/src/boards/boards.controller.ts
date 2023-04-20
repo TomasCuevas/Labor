@@ -19,7 +19,7 @@ import { BoardsService } from './boards.service';
 import { CardsService } from '../cards/cards.service';
 
 //* dtos *//
-import { CreateBoardDto } from './dto';
+import { CreateBoardDto, UpdateBoardDto } from './dto';
 
 //* entities *//
 import { Board } from './entities';
@@ -65,5 +65,15 @@ export class BoardsController {
     @GetUser() user: User,
   ): Promise<Card[]> {
     return await this.cardsService.findAllByBoard(boardId, user.id);
+  }
+
+  //! update board [controller]
+  @Patch('update/:id')
+  async update(
+    @Param('id') id: string,
+    @Body() updateBoardDto: UpdateBoardDto,
+    @GetUser() user: User,
+  ) {
+    return await this.boardsService.update(id, updateBoardDto, user);
   }
 }
