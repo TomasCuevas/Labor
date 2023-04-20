@@ -2,21 +2,41 @@
 import { boardsApi } from "../../api";
 
 //* interfaces *//
-import { IBoard } from "../../interfaces";
+import { IBoard, IBoardForCreate, IBoardForUpdate } from "../../interfaces";
 
 //! create board service
 export const createBoardService = async (
-  name: string
+  board: IBoardForCreate
 ): Promise<{ ok: boolean; board?: IBoard }> => {
   try {
-    const { data } = await boardsApi.post("/create", { name });
+    const { data } = await boardsApi.post("/create", board);
 
     return {
       ok: true,
       board: data,
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    return {
+      ok: false,
+    };
+  }
+};
+
+//! update board service
+export const updateBoardService = async (
+  boardId: string,
+  board: IBoardForUpdate
+): Promise<{ ok: boolean; board?: IBoard }> => {
+  try {
+    const { data } = await boardsApi.patch(`/update/${boardId}`, board);
+
+    return {
+      ok: true,
+      board: data,
+    };
+  } catch (error) {
+    console.error(error);
     return {
       ok: false,
     };
@@ -30,7 +50,7 @@ export const getAllBoardsService = async (): Promise<IBoard[]> => {
 
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw new Error("Error al obtener los tableros.");
   }
 };
@@ -47,7 +67,7 @@ export const getBoardByName = async (
       board: data,
     };
   } catch (error: any) {
-    console.log(error);
+    console.error(error);
     return { ok: false };
   }
 };
