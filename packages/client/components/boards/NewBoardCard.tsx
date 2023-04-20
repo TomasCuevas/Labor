@@ -14,8 +14,9 @@ export const NewBoardCard: React.FC = () => {
           onChangeMenuOpen("create");
           onChangeCreateMenuState("board");
         }}
-        className="flex h-full w-full items-center justify-center gap-2 rounded-md bg-dark/70 p-4 hover:bg-dark/90 lg:justify-start lg:px-8"
+        className="relative flex h-full w-full items-center justify-center gap-2 overflow-hidden rounded-md bg-dark p-4 lg:justify-start lg:px-8"
       >
+        <span className="absolute top-0 left-0 h-full w-full bg-gray-700/30 hover:bg-black/0"></span>
         <RiAddLine className="text-4xl text-white lg:text-3xl" />
         <span className="hidden text-center text-white lg:block">
           Crear tablero
