@@ -2,11 +2,24 @@
 import { IUser } from ".";
 
 export interface IBoard {
+  background: string;
+  description: string;
   id: string;
-  user: IUser;
+  lastUpdate: number;
   name: string;
   status: IBoardStaus;
-  lastUpdate: number;
+  user: IUser;
+}
+
+export interface IBoardForCreate {
+  name: string;
+}
+
+export interface IBoardForUpdate {
+  background?: string;
+  description?: string;
+  name?: string;
+  status?: IBoardStaus;
 }
 
 type IBoardStaus = "open" | "closed";
