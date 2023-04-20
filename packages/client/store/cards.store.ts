@@ -21,7 +21,7 @@ interface useCardState {
   cardModal: ICard | undefined;
   onCreateCard(card: ICardForCreate, boardId: string): Promise<void>;
   onUpdateCard(
-    cardToUpdate: ICardForUpdate,
+    card: ICardForUpdate,
     cardId: string,
     boardId: string
   ): Promise<void>;
@@ -39,12 +39,8 @@ export const useCardsStore = create<useCardState>((set) => ({
       queryClient.invalidateQueries([`/boards/${boardId}/todos`]);
     }
   },
-  async onUpdateCard(
-    cardToUpdate: ICardForUpdate,
-    cardId: string,
-    boardId: string
-  ) {
-    const result = await updateCardService(cardToUpdate, cardId);
+  async onUpdateCard(card: ICardForUpdate, cardId: string, boardId: string) {
+    const result = await updateCardService(card, cardId);
     if (result.ok) {
       queryClient.invalidateQueries([`/boards/${boardId}/todos`]);
       notiSuccess("Tarjeta actualizada.");
