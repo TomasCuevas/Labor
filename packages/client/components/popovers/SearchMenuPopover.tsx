@@ -21,7 +21,7 @@ export const SearchMenuPopover = () => {
         className="fixed top-0 left-0 z-10 hidden h-screen w-screen sm:block"
         onClick={() => onChangeMenuOpen("nothing")}
       >
-        <section className="absolute right-14 top-12 flex w-[464px] flex-col rounded-md bg-slate-800 shadow-xl shadow-slate-500/10">
+        <section className="absolute right-14 top-12 flex w-[464px] flex-col rounded-md bg-slate-800/80 shadow-xl backdrop-blur-xl">
           {cards!.length > 0 && (
             <div className="mt-1">
               <h3 className="ml-2 text-[17px] font-bold text-light">

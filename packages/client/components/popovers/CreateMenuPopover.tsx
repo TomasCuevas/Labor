@@ -20,7 +20,7 @@ export const CreateMenuPopover: React.FC = () => {
       >
         <section
           onClick={(event) => event.stopPropagation()}
-          className="absolute right-2 top-12 flex w-[310px] max-w-[310px] flex-col rounded-md bg-white py-2 drop-shadow-md"
+          className="absolute right-2 top-12 flex w-[310px] max-w-[310px] flex-col rounded-md bg-slate-800/80 py-2 shadow-xl drop-shadow-md backdrop-blur-xl"
         >
           {createMenuState === "nothing" && (
             <ul>

@@ -21,24 +21,24 @@ export const CreateBoard: React.FC = () => {
   //! start create board
   const startCreateBoard = async (event: FormEvent) => {
     event.preventDefault();
-    const result = await onCreateBoard(boardTitle);
+    await onCreateBoard({ name: boardTitle });
   };
 
   return (
     <>
       <header className="relative mx-2 flex items-center justify-center">
-        <h2 className="text-sm text-emerald">Crear tablero</h2>
+        <h2 className="text-sm text-light">Crear tablero</h2>
         <button
           className="absolute left-0 text-lg"
           onClick={() => onChangeCreateMenuState("nothing")}
         >
-          <RiArrowLeftSLine />
+          <RiArrowLeftSLine className="text-white" />
         </button>
         <button
           className="t absolute right-0 text-lg"
           onClick={() => onChangeMenuOpen("nothing")}
         >
-          <RiCloseFill />
+          <RiCloseFill className="text-white" />
         </button>
       </header>
       <hr className="my-2" />

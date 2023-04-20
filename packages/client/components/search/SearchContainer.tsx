@@ -34,7 +34,7 @@ export const SearchContainer: React.FC = () => {
   }, [search]);
 
   return (
-    <div className="mx-4 mt-4 flex w-full items-start">
+    <div className="mx-4 mt-4 flex w-full items-start pt-11">
       <section className="mx-auto flex max-h-[calc(100vh_-_64px)] w-full max-w-[750px] flex-col overflow-y-scroll rounded-2xl bg-dark/20 px-4 py-4 backdrop-blur-2xl sm:px-8">
         <h2 className="text-2xl font-black text-white">Buscar</h2>
         <div className="relative mt-4 flex items-center">

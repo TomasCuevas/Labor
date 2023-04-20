@@ -16,7 +16,7 @@ export const PopoverInput: React.FC<Props> = ({
 }) => {
   return (
     <div className="flex w-full flex-col">
-      <label className="text-sm" htmlFor={inputName}>
+      <label className="text-sm text-light" htmlFor={inputName}>
         {label}
       </label>
       <input
@@ -25,7 +25,7 @@ export const PopoverInput: React.FC<Props> = ({
         autoFocus={focus}
         value={inputValue}
         onChange={inputChange}
-        className="rounded-md border-2 border-emerald px-2 outline-none focus:border-dark"
+        className="rounded-md border-2 border-white px-2 outline-none focus:border-emerald"
         autoComplete="off"
       />
     </div>

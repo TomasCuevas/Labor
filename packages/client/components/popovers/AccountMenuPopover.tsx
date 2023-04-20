@@ -18,7 +18,7 @@ export const AccountMenuPopover: React.FC = () => {
         className="fixed top-0 left-0 z-10 h-screen w-screen"
         onClick={() => onChangeMenuOpen("nothing")}
       >
-        <section className="absolute left-2 top-12 flex flex-col rounded-md border border-dark/10 bg-white pt-5 drop-shadow-md">
+        <section className="absolute left-2 top-12 flex flex-col overflow-hidden rounded-md bg-slate-800/80 pt-5 shadow-xl drop-shadow-md backdrop-blur-xl">
           <h2 className="mb-2 px-4 text-xs font-bold text-emerald">CUENTA</h2>
           <div className="mb-4 flex gap-2 px-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald">
@@ -27,8 +27,8 @@ export const AccountMenuPopover: React.FC = () => {
               </span>
             </div>
             <div className="flex flex-col justify-center">
-              <span className="text-sm text-dark">{user!.name}</span>
-              <span className="text-sm text-light">{user!.email}</span>
+              <span className="text-sm text-white">{user!.name}</span>
+              <span className="text-sm text-gray-400">{user!.email}</span>
             </div>
           </div>
           <hr className="mb-2" />
