@@ -10,8 +10,8 @@ export const RegisterLoginSwitch: React.FC = () => {
         <span
           className={
             router.pathname === "/auth/login"
-              ? "border-b-2 border-emerald text-xl font-light text-white"
-              : "border-b-2 border-[#0000] text-xl font-light text-light"
+              ? "cursor-pointer border-b-2 border-emerald text-xl font-light text-white"
+              : "cursor-pointer border-b-2 border-[#0000] text-xl font-light text-light"
           }
         >
           Iniciar sesión
@@ -22,8 +22,8 @@ export const RegisterLoginSwitch: React.FC = () => {
         <span
           className={
             router.pathname === "/auth/register"
-              ? "border-b-2 border-emerald text-xl font-light text-white"
-              : "border-b-2 border-[#0000] text-xl font-light text-light"
+              ? "cursor-pointer border-b-2 border-emerald text-xl font-light text-white"
+              : "cursor-pointer border-b-2 border-[#0000] text-xl font-light text-light"
           }
         >
           Registrarse
