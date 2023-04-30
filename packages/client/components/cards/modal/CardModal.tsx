@@ -87,7 +87,7 @@ export const CardModal: React.FC = () => {
 
   return (
     <div
-      className="absolute top-0 left-0 flex h-screen w-screen items-start justify-center bg-dark/90 py-12"
+      className="absolute top-0 left-0 z-10 flex h-screen w-screen items-start justify-center bg-dark/90 py-12"
       onClick={() => onToggleCardModal(undefined)}
     >
       <div
