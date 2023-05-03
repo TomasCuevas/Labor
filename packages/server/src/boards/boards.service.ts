@@ -7,36 +7,38 @@ import { CreateBoardDto, UpdateBoardDto } from './dto';
 
 //* entities *//
 import { Board } from './entities';
+import { Card } from '../cards/entities';
 import { User } from '../users/entities';
 
 @Injectable()
 export class BoardsService {
   constructor(
     @InjectRepository(Board)
-    private readonly boardsRepository: Repository<Board>,
+    private readonly BoardsRepository: Repository<Board>,
+    @InjectRepository(Card) private readonly CardsRepository: Repository<Card>,
   ) {}
 
   //! create board [service]
   async create(createBoardDto: CreateBoardDto, createBy: User): Promise<Board> {
-    const newBoard = await this.boardsRepository.create({
+    const newBoard = await this.BoardsRepository.create({
       ...createBoardDto,
       user: createBy,
     });
 
-    return await this.boardsRepository.save(newBoard);
+    return await this.BoardsRepository.save(newBoard);
   }
 
-  //! get all boards by user [service]
+  //! get all open boards by user [service]
   async findAll(userId: string): Promise<Board[]> {
-    return await this.boardsRepository.findBy({
+    return await this.BoardsRepository.findBy({
       user: { id: userId },
+      status: 'open',
     });
   }
 
   //! get all boards by search [service]
   async findAllBySearch(search: string, userId: string): Promise<Board[]> {
-    return this.boardsRepository
-      .createQueryBuilder('board')
+    return this.BoardsRepository.createQueryBuilder('board')
       .innerJoinAndSelect('board.user', 'user')
       .where('board.userId = :userId', { userId })
       .andWhere('LOWER(board.name) like :name', {
@@ -47,7 +49,7 @@ export class BoardsService {
 
   //! get one board by id [service]
   async findOneById(boardId: string, userId: string): Promise<Board> {
-    return await this.boardsRepository.findOneBy({
+    return await this.BoardsRepository.findOneBy({
       id: boardId,
       user: { id: userId },
     });
@@ -55,7 +57,7 @@ export class BoardsService {
 
   //! get board by name [service]
   async findOneByName(name: string, userId: string): Promise<Board> {
-    return await this.boardsRepository.findOneBy({
+    return await this.BoardsRepository.findOneBy({
       user: { id: userId },
       name: name,
     });
@@ -69,11 +71,24 @@ export class BoardsService {
   ): Promise<Board> {
     await this.findOneById(boardId, updateBy.id);
 
-    const board = await this.boardsRepository.preload({
+    const board = await this.BoardsRepository.preload({
       ...updateBoardDto,
       id: boardId,
     });
 
-    return await this.boardsRepository.save(board);
+    return await this.BoardsRepository.save(board);
+  }
+
+  //! delete board [service]
+  async delete(boardId: string, deleteBy: User): Promise<void> {
+    await this.CardsRepository.delete({
+      board: { id: boardId },
+      user: { id: deleteBy.id },
+    });
+
+    const board = await this.findOneById(boardId, deleteBy.id);
+    await this.BoardsRepository.remove(board);
+
+    return;
   }
 }

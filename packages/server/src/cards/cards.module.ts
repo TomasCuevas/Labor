@@ -1,5 +1,4 @@
-import { Module } from '@nestjs/common';
-import { forwardRef } from '@nestjs/common/utils';
+import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 //* controllers *//

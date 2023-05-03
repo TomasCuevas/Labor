@@ -43,7 +43,7 @@ export class BoardsController {
     return await this.boardsService.create(createBoardDto, user);
   }
 
-  //! get all boards [controller]
+  //! get all open boards [controller]
   @Get('all')
   async findAll(@GetUser() user: User): Promise<Board[]> {
     return this.boardsService.findAll(user.id);
@@ -73,7 +73,16 @@ export class BoardsController {
     @Param('id') id: string,
     @Body() updateBoardDto: UpdateBoardDto,
     @GetUser() user: User,
-  ) {
+  ): Promise<Board> {
     return await this.boardsService.update(id, updateBoardDto, user);
+  }
+
+  //! delete board [controller]
+  @Delete('delete/:id')
+  async delete(
+    @Param('id', ParseUUIDPipe) id: string,
+    @GetUser() user: User,
+  ): Promise<void> {
+    return await this.boardsService.delete(id, user);
   }
 }

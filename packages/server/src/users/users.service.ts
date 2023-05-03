@@ -12,7 +12,7 @@ import { User } from './entities';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(User) private readonly UserRepository: Repository<User>,
   ) {}
 
   //! create user service
@@ -26,11 +26,11 @@ export class UsersService {
       ]);
     }
 
-    const user = await this.userRepository.create({
+    const user = await this.UserRepository.create({
       ...userData,
       password: bcryptjs.hashSync(password, bcryptjs.genSaltSync()),
     });
-    await this.userRepository.save(user);
+    await this.UserRepository.save(user);
 
     delete user.password;
 
@@ -39,6 +39,6 @@ export class UsersService {
 
   //! find user by email service
   async findByEmail(email: string) {
-    return await this.userRepository.findOneBy({ email });
+    return await this.UserRepository.findOneBy({ email });
   }
 }
