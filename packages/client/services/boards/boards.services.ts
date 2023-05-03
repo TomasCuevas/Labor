@@ -60,7 +60,7 @@ export const getBoardByName = async (
   boardName: string
 ): Promise<{ ok: boolean; board?: IBoard }> => {
   try {
-    const { data } = await await boardsApi.get(`/${boardName}`);
+    const { data } = await boardsApi.get(`/${boardName}`);
 
     return {
       ok: true,
@@ -69,5 +69,21 @@ export const getBoardByName = async (
   } catch (error: any) {
     console.error(error);
     return { ok: false };
+  }
+};
+
+//! delete board
+export const deleteBoard = async (boardId: string) => {
+  try {
+    const { data } = await boardsApi.delete(`/${boardId}`);
+
+    return {
+      ok: true,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      ok: false,
+    };
   }
 };
