@@ -1,6 +1,7 @@
 export * from "./Board";
 export * from "./BoardCard";
 export * from "./BoardHeader";
+export * from "./BoardIsClosed";
 export * from "./NewBoardCard";
 export * from "./YourBoards";
 export * from "./sidebar/BoardSidebar";
