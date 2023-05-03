@@ -10,9 +10,13 @@ interface Props {
 export const SearchBoard: React.FC<Props> = ({ board }) => {
   return (
     <Link href={`/boards/${board.user.id}/${board.name}`}>
-      <article className="flex cursor-pointer gap-4 rounded-md p-2 duration-200 hover:bg-light/10">
-        <div>
-          <img src="/labor.svg" alt="icon" className="w-7" />
+      <article className="flex cursor-pointer items-center gap-4 rounded-md p-2 duration-200 hover:bg-light/10">
+        <div className="w-7">
+          <img
+            src={`/board_background/${board.background}.svg`}
+            alt="icon"
+            className="h-6 w-6 rounded-md object-cover"
+          />
         </div>
         <div className="flex flex-col">
           <div>
