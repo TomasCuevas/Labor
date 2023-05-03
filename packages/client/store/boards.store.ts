@@ -4,10 +4,14 @@ import { create } from "zustand";
 import { queryClient } from "../pages/_app";
 
 //* utils *//
-import { notiError, notiSuccess } from "../utils";
+import { notiError } from "../utils";
 
 //* services *//
-import { createBoardService, updateBoardService } from "../services";
+import {
+  createBoardService,
+  deleteBoard,
+  updateBoardService,
+} from "../services";
 
 //* interface *//
 import { IBoard, IBoardForCreate, IBoardForUpdate } from "../interfaces";
@@ -18,6 +22,7 @@ interface useBoardsState {
     boardId: string,
     board: IBoardForUpdate
   ): Promise<{ ok: boolean; board?: IBoard }>;
+  onDeleteBoard(boardId: string): Promise<{ ok: boolean }>;
 }
 
 export const useBoardsStore = create<useBoardsState>(() => ({
@@ -33,13 +38,28 @@ export const useBoardsStore = create<useBoardsState>(() => ({
   async onUpdateBoard(boardId: string, board: IBoardForUpdate) {
     const result = await updateBoardService(boardId, board);
     if (result.ok) {
-      notiSuccess("Descripción actualizada.");
+      queryClient.invalidateQueries(["/boards"]);
       return {
         ok: true,
         board: result.board,
       };
     } else {
-      notiError("Error al actualizar la descripción.");
+      notiError("Error al actualizar el tablero.");
+      return {
+        ok: false,
+      };
+    }
+  },
+  async onDeleteBoard(boardId: string) {
+    const result = await deleteBoard(boardId);
+
+    if (result.ok) {
+      queryClient.invalidateQueries(["/boards"]);
+      return {
+        ok: true,
+      };
+    } else {
+      notiError("Error al eliminar el tablero.");
       return {
         ok: false,
       };
