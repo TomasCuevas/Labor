@@ -17,7 +17,9 @@ import {
 import { IBoard, IBoardForCreate, IBoardForUpdate } from "../interfaces";
 
 interface useBoardsState {
-  onCreateBoard(board: IBoardForCreate): Promise<boolean>;
+  onCreateBoard(
+    board: IBoardForCreate
+  ): Promise<{ ok: boolean; board?: IBoard }>;
   onUpdateBoard(
     boardId: string,
     board: IBoardForUpdate
@@ -30,9 +32,14 @@ export const useBoardsStore = create<useBoardsState>(() => ({
     const result = await createBoardService(board);
     if (result.ok) {
       queryClient.invalidateQueries(["/boards"]);
-      return true;
+      return {
+        ok: true,
+        board: result.board,
+      };
     } else {
-      return false;
+      return {
+        ok: false,
+      };
     }
   },
   async onUpdateBoard(boardId: string, board: IBoardForUpdate) {
