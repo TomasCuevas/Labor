@@ -42,7 +42,7 @@ export const NewCard: React.FC<Props> = ({ boardId, status }) => {
             name="title"
             value={title}
             onChange={onInputChange}
-            className="h-20 w-full resize-none rounded-md bg-slate-50 p-2  text-dark shadow-sm shadow-dark/50 outline-none placeholder:text-dark/70"
+            className="h-20 w-full resize-none rounded-md bg-slate-50 p-2  text-dark shadow-sm shadow-dark/20 outline-none drop-shadow-xl placeholder:text-dark/70"
             maxLength={50}
             placeholder="Introduzca un título para esta tarjeta..."
           >
@@ -68,10 +68,12 @@ export const NewCard: React.FC<Props> = ({ boardId, status }) => {
   return (
     <button
       onClick={() => setIsInputOpen(true)}
-      className="flex w-full items-center gap-1 rounded-md bg-gray-200 px-2 py-1 hover:bg-gray-300"
+      className="group flex w-full items-center gap-1 rounded-md px-2 py-1 hover:bg-zinc-300"
     >
-      <RiAddLine className="text-gray-600" />
-      <span className="text-gray-600">Añada una tarjeta</span>
+      <RiAddLine className="text-gray-600 group-hover:text-gray-800" />
+      <span className="text-gray-600 group-hover:text-gray-800">
+        Añada una tarjeta
+      </span>
     </button>
   );
 };

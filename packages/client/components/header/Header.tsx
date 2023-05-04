@@ -10,7 +10,7 @@ import {
 
 export const Header: React.FC = () => {
   return (
-    <header className="fixed top-0 flex h-11 w-full items-center gap-3 border-b border-b-white/30 bg-emerald px-2 py-1">
+    <header className="fixed top-0 z-10 flex h-11 w-full items-center gap-3 bg-black/30 px-2 py-1 backdrop-blur-3xl">
       <AccountMenuButton />
       <Link href="/">
         <div className="flex h-full cursor-pointer items-center gap-1 rounded-md px-2 hover:bg-light/50">

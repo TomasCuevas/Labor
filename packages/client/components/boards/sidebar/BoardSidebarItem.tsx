@@ -22,7 +22,7 @@ export const BoardSidebarItem: React.FC<Props> = ({
   return (
     <li
       onClick={navigate ? () => onSetSidebarSection(navigate) : () => {}}
-      className="flex w-full cursor-pointer items-center gap-4 rounded-md px-3 py-2 hover:bg-gray-300"
+      className="flex w-full cursor-pointer items-center gap-4 rounded-md px-3 py-2 hover:bg-gray-200"
     >
       {icon ? <div className="w-6">{icon}</div> : null}
       <div className="flex flex-col">

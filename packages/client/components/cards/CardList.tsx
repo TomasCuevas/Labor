@@ -49,7 +49,7 @@ export const CardList: React.FC<Props> = ({
       onDrop={onDropEntry}
       onDragOver={allowDrop}
     >
-      <div className="flex flex-col gap-1 rounded-md bg-slate-300/60 p-2 backdrop-blur-xl">
+      <div className="flex flex-col gap-1 rounded-md bg-[#ebecf0] p-2 backdrop-blur-xl">
         <div className="mb-1 flex w-full items-center">
           <h1 className="font-bold tracking-[1px] text-dark/60">{title}</h1>
         </div>

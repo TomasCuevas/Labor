@@ -20,7 +20,7 @@ export const BoardSidebarHeader: React.FC<Props> = ({ backAction, title }) => {
       {backAction ? (
         <button
           onClick={() => onSetSidebarSection(backAction)}
-          className="rounded-full p-1 hover:bg-gray-300"
+          className="rounded-full p-1 hover:bg-gray-100"
         >
           <RiArrowLeftSLine className="text-2xl text-gray-700" />
         </button>
@@ -28,7 +28,7 @@ export const BoardSidebarHeader: React.FC<Props> = ({ backAction, title }) => {
       <h3 className="ml-auto text-base font-semibold text-gray-700">{title}</h3>
       <button
         onClick={() => onToggleSidebar(false)}
-        className="ml-auto rounded-full p-1 hover:bg-gray-300"
+        className="ml-auto rounded-full p-1 hover:bg-gray-100"
       >
         <RiCloseFill className="text-2xl text-gray-700" />
       </button>
