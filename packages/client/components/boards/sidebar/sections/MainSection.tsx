@@ -1,11 +1,37 @@
+import { useRouter } from "next/router";
+import Swal from "sweetalert2";
+
 //* comppnents *//
 import { BoardSidebarHeader, BoardSidebarItem } from "../../";
 
 //* store *//
-import { useBoardInterfaceStore } from "../../../../store";
+import { useBoardInterfaceStore, useBoardsStore } from "../../../../store";
 
 export const MainSection: React.FC = () => {
-  const { board } = useBoardInterfaceStore();
+  const { onUpdateBoard } = useBoardsStore();
+  const { board, onToggleSidebar } = useBoardInterfaceStore();
+  const { replace } = useRouter();
+
+  //! start close board
+  const startCloseBoard = async () => {
+    Swal.fire({
+      title: "¿Desea cerrar el tablero?",
+      text: "Puede buscar y volver a abrir los tableros cerrados en la parte inferior de su página de tableros.",
+      icon: "warning",
+      showCancelButton: true,
+      focusCancel: true,
+      confirmButtonColor: "#B91C1C",
+      cancelButtonColor: "#0d132c",
+      confirmButtonText: "Cerrar tablero",
+      cancelButtonText: "Cancelar",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await onUpdateBoard(board!.id, { status: "closed" });
+        onToggleSidebar(false);
+        replace(`/boards/${board?.user.id}/${board?.name}`);
+      }
+    });
+  };
 
   return (
     <>
@@ -28,12 +54,14 @@ export const MainSection: React.FC = () => {
             <img
               src={`/board_background/${board?.background}.svg`}
               alt="board background"
-              className="object-fill"
+              className="h-6 w-6 rounded-md object-cover"
             />
           }
         />
-        <span className="mt-4"></span>
-        <BoardSidebarItem title="Cerrar tablero" />
+        <hr className="mt-4 mb-2 border-gray-500"></hr>
+        <div onClick={startCloseBoard}>
+          <BoardSidebarItem title="Cerrar tablero..." />
+        </div>
       </ul>
     </>
   );
