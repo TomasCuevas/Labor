@@ -1,5 +1,3 @@
-import { MouseEvent } from "react";
-
 //* icons *//
 import { RiCheckFill } from "react-icons/ri";
 
