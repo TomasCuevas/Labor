@@ -1,4 +1,5 @@
 import { FormEvent } from "react";
+import { useRouter } from "next/router";
 
 //* icons *//
 import { RiArrowLeftSLine, RiCloseFill } from "react-icons/ri";
@@ -15,13 +16,19 @@ import { useBoardsStore, useHeaderStore } from "../../../store";
 export const CreateBoard: React.FC = () => {
   const { onChangeMenuOpen, onChangeCreateMenuState } = useHeaderStore();
   const { onCreateBoard } = useBoardsStore();
+  const { push } = useRouter();
 
   const { boardTitle, onInputChange } = useForm({ boardTitle: "" });
 
   //! start create board
   const startCreateBoard = async (event: FormEvent) => {
     event.preventDefault();
-    await onCreateBoard({ name: boardTitle });
+
+    const result = await onCreateBoard({ name: boardTitle });
+    if (result.ok) {
+      onChangeMenuOpen("nothing");
+      push(`/boards/${result.board?.user.id}/${result.board?.name}`);
+    }
   };
 
   return (
