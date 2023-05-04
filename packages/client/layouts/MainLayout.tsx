@@ -26,9 +26,9 @@ export const MainLayout: React.FC<Props> = ({
   title,
 }) => {
   const { status } = useAuthStore();
-  const router = useRouter();
+  const { replace } = useRouter();
 
-  if (status === "not-authenticated") router.replace("/auth/login");
+  if (status === "not-authenticated") replace("/auth/login");
   if (status === "authenticated") {
     return (
       <>
@@ -42,8 +42,10 @@ export const MainLayout: React.FC<Props> = ({
         <CreateMenuPopover />
         <SearchMenuPopover />
 
-        <main className="mt-11 flex min-h-[calc(100vh_-_44px)] w-full bg-[url('/backgrounds/auth_desktop_background.svg')]">
-          {children}
+        <main className="flex h-screen w-full">
+          <div className="flex w-full bg-[url('/background/labor_background.svg')]">
+            {children}
+          </div>
         </main>
       </>
     );
