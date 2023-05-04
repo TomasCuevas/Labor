@@ -75,7 +75,7 @@ export const getBoardByName = async (
 //! delete board
 export const deleteBoard = async (boardId: string) => {
   try {
-    const { data } = await boardsApi.delete(`/${boardId}`);
+    const { data } = await boardsApi.delete(`/delete/${boardId}`);
 
     return {
       ok: true,
