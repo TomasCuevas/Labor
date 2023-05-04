@@ -3,7 +3,12 @@ import { NextPage, GetServerSideProps } from "next";
 import axios from "axios";
 
 //* components *//
-import { Board, BoardHeader, BoardSidebar } from "../../../components/boards";
+import {
+  Board,
+  BoardHeader,
+  BoardIsClosed,
+  BoardSidebar,
+} from "../../../components/boards";
 import { CardModal } from "../../../components/cards";
 
 //* layout *//
@@ -16,33 +21,40 @@ import { useBoardInterfaceStore, useCardsStore } from "../../../store";
 import { IBoard, ICard } from "../../../interfaces";
 
 interface Props {
-  board: IBoard;
+  boardProp: IBoard;
   modalCard?: ICard;
 }
 
-const BoardPage: NextPage<Props> = ({ board, modalCard }) => {
+const BoardPage: NextPage<Props> = ({ boardProp, modalCard }) => {
   const { cardModal, onToggleCardModal } = useCardsStore();
-  const { onSetBoard, sidebar } = useBoardInterfaceStore();
+  const { board, onSetBoard, sidebar } = useBoardInterfaceStore();
 
   useEffect(() => {
-    if (modalCard) onToggleCardModal(modalCard);
-    onSetBoard(board);
+    if (modalCard && boardProp.status === "open") onToggleCardModal(modalCard);
+    onSetBoard(boardProp);
   }, []);
 
   return (
     <MainLayout
-      title={`${board.name} | Labor`}
-      description={`Pagina dedicada al tablero ${board.name} creado por ${board.user.name}`}
+      title={`${boardProp?.name} | Labor`}
+      description={`Pagina dedicada al tablero ${boardProp?.name} creado por ${boardProp?.user.name}`}
     >
       <div
-        className="flex h-full w-full flex-col bg-cover bg-center bg-no-repeat pt-11"
+        className="relative flex h-full w-full flex-col bg-cover bg-center bg-no-repeat pt-11"
         style={{
-          backgroundImage: `url(/board_background/${board.background}.svg)`,
+          backgroundImage: `url(/board_background/${board?.background}.svg)`,
         }}
       >
-        <BoardHeader boardName={board.name} />
-        <Board boardId={board.id} />
+        {boardProp.status === "open" ? (
+          <>
+            <BoardHeader boardName={boardProp?.name} />
+            <Board boardId={boardProp?.id} />
+          </>
+        ) : (
+          <BoardIsClosed board={boardProp} />
+        )}
       </div>
+
       {cardModal ? <CardModal /> : null}
       {sidebar ? <BoardSidebar /> : null}
     </MainLayout>
@@ -78,7 +90,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   if (!modal) {
     return {
       props: {
-        board: data,
+        boardProp: data,
       },
     };
   }
@@ -89,7 +101,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   return {
     props: {
-      board: data,
+      boardProp: data,
       modalCard: modalData,
     },
   };
