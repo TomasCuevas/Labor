@@ -1,8 +1,8 @@
-//* components *//
-import { CardList } from "../cards";
+//* component *//
+import { CardList } from "@/components/cards";
 
-//* hooks *//
-import { useCards } from "../../hooks";
+//* hook *//
+import { useCards } from "@/hooks";
 
 //* inteface *//
 interface Props {

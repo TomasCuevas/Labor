@@ -2,7 +2,7 @@
 import { RiAddLine } from "react-icons/ri";
 
 //* store *//
-import { useHeaderStore } from "../../store";
+import { useHeaderStore } from "@/store";
 
 export const NewBoardCard: React.FC = () => {
   const { onChangeMenuOpen, onChangeCreateMenuState } = useHeaderStore();

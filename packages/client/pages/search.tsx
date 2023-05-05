@@ -1,10 +1,10 @@
 import { NextPage } from "next";
 
 //* components *//
-import { SearchContainer } from "../components/search";
+import { SearchContainer } from "@/components/search";
 
 //* layout *//
-import { MainLayout } from "../layouts";
+import { MainLayout } from "@/layouts";
 
 const SearchPage: NextPage = () => {
   return (

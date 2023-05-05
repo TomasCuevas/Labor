@@ -1,5 +1,5 @@
-import { Checkbox } from "@mui/material";
 import { ChangeEvent } from "react";
+import { Checkbox } from "@mui/material";
 
 //* interface *//
 interface Props {

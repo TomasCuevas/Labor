@@ -1,8 +1,8 @@
 //* store *//
-import { useBoardInterfaceStore } from "../../../store";
+import { useBoardInterfaceStore } from "@/store";
 
-//* interface *//
-import { IBoardSidebarSection } from "../../../interfaces";
+//* interfaces *//
+import { IBoardSidebarSection } from "@/interfaces";
 
 interface Props {
   description?: string;

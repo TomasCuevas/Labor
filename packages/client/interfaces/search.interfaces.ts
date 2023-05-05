@@ -1,5 +1,5 @@
 //* interfaces *//
-import { IBoard, ICard } from "./";
+import { IBoard, ICard } from "@/interfaces";
 
 export interface ISearch {
   cards?: ICard[];

@@ -2,10 +2,10 @@ import { create } from "zustand";
 import Cookies from "js-cookie";
 
 //* services *//
-import { checkService, loginService, registerService } from "../services";
+import { checkService, loginService, registerService } from "@/services";
 
 //* interfaces *//
-import { IAuthState, ILogin, IRegister } from "../interfaces";
+import { IAuthState, ILogin, IRegister } from "@/interfaces";
 
 interface useAuthState extends IAuthState {
   setLogin(user: any, token: string): void;

@@ -6,7 +6,7 @@ import {
   CreateMenuButton,
   SearchInputDesktop,
   SearchInputMobile,
-} from "./";
+} from "@/components/header";
 
 export const Header: React.FC = () => {
   return (

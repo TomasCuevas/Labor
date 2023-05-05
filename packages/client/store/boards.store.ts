@@ -1,20 +1,20 @@
 import { create } from "zustand";
 
 //* queryClient *//
-import { queryClient } from "../pages/_app";
+import { queryClient } from "@/pages/_app";
 
-//* utils *//
-import { notiError } from "../utils";
+//* util *//
+import { notiError } from "@/utils";
 
 //* services *//
 import {
   createBoardService,
   deleteBoard,
   updateBoardService,
-} from "../services";
+} from "@/services";
 
-//* interface *//
-import { IBoard, IBoardForCreate, IBoardForUpdate } from "../interfaces";
+//* interfaces *//
+import { IBoard, IBoardForCreate, IBoardForUpdate } from "@/interfaces";
 
 interface useBoardsState {
   onCreateBoard(

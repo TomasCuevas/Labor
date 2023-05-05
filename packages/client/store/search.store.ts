@@ -1,10 +1,10 @@
 import { create } from "zustand";
 
-//* services *//
-import { searchAll } from "../services";
+//* service *//
+import { searchAll } from "@/services";
 
-//* interfaces *//
-import { ISearch } from "../interfaces";
+//* interface *//
+import { ISearch } from "@/interfaces";
 
 export const useSearchStore = create<ISearch>((set) => ({
   boards: [],

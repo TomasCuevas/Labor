@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 
-//* services *//
-import { getAllCardsByBoardService } from "../services";
+//* service *//
+import { getAllCardsByBoardService } from "@/services";
 
 //* interfaces *//
-import { ICard } from "../interfaces";
+import { ICard } from "@/interfaces";
 
 interface Return {
   isLoading: boolean;

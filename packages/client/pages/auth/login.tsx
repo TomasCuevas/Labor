@@ -8,16 +8,16 @@ import {
   FormAuthInput,
   FormErrorMessage,
   RegisterLoginSwitch,
-} from "../../components/auth";
+} from "@/components/auth";
 
 //* layout *//
-import { AuthLayout } from "../../layouts";
+import { AuthLayout } from "@/layouts";
 
 //* hooks *//
-import { useForm } from "../../hooks/useForm";
+import { useForm } from "@/hooks";
 
 //* store *//
-import { useAuthStore } from "../../store";
+import { useAuthStore } from "@/store";
 
 const LoginPage: NextPage = () => {
   const { onLogin } = useAuthStore();

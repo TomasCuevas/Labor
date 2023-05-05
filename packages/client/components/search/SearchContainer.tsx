@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 
-//* icons *//
+//* icon *//
 import { RiCloseFill } from "react-icons/ri";
 
 //* components *//
-import { SearchCard, SearchBoard } from "./";
+import { SearchCard, SearchBoard } from "@/components/search";
 
-//* hooks *//
-import { useForm } from "../../hooks";
+//* hook *//
+import { useForm } from "@/hooks";
 
 //* store *//
-import { useSearchStore } from "../../store";
+import { useSearchStore } from "@/store";
 
 export const SearchContainer: React.FC = () => {
   const { boards, cards } = useSearchStore();

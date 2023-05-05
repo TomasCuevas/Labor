@@ -1,8 +1,12 @@
 //* components *//
-import { AboutSection, BackgroundSection, MainSection } from "../";
+import {
+  AboutSection,
+  BackgroundSection,
+  MainSection,
+} from "@/components/boards";
 
 //* store *//
-import { useBoardInterfaceStore } from "../../../store";
+import { useBoardInterfaceStore } from "@/store";
 
 export const BoardSidebar: React.FC = () => {
   const { sidebarSection } = useBoardInterfaceStore();

@@ -1,11 +1,11 @@
 //* data *//
-import { backgroundColors } from "../../../../data";
+import { backgroundColors } from "@/data";
 
 //* components *//
-import { BackgroundCard, BoardSidebarHeader } from "../../";
+import { BackgroundCard, BoardSidebarHeader } from "@/components/boards";
 
 //* store *//
-import { useBoardInterfaceStore } from "../../../../store";
+import { useBoardInterfaceStore } from "@/store";
 
 export const BackgroundSection: React.FC = () => {
   const { board } = useBoardInterfaceStore();

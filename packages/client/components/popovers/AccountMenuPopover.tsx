@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 
 //* components *//
-import { PopoverItem } from "./";
+import { PopoverItem } from "@/components/popovers";
 
-//* store *//
-import { useAuthStore, useHeaderStore } from "../../store";
+//* stores *//
+import { useAuthStore, useHeaderStore } from "@/store";
 
 export const AccountMenuPopover: React.FC = () => {
   const { user, setLogout } = useAuthStore();

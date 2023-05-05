@@ -1,8 +1,8 @@
 //* components *//
-import { BoardCard, NewBoardCard } from "./";
+import { BoardCard, NewBoardCard } from "@/components/boards";
 
 //* hooks *//
-import { useBoards } from "../../hooks";
+import { useBoards } from "@/hooks";
 
 export const YourBoards: React.FC = () => {
   const { boards } = useBoards();

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
-//* interface *//
-import { CreateMenuState, IHeader, MenuOpen } from "../interfaces";
+//* interfaces *//
+import { CreateMenuState, IHeader, MenuOpen } from "@/interfaces";
 
 interface useHeaderState extends IHeader {
   onChangeMenuOpen(menu: MenuOpen): void;

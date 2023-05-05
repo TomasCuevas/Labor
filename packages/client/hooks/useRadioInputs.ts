@@ -1,5 +1,6 @@
 import { useState, ChangeEvent } from "react";
 
+//* interface *//
 interface Return {
   selectedInputs: string | string[];
   onRadioChange(event: ChangeEvent<HTMLInputElement>): void;

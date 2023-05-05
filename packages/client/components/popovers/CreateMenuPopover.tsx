@@ -1,8 +1,8 @@
 //* components *//
-import { PopoverCreateItem, CreateBoard } from "./";
+import { PopoverCreateItem, CreateBoard } from "@/components/popovers";
 
-//* store *//
-import { useHeaderStore } from "../../store";
+//* stores *//
+import { useHeaderStore } from "@/store";
 
 export const CreateMenuPopover: React.FC = () => {
   const {

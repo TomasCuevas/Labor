@@ -1,8 +1,8 @@
-//* axios *//
-import { authApi } from "../../api";
+//* axios instance *//
+import { authApi } from "@/api";
 
 //* interfaces *//
-import { IRegister, ILogin } from "../../interfaces";
+import { IRegister, ILogin } from "@/interfaces";
 
 //! register service
 export const registerService = async (registerData: IRegister) => {

@@ -1,16 +1,16 @@
 import { useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 
-//* icons *//
+//* icon *//
 import { RiSearch2Line } from "react-icons/ri";
 
-//* hooks *//
-import { useForm } from "../../hooks";
+//* hook *//
+import { useForm } from "@/hooks";
 
-//* store *//
-import { useHeaderStore, useSearchStore } from "../../store";
+//* stores *//
+import { useHeaderStore, useSearchStore } from "@/store";
 
-export const SearchInputDesktop = () => {
+export const SearchInputDesktop: React.FC = () => {
   const { onChangeMenuOpen } = useHeaderStore();
   const { clearData, onSearch } = useSearchStore();
 

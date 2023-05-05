@@ -4,13 +4,13 @@ import { DragEvent } from "react";
 import { RiAlignLeft } from "react-icons/ri";
 
 //* data *//
-import { labelColors } from "../../data";
+import { labelColors } from "@/data";
 
 //* store *//
-import { useCardsStore } from "../../store";
+import { useCardsStore } from "@/store";
 
 //* interfaces *//
-import { ICard } from "../../interfaces";
+import { ICard } from "@/interfaces";
 
 interface Props {
   card: ICard;

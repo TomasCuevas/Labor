@@ -2,10 +2,10 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 
 //* components *//
-import { FullLoader } from "../components/ui";
+import { FullLoader } from "@/components/ui";
 
 //* context *//
-import { useAuthStore } from "../store";
+import { useAuthStore } from "@/store";
 
 //* interface *//
 interface Props {

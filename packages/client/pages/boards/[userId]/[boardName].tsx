@@ -8,17 +8,17 @@ import {
   BoardHeader,
   BoardIsClosed,
   BoardSidebar,
-} from "../../../components/boards";
-import { CardModal } from "../../../components/cards";
+} from "@/components/boards";
+import { CardModal } from "@/components/cards";
 
 //* layout *//
-import { MainLayout } from "../../../layouts";
+import { MainLayout } from "@/layouts";
 
 //* store *//
-import { useBoardInterfaceStore, useCardsStore } from "../../../store";
+import { useBoardInterfaceStore, useCardsStore } from "@/store";
 
 //* interfaces *//
-import { IBoard, ICard } from "../../../interfaces";
+import { IBoard, ICard } from "@/interfaces";
 
 interface Props {
   boardProp: IBoard;

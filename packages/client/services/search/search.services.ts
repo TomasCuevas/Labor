@@ -1,8 +1,8 @@
 //* axios instance *//
-import { searchApi } from "../../api";
+import { searchApi } from "@/api";
 
 //* interfaces *//
-import { IBoard, ICard } from "../../interfaces";
+import { IBoard, ICard } from "@/interfaces";
 
 //! search all services
 export const searchAll = async (

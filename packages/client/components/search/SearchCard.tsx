@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-//* icons *//
+//* icon *//
 import { FaPager } from "react-icons/fa";
 
 //* interfaces *//
-import { ICard } from "../../interfaces";
+import { ICard } from "@/interfaces";
 
 interface Props {
   card: ICard;

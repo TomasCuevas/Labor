@@ -5,13 +5,13 @@ import { useRouter } from "next/router";
 import { RiArrowLeftSLine, RiCloseFill } from "react-icons/ri";
 
 //* components *//
-import { PopoverButton, PopoverInput } from "../";
+import { PopoverButton, PopoverInput } from "@/components/popovers";
 
-//* hooks *//
-import { useForm } from "../../../hooks/useForm";
+//* hook *//
+import { useForm } from "@/hooks";
 
-//* store *//
-import { useBoardsStore, useHeaderStore } from "../../../store";
+//* stores *//
+import { useBoardsStore, useHeaderStore } from "@/store";
 
 export const CreateBoard: React.FC = () => {
   const { onChangeMenuOpen, onChangeCreateMenuState } = useHeaderStore();

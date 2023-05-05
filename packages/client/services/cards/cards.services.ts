@@ -1,8 +1,8 @@
-//* axios instances *//
-import { boardsApi, cardsApi } from "../../api";
+//* axios instance *//
+import { boardsApi, cardsApi } from "@/api";
 
 //* interfaces *//
-import { ICard, ICardForCreate, ICardForUpdate } from "../../interfaces";
+import { ICard, ICardForCreate, ICardForUpdate } from "@/interfaces";
 
 //! create card [service]
 export const createCardService = async (

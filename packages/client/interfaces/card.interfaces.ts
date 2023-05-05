@@ -1,5 +1,5 @@
 //* interfaces *//
-import { IUser, IBoard } from "./";
+import { IUser, IBoard } from "@/interfaces";
 
 export interface ICard {
   board: IBoard;

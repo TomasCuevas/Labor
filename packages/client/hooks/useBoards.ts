@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 
-//* services *//
-import { getAllBoardsService } from "../services";
+//* service *//
+import { getAllBoardsService } from "@/services";
 
 //* interfaces *//
-import { IBoard } from "../interfaces";
+import { IBoard } from "@/interfaces";
 
 interface Return {
   boards?: IBoard[];

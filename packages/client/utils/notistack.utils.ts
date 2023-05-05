@@ -1,4 +1,4 @@
-import { snackbarProvider } from "../pages/_app";
+import { snackbarProvider } from "@/pages/_app";
 
 export const notiSuccess = (menssaje: string) => {
   snackbarProvider.current?.enqueueSnackbar(menssaje, {

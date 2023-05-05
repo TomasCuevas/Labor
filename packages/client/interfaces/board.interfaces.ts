@@ -1,5 +1,5 @@
 //* interfaces *//
-import { IUser } from ".";
+import { IUser } from "@/interfaces";
 
 export interface IBoard {
   background: string;

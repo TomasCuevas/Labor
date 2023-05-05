@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-//* icons *//
+//* icon *//
 import { RiSearch2Line } from "react-icons/ri";
 
 export const SearchInputMobile: React.FC = () => {

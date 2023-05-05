@@ -1,8 +1,8 @@
-//* axios *//
-import { boardsApi } from "../../api";
+//* axios instance *//
+import { boardsApi } from "@/api";
 
 //* interfaces *//
-import { IBoard, IBoardForCreate, IBoardForUpdate } from "../../interfaces";
+import { IBoard, IBoardForCreate, IBoardForUpdate } from "@/interfaces";
 
 //! create board service
 export const createBoardService = async (

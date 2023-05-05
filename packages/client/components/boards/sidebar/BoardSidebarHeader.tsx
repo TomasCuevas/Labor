@@ -2,10 +2,10 @@
 import { RiCloseFill, RiArrowLeftSLine } from "react-icons/ri";
 
 //* store *//
-import { useBoardInterfaceStore } from "../../../store";
+import { useBoardInterfaceStore } from "@/store";
 
 //* interface *//
-import { IBoardSidebarSection } from "../../../interfaces";
+import { IBoardSidebarSection } from "@/interfaces";
 
 interface Props {
   title: string;

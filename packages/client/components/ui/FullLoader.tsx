@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-export const FullLoader = () => {
+export const FullLoader: React.FC = () => {
   return (
     <>
       <Head>

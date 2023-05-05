@@ -1,5 +1,6 @@
 import { IconType } from "react-icons/lib";
 
+//* interface *//
 interface Props {
   action: any;
   text: string;

@@ -1,15 +1,15 @@
 import { useRouter } from "next/router";
 
-//* icons *//
+//* icon *//
 import { RiSearch2Line } from "react-icons/ri";
 
 //* components *//
-import { SearchBoard, SearchCard } from "../search";
+import { SearchBoard, SearchCard } from "@/components/search";
 
-//* store *//
-import { useHeaderStore, useSearchStore } from "../../store";
+//* stores *//
+import { useHeaderStore, useSearchStore } from "@/store";
 
-export const SearchMenuPopover = () => {
+export const SearchMenuPopover: React.FC = () => {
   const { menuOpen, onChangeMenuOpen } = useHeaderStore();
   const { boards, cards } = useSearchStore();
 

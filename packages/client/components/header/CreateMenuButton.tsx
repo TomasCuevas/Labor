@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 
-//* icons *//
+//* icon *//
 import { RiAddFill } from "react-icons/ri";
 
 //* store *//
-import { useHeaderStore } from "../../store";
+import { useHeaderStore } from "@/store";
 
 export const CreateMenuButton: React.FC = () => {
   const { menuOpen, onChangeMenuOpen } = useHeaderStore();

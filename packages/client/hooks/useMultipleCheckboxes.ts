@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-//* interfaces *//
+//* interface *//
 interface Return {
   checkboxes: any;
   handleCheckboxChange(event: React.ChangeEvent<HTMLInputElement>): void;

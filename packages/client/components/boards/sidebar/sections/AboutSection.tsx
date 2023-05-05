@@ -4,17 +4,13 @@ import { MouseEvent, useState } from "react";
 import { RiAlignLeft, RiUserLine } from "react-icons/ri";
 
 //* components *//
-import { BoardSidebarHeader } from "../../";
+import { BoardSidebarHeader } from "@/components/boards";
 
 //* hook *//
-import { useForm } from "../../../../hooks";
+import { useForm } from "@/hooks";
 
 //* store *//
-import {
-  useAuthStore,
-  useBoardInterfaceStore,
-  useBoardsStore,
-} from "../../../../store";
+import { useAuthStore, useBoardInterfaceStore, useBoardsStore } from "@/store";
 
 export const AboutSection = () => {
   const { user } = useAuthStore();

@@ -1,8 +1,8 @@
-//* icons *//
+//* icon *//
 import { RiAppsFill } from "react-icons/ri";
 
 //* store *//
-import { useHeaderStore } from "../../store";
+import { useHeaderStore } from "@/store";
 
 export const AccountMenuButton: React.FC = () => {
   const { onChangeMenuOpen, menuOpen } = useHeaderStore();

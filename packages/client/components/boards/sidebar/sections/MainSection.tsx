@@ -2,10 +2,10 @@ import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 
 //* comppnents *//
-import { BoardSidebarHeader, BoardSidebarItem } from "../../";
+import { BoardSidebarHeader, BoardSidebarItem } from "@/components/boards";
 
 //* store *//
-import { useBoardInterfaceStore, useBoardsStore } from "../../../../store";
+import { useBoardInterfaceStore, useBoardsStore } from "@/store";
 
 export const MainSection: React.FC = () => {
   const { onUpdateBoard } = useBoardsStore();

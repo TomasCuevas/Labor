@@ -2,16 +2,16 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 //* components *//
-import { Header } from "../components/header";
-import { FullLoader } from "../components/ui";
+import { Header } from "@/components/header";
+import { FullLoader } from "@/components/ui";
 import {
   AccountMenuPopover,
   CreateMenuPopover,
   SearchMenuPopover,
-} from "../components/popovers";
+} from "@/components/popovers";
 
 //* store *//
-import { useAuthStore } from "../store";
+import { useAuthStore } from "@/store";
 
 //* interface
 interface Props {

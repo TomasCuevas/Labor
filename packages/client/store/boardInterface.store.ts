@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 //* interfaces *//
-import { IBoard, IBoardSidebarSection } from "../interfaces";
+import { IBoard, IBoardSidebarSection } from "@/interfaces";
 
 interface useBoardInterfaceState {
   sidebar: boolean;

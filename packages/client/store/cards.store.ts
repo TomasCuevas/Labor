@@ -1,20 +1,20 @@
 import { create } from "zustand";
 
 //* utils *//
-import { notiError, notiSuccess } from "../utils/notistack.utils";
+import { notiError, notiSuccess } from "@/utils/notistack.utils";
 
 //* services *//
 import {
   createCardService,
   removeCardService,
   updateCardService,
-} from "../services";
+} from "@/services";
 
 //* queryClient *//
-import { queryClient } from "../pages/_app";
+import { queryClient } from "@/pages/_app";
 
 //* interfaces *//
-import { ICard, ICardForCreate, ICardForUpdate } from "../interfaces";
+import { ICard, ICardForCreate, ICardForUpdate } from "@/interfaces";
 
 interface useCardState {
   isCardDragging: boolean;

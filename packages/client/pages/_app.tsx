@@ -5,10 +5,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SnackbarProvider } from "notistack";
 
 //* store *//
-import { useAuthStore } from "../store";
+import { useAuthStore } from "@/store";
 
 //* styles *//
-import "../styles/globals.css";
+import "@/styles/globals.css";
 
 //* create a client *//
 export const queryClient = new QueryClient();

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 //* interfaces *//
-import { IBoard } from "../../interfaces";
+import { IBoard } from "@/interfaces";
 
 interface Props {
   board: IBoard;

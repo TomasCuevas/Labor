@@ -1,16 +1,16 @@
 import { DragEvent } from "react";
 
 //* components *//
-import { NewCard, Card } from ".";
+import { NewCard, Card } from "@/components/cards";
 
 //* styles *//
-import Styles from "./TodoList.module.css";
+import Styles from "@/components/cards/TodoList.module.css";
 
 //* store *//
-import { useCardsStore } from "../../store";
+import { useCardsStore } from "@/store";
 
 //* interfaces *//
-import { ICard, ICardStatus } from "../../interfaces";
+import { ICard, ICardStatus } from "@/interfaces";
 
 interface Props {
   boardId: string;

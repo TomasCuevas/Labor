@@ -12,19 +12,19 @@ import {
 import { MdSaveAlt, MdOutlineRemove } from "react-icons/md";
 
 //* data *//
-import { labelColors } from "../../../data";
+import { labelColors } from "@/data";
 
 //* components *//
-import { LabelInput, ModalActionButtom, RadioInput } from "../";
+import { LabelInput, ModalActionButtom, RadioInput } from "@/components/cards";
 
 //* hooks *//
-import { useForm, useMultipleCheckboxes, useRadioInputs } from "../../../hooks";
+import { useForm, useMultipleCheckboxes, useRadioInputs } from "@/hooks";
 
 //* store *//
-import { useCardsStore } from "../../../store";
+import { useCardsStore } from "@/store";
 
 //* interfaces *//
-import { ICardStatus } from "../../../interfaces";
+import { ICardStatus } from "@/interfaces";
 
 export const CardModal: React.FC = () => {
   const { cardModal, onToggleCardModal, onUpdateCard, onDeleteCard } =

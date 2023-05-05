@@ -2,7 +2,7 @@
 import { RiCheckFill } from "react-icons/ri";
 
 //* store *//
-import { useBoardInterfaceStore, useBoardsStore } from "../../../../store";
+import { useBoardInterfaceStore, useBoardsStore } from "@/store";
 
 //* interface *//
 interface Props {

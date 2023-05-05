@@ -4,13 +4,13 @@ import { MouseEvent, useState } from "react";
 import { RiAddLine, RiCloseFill } from "react-icons/ri";
 
 //* hooks *//
-import { useForm } from "../../hooks";
+import { useForm } from "@/hooks";
 
 //* store *//
-import { useCardsStore } from "../../store";
+import { useCardsStore } from "@/store";
 
-//* interface *//
-import { ICardStatus } from "../../interfaces";
+//* interfaces *//
+import { ICardStatus } from "@/interfaces";
 
 interface Props {
   status: ICardStatus;
