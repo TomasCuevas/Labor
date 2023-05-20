@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 
 //* comppnents *//
-import { BoardSidebarHeader, BoardSidebarItem } from "@/components/boards";
+import { BoardSidebarHeader, BoardSidebarItem } from "@/components/board";
 
 //* store *//
 import { useBoardInterfaceStore, useBoardsStore } from "@/store";
@@ -26,9 +26,14 @@ export const MainSection: React.FC = () => {
       cancelButtonText: "Cancelar",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await onUpdateBoard(board!.id, { status: "closed" });
+        try {
+          await onUpdateBoard(board!.id, { status: "closed" });
+          replace(`/boards/${board?.user.id}/${board?.name}`);
+        } catch (error) {
+          console.error(error);
+        }
+
         onToggleSidebar(false);
-        replace(`/boards/${board?.user.id}/${board?.name}`);
       }
     });
   };

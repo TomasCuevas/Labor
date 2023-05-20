@@ -4,7 +4,7 @@ import { RiCloseFill, RiArrowLeftSLine } from "react-icons/ri";
 //* store *//
 import { useBoardInterfaceStore } from "@/store";
 
-//* interface *//
+//* interfaces *//
 import { IBoardSidebarSection } from "@/interfaces";
 
 interface Props {

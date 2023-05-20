@@ -1,5 +1,5 @@
 //* component *//
-import { CardList } from "@/components/cards";
+import { CardList } from "@/components/card";
 
 //* hook *//
 import { useCards } from "@/hooks";

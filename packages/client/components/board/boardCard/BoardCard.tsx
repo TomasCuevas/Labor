@@ -9,7 +9,7 @@ interface Props {
 
 export const BoardCard: React.FC<Props> = ({ board }) => {
   return (
-    <li className="h-20 w-full overflow-hidden rounded-md">
+    <li className="h-20 w-full overflow-hidden rounded-md shadow-md shadow-black/20 drop-shadow-md hover:shadow-black/30">
       <Link href={`/boards/${board.user.id}/${board.name}`}>
         <button
           className="relative flex h-full w-full overflow-hidden rounded-md bg-cover bg-center bg-no-repeat px-4 py-2 sm:px-6"

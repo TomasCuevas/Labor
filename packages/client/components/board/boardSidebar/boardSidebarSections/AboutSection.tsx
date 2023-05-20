@@ -1,13 +1,23 @@
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 //* icons *//
 import { RiAlignLeft, RiUserLine } from "react-icons/ri";
 
 //* components *//
-import { BoardSidebarHeader } from "@/components/boards";
+import { BoardSidebarHeader } from "@/components/board";
 
-//* hook *//
-import { useForm } from "@/hooks";
+//* form-initial-values and form-validations *//
+const initialValues = (description?: string) => ({
+  description: description || "",
+});
+
+const formValidations = () => {
+  return Yup.object({
+    description: Yup.string().min(1).max(300).required(),
+  });
+};
 
 //* store *//
 import { useAuthStore, useBoardInterfaceStore, useBoardsStore } from "@/store";
@@ -18,22 +28,20 @@ export const AboutSection = () => {
   const { onUpdateBoard } = useBoardsStore();
   const [isInputOpen, setIsInputOpen] = useState<boolean>(false);
 
-  const { description, onInputChange } = useForm({
-    description: board!.description,
+  const formik = useFormik({
+    initialValues: initialValues(board?.description),
+    validationSchema: formValidations(),
+    onSubmit: async (formValues) => {
+      try {
+        const result = await onUpdateBoard(board!.id, formValues);
+        onSetBoard(result);
+      } catch (error) {
+        console.error(error);
+      }
+
+      setIsInputOpen(false);
+    },
   });
-
-  //! start update description
-  const startUpdateDescription = async (
-    event: MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-
-    const result = await onUpdateBoard(board!.id, {
-      description: description || " ",
-    });
-    if (result) onSetBoard(result.board!);
-    setIsInputOpen(false);
-  };
 
   return (
     <>
@@ -60,25 +68,27 @@ export const AboutSection = () => {
         </div>
         <div className="mt-4">
           {isInputOpen ? (
-            <>
-              <div>
-                <textarea
-                  name="description"
-                  value={description}
-                  onChange={onInputChange}
-                  className="h-32 w-full resize-none rounded-md bg-gray-200 p-2 text-dark outline-none placeholder:text-dark/70"
-                  maxLength={300}
-                  placeholder="Introduzca una descripción..."
-                  autoFocus
-                >
-                  {description}
-                </textarea>
-              </div>
+            <form onSubmit={formik.handleSubmit}>
+              <textarea
+                name="description"
+                value={formik.values.description}
+                onChange={formik.handleChange}
+                className="h-32 w-full resize-none rounded-md bg-gray-200 p-2 text-dark outline-none placeholder:text-dark/70"
+                maxLength={300}
+                placeholder="Introduzca una descripción..."
+                autoFocus
+              >
+                {formik.values.description}
+              </textarea>
               <div className="mt-1 flex items-center gap-2">
                 <button
+                  disabled={
+                    formik.isSubmitting || formik.errors.description
+                      ? true
+                      : false
+                  }
                   type="submit"
-                  onClick={startUpdateDescription}
-                  className="cursor-pointer rounded-md bg-emerald p-2 px-4 text-sm text-white hover:bg-emerald/80"
+                  className="cursor-pointer rounded-md bg-emerald p-2 px-4 text-sm text-white hover:bg-emerald/80 disabled:cursor-not-allowed disabled:bg-dark/20"
                 >
                   Guardar
                 </button>
@@ -89,7 +99,7 @@ export const AboutSection = () => {
                   Cancelar
                 </button>
               </div>
-            </>
+            </form>
           ) : (
             <button
               onClick={() => setIsInputOpen(true)}

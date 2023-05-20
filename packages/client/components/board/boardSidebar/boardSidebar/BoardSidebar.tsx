@@ -3,7 +3,7 @@ import {
   AboutSection,
   BackgroundSection,
   MainSection,
-} from "@/components/boards";
+} from "@/components/board";
 
 //* store *//
 import { useBoardInterfaceStore } from "@/store";

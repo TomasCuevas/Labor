@@ -16,8 +16,12 @@ export const BackgroundCard: React.FC<Props> = ({ background, isSelected }) => {
 
   //! start update background
   const startUpdateBackground = async () => {
-    const result = await onUpdateBoard(board!.id, { background });
-    if (result) onSetBoard(result.board!);
+    try {
+      const result = await onUpdateBoard(board!.id, { background });
+      onSetBoard(result);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

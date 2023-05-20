@@ -1,10 +1,13 @@
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 
+//* util *//
+import { notiError } from "@/utils";
+
 //* store *//
 import { useBoardsStore } from "@/store";
 
-//* interface *//
+//* interfaces *//
 import { IBoard } from "@/interfaces";
 
 interface Props {
@@ -17,9 +20,11 @@ export const BoardIsClosed: React.FC<Props> = ({ board }) => {
 
   //! start open board
   const startOpenBoard = async () => {
-    const result = await onUpdateBoard(board.id, { status: "open" });
-    if (result.ok) {
+    try {
+      await onUpdateBoard(board.id, { status: "open" });
       replace(`/boards/${board.user.id}/${board.name}`);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -36,8 +41,12 @@ export const BoardIsClosed: React.FC<Props> = ({ board }) => {
       cancelButtonText: "Cancelar",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await onDeleteBoard(board.id);
-        replace("/");
+        try {
+          await onDeleteBoard(board.id);
+          replace("/");
+        } catch (error) {
+          console.error(error);
+        }
       }
     });
   };

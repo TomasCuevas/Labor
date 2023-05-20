@@ -2,7 +2,7 @@
 import { backgroundColors } from "@/data";
 
 //* components *//
-import { BackgroundCard, BoardSidebarHeader } from "@/components/boards";
+import { BackgroundCard, BoardSidebarHeader } from "@/components/board";
 
 //* store *//
 import { useBoardInterfaceStore } from "@/store";
