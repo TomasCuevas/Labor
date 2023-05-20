@@ -12,13 +12,13 @@ import {
 export class CreateCardDto {
   @Matches(/^(?!\s)[\s\S]*(?<!\s)$/, {
     message:
-      'El nombre del tablero, no puede tener espacios al principio ni al final.',
+      'El nombre de la tarjeta, no puede tener espacios al principio ni al final.',
   })
   @MinLength(1, {
-    message: 'El nombre del tablero debe tener mínimo 1 carácter.',
+    message: 'El nombre de la tarjeta debe tener mínimo 1 carácter.',
   })
   @MaxLength(50, {
-    message: 'El nombre del tablero debe tener máximo 50 caracteres.',
+    message: 'El nombre de la tarjeta debe tener máximo 50 caracteres.',
   })
   title: string;
 
