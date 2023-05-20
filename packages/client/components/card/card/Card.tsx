@@ -29,7 +29,7 @@ export const Card: React.FC<Props> = ({ card }) => {
       draggable
       onDragStart={onDragStart}
       onClick={() => onToggleCardModal(card)}
-      className="group flex cursor-pointer flex-col gap-[2px] rounded-[4px] bg-white p-2 shadow-sm shadow-dark/20 drop-shadow-lg hover:bg-[#f4f5f7]"
+      className="group flex cursor-pointer flex-col gap-2 rounded-[4px] bg-white p-2 shadow-sm shadow-dark/20 drop-shadow-lg hover:bg-[#f4f5f7]"
     >
       {card.labels.length > 0 ? (
         <div className="flex flex-wrap gap-1">
@@ -45,9 +45,9 @@ export const Card: React.FC<Props> = ({ card }) => {
         </div>
       ) : null}
       <div>
-        <span className="text-sm text-gray-600 group-hover:text-gray-800">
+        <p className="text-sm text-gray-600 group-hover:text-gray-800">
           {card.title}
-        </span>
+        </p>
       </div>
       {card.description && (
         <div>

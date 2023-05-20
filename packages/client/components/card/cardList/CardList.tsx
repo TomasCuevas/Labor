@@ -1,10 +1,10 @@
 import { DragEvent } from "react";
 
 //* components *//
-import { NewCard, Card } from "@/components/cards";
+import { NewCard, Card } from "@/components/card";
 
 //* styles *//
-import Styles from "@/components/cards/TodoList.module.css";
+import Styles from "./cardDragging.module.css";
 
 //* store *//
 import { useCardsStore } from "@/store";
