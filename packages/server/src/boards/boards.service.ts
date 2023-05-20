@@ -76,7 +76,7 @@ export class BoardsService {
       id: boardId,
     });
 
-    return await this.BoardsRepository.save(board);
+    return await this.BoardsRepository.save({ ...board, user: updateBy });
   }
 
   //! delete board [service]
