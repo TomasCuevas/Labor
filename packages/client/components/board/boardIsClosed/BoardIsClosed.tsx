@@ -1,9 +1,6 @@
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 
-//* util *//
-import { notiError } from "@/utils";
-
 //* store *//
 import { useBoardsStore } from "@/store";
 

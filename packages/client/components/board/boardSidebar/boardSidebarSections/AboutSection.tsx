@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 
 //* icons *//
 import { RiAlignLeft, RiUserLine } from "react-icons/ri";
@@ -9,15 +8,7 @@ import { RiAlignLeft, RiUserLine } from "react-icons/ri";
 import { BoardSidebarHeader } from "@/components/board";
 
 //* form-initial-values and form-validations *//
-const initialValues = (description?: string) => ({
-  description: description || "",
-});
-
-const formValidations = () => {
-  return Yup.object({
-    description: Yup.string().min(1).max(300).required(),
-  });
-};
+import { formValidations, initialValues } from "./aboutSection.form";
 
 //* store *//
 import { useAuthStore, useBoardInterfaceStore, useBoardsStore } from "@/store";
