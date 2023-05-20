@@ -1,10 +1,11 @@
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
+import { useFormik } from "formik";
 
 //* icons *//
 import { RiAddLine, RiCloseFill } from "react-icons/ri";
 
-//* hooks *//
-import { useForm } from "@/hooks";
+//* form-inital-values and form-validations *//
+import { formValidations, initialValues } from "./newCard.form";
 
 //* store *//
 import { useCardsStore } from "@/store";
@@ -21,39 +22,42 @@ export const NewCard: React.FC<Props> = ({ boardId, status }) => {
   const { onCreateCard } = useCardsStore();
   const [isInputOpen, setIsInputOpen] = useState<boolean>(false);
 
-  const { title, onInputChange, reset } = useForm({
-    title: "",
+  const formik = useFormik({
+    initialValues: initialValues(),
+    validationSchema: formValidations(),
+    validateOnMount: true,
+    validateOnChange: true,
+    onSubmit: async (formValues) => {
+      const { title } = formValues;
+
+      try {
+        await onCreateCard({ title, status }, boardId);
+        formik.resetForm();
+        setIsInputOpen(false);
+      } catch (error) {}
+    },
   });
-
-  //! start create card
-  const startCreateCard = async (event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-
-    await onCreateCard({ title, status }, boardId);
-    setIsInputOpen(false);
-    reset();
-  };
 
   if (isInputOpen) {
     return (
-      <div>
+      <form onSubmit={formik.handleSubmit}>
         <div>
           <textarea
             name="title"
-            value={title}
-            onChange={onInputChange}
+            value={formik.values.title}
+            onChange={formik.handleChange}
             className="h-20 w-full resize-none rounded-md bg-slate-50 p-2  text-dark shadow-sm shadow-dark/20 outline-none drop-shadow-xl placeholder:text-dark/70"
             maxLength={50}
             placeholder="Introduzca un título para esta tarjeta..."
           >
-            {title}
+            {formik.values.title}
           </textarea>
         </div>
         <div className="mt-1 flex items-center gap-2">
           <button
             type="submit"
-            onClick={startCreateCard}
-            className="cursor-pointer rounded-md bg-emerald p-2 px-4 text-sm text-white hover:bg-emerald/80"
+            className="cursor-pointer rounded-md bg-emerald p-2 px-4 text-sm text-white hover:bg-emerald/80 disabled:cursor-not-allowed disabled:bg-dark/20"
+            disabled={formik.errors.title ? true : false}
           >
             Añadir tarjeta
           </button>
@@ -61,7 +65,7 @@ export const NewCard: React.FC<Props> = ({ boardId, status }) => {
             <RiCloseFill className="text-2xl text-dark/80 hover:text-dark/50" />
           </button>
         </div>
-      </div>
+      </form>
     );
   }
 
