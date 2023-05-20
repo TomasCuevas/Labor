@@ -2,6 +2,7 @@ import { ChangeEvent } from "react";
 
 //* interface *//
 interface Props {
+  value: string;
   checked: boolean;
   inputName: string;
   label: string;
@@ -12,11 +13,13 @@ export const RadioInput: React.FC<Props> = ({
   checked,
   inputName,
   label,
+  value,
   onChange,
 }) => {
   return (
     <label className="flex cursor-pointer items-center gap-1">
       <input
+        value={value}
         type="radio"
         name={inputName}
         checked={checked}

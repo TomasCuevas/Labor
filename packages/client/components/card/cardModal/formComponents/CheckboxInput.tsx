@@ -5,11 +5,13 @@ import { Checkbox } from "@mui/material";
 interface Props {
   color: string;
   name: string;
-  value: boolean;
+  value: string;
+  checked: boolean;
   onChange(event: ChangeEvent<HTMLInputElement>): void;
 }
 
-export const LabelInput: React.FC<Props> = ({
+export const CheckboxInput: React.FC<Props> = ({
+  checked,
   color,
   name,
   value,
@@ -17,7 +19,12 @@ export const LabelInput: React.FC<Props> = ({
 }) => {
   return (
     <label className="flex cursor-pointer items-center gap-2 duration-200 hover:opacity-50">
-      <Checkbox name={name} checked={value} onChange={onChange} />
+      <Checkbox
+        name={name}
+        value={value}
+        checked={checked}
+        onChange={onChange}
+      />
       <div
         className="flex h-8 w-full items-center rounded-sm"
         style={{ backgroundColor: `${color}55` }}
@@ -25,7 +32,7 @@ export const LabelInput: React.FC<Props> = ({
         <span
           className="ml-3 h-4 w-4 rounded-full"
           style={{ backgroundColor: color }}
-        ></span>
+        />
       </div>
     </label>
   );
