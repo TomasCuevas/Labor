@@ -30,7 +30,7 @@ export const AuthLayout: React.FC<Props> = ({
           <title>{title}</title>
           <meta name="description" content={description} />
         </Head>
-        <main className="flex h-screen  bg-[url('/background/labor_background.svg')]">
+        <main className="flex h-screen bg-[url('/background/labor_background.svg')] bg-cover bg-center">
           {children}
         </main>
       </>

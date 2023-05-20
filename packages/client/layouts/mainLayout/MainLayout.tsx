@@ -42,10 +42,8 @@ export const MainLayout: React.FC<Props> = ({
         <CreateMenuPopover />
         <SearchMenuPopover />
 
-        <main className="flex h-screen w-full">
-          <div className="flex w-full bg-[url('/background/labor_background.svg')]">
-            {children}
-          </div>
+        <main className="flex h-screen w-full bg-[url('/background/labor_background.svg')] bg-cover bg-center">
+          {children}
         </main>
       </>
     );
