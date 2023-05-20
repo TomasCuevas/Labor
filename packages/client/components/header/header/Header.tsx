@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 //* components *//
 import {
@@ -9,6 +10,21 @@ import {
 } from "@/components/header";
 
 export const Header: React.FC = () => {
+  const { pathname } = useRouter();
+
+  const Searcher = () => {
+    if (pathname !== "/search") {
+      return (
+        <>
+          <SearchInputMobile />
+          <SearchInputDesktop />
+        </>
+      );
+    }
+
+    return <></>;
+  };
+
   return (
     <header className="fixed top-0 z-10 flex h-11 w-full items-center gap-3 bg-black/30 px-2 py-1 backdrop-blur-3xl">
       <AccountMenuButton />
@@ -18,8 +34,7 @@ export const Header: React.FC = () => {
           <span className="text-xl font-black text-white">Labor</span>
         </div>
       </Link>
-      <SearchInputMobile />
-      <SearchInputDesktop />
+      <Searcher />
       <CreateMenuButton />
     </header>
   );

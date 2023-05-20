@@ -1,5 +1,4 @@
 import { useRef, useEffect } from "react";
-import { useRouter } from "next/router";
 
 //* icon *//
 import { RiSearch2Line } from "react-icons/ri";
@@ -17,7 +16,6 @@ export const SearchInputDesktop: React.FC = () => {
   const { search, onInputChange } = useForm({ search: "" });
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const { pathname } = useRouter();
 
   useEffect(() => {
     if (search.length < 1) {
@@ -33,11 +31,7 @@ export const SearchInputDesktop: React.FC = () => {
   }, [search]);
 
   return (
-    <div
-      className={`ml-auto h-full items-center rounded-md bg-light/50 ${
-        pathname === "/search" ? "hidden" : "hidden sm:flex"
-      }`}
-    >
+    <div className="ml-auto hidden h-full items-center rounded-md bg-light/50 sm:flex">
       <input
         type="text"
         className="w-0 border-b bg-[#0000] text-white outline-none transition-all duration-300 placeholder:text-sm placeholder:text-light/0 focus:mx-4 focus:w-[340px] focus:px-2 focus:pb-[2px] focus:placeholder:text-light md:focus:w-[380px]"
