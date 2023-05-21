@@ -1,6 +1,7 @@
-import { FormEvent } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 //* components *//
 import {
@@ -13,44 +14,48 @@ import {
 //* layout *//
 import { AuthLayout } from "@/layouts";
 
-//* hooks *//
-import { useForm } from "@/hooks";
+//* form-initial-values and form-validations *//
+const initialValues = () => ({
+  email: "",
+  name: "",
+  password: "",
+  repeatPassword: "",
+});
+
+const formValidations = () => {
+  return Yup.object({
+    email: Yup.string().email().required().trim(),
+    name: Yup.string().min(1).max(46).required().trim(),
+    password: Yup.string().min(6).max(50).required().trim(),
+    repeatPassword: Yup.string().min(6).max(50).required().trim(),
+  });
+};
 
 //* store *//
 import { useAuthStore } from "@/store";
 
 const RegisterPage: NextPage = () => {
   const { onRegister } = useAuthStore();
-
-  const {
-    email,
-    name,
-    password,
-    repeatPassword,
-    onInputChange,
-    setError,
-    error,
-  } = useForm({
-    email: "",
-    name: "",
-    password: "",
-    repeatPassword: "",
-  });
-
   const router = useRouter();
 
-  //! start register
-  const startRegister = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const formik = useFormik({
+    initialValues: initialValues(),
+    validationSchema: formValidations(),
+    onSubmit: async (formValues, { setStatus }) => {
+      if (formValues.password !== formValues.repeatPassword) {
+        setStatus("Las contraseñas no coinciden.");
+        return;
+      }
 
-    if (password !== repeatPassword) {
-      setError("Las contraseñas no coinciden.");
-      return;
-    }
-
-    const result = await onRegister({ email, name, password });
-    result.ok ? router.replace("/") : setError(result.message);
-  };
+      try {
+        const { repeatPassword, ...values } = formValues;
+        await onRegister(values);
+        router.replace("/");
+      } catch (error) {
+        setStatus(error as string);
+      }
+    },
+  });
 
   return (
     <AuthLayout
@@ -60,41 +65,51 @@ const RegisterPage: NextPage = () => {
       <div className="mx-auto flex w-full max-w-[600px] flex-col items-center justify-center px-4 md:px-0">
         <div className="flex w-full flex-col justify-center rounded-2xl bg-white/5 p-4 backdrop-blur-3xl sm:py-6 md:py-8 lg:py-10">
           <RegisterLoginSwitch />
-          <form onSubmit={startRegister} className="flex w-full flex-col gap-2">
+          <form
+            onSubmit={formik.handleSubmit}
+            className="flex w-full flex-col gap-2"
+          >
             <FormAuthInput
-              inputChange={onInputChange}
+              inputChange={formik.handleChange}
               inputName="email"
-              inputValue={email}
+              inputValue={formik.values.email}
               label="Correo electrónico"
             />
             <FormAuthInput
-              inputChange={onInputChange}
+              inputChange={formik.handleChange}
               inputName="name"
-              inputValue={name}
+              inputValue={formik.values.name}
               label="Nombre completo"
             />
             <FormAuthInput
-              inputChange={onInputChange}
+              inputChange={formik.handleChange}
               inputName="password"
-              inputValue={password}
+              inputValue={formik.values.password}
               inputType="password"
               label="Contraseña"
             />
             <FormAuthInput
-              inputChange={onInputChange}
+              inputChange={formik.handleChange}
               inputName="repeatPassword"
-              inputValue={repeatPassword}
+              inputValue={formik.values.repeatPassword}
               inputType="password"
               label="Repita la contraseña"
             />
             <FormAuthButton
               isDisabled={
-                email.length < 1 || name.length < 1 || password.length < 6
+                formik.errors.email ||
+                formik.errors.name ||
+                formik.errors.password ||
+                formik.errors.repeatPassword
+                  ? true
+                  : false
               }
               label="Registrarme"
               type="submit"
             />
-            {error ? <FormErrorMessage message={error} /> : null}
+            {formik.status ? (
+              <FormErrorMessage message={formik.status} />
+            ) : null}
           </form>
         </div>
       </div>

@@ -1,6 +1,7 @@
-import { FormEvent } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 //* components *//
 import {
@@ -13,34 +14,38 @@ import {
 //* layout *//
 import { AuthLayout } from "@/layouts";
 
-//* hooks *//
-import { useForm } from "@/hooks";
+//* form-initial-values and form-validations *//
+const initialValues = () => ({
+  email: "",
+  password: "",
+});
+
+const formValidations = () => {
+  return Yup.object({
+    email: Yup.string().email().required().trim(),
+    password: Yup.string().min(6).max(50).required().trim(),
+  });
+};
 
 //* store *//
 import { useAuthStore } from "@/store";
 
 const LoginPage: NextPage = () => {
   const { onLogin } = useAuthStore();
-
-  const { email, password, onInputChange, formValues, setError, error } =
-    useForm({
-      email: "",
-      password: "",
-    });
-
   const router = useRouter();
 
-  //! start login
-  const startLogin = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const result = await onLogin(formValues);
-    if (result.ok) {
-      router.replace("/");
-    } else {
-      setError(result.message);
-    }
-  };
+  const formik = useFormik({
+    initialValues: initialValues(),
+    validationSchema: formValidations(),
+    onSubmit: async (formValues, { setStatus }) => {
+      try {
+        await onLogin(formValues);
+        router.replace("/");
+      } catch (error) {
+        setStatus(error as string);
+      }
+    },
+  });
 
   return (
     <AuthLayout
@@ -51,28 +56,32 @@ const LoginPage: NextPage = () => {
         <div className="flex w-full flex-col justify-center rounded-2xl bg-white/5 p-4 backdrop-blur-3xl sm:py-6 md:py-8 lg:py-10">
           <RegisterLoginSwitch />
           <form
-            onSubmit={startLogin}
+            onSubmit={formik.handleSubmit}
             className="flex w-full flex-col gap-2 sm:gap-4"
           >
             <FormAuthInput
-              inputChange={onInputChange}
+              inputChange={formik.handleChange}
               inputName="email"
-              inputValue={email}
+              inputValue={formik.values.email}
               label="Correo electrónico"
             />
             <FormAuthInput
-              inputChange={onInputChange}
+              inputChange={formik.handleChange}
               inputName="password"
-              inputValue={password}
+              inputValue={formik.values.password}
               inputType="password"
               label="Contraseña"
             />
             <FormAuthButton
-              isDisabled={email.length < 1 || password.length < 6}
+              isDisabled={
+                formik.errors.email || formik.errors.password ? true : false
+              }
               label="Iniciar sesión"
               type="submit"
             />
-            {error ? <FormErrorMessage message={error} /> : null}
+            {formik.status ? (
+              <FormErrorMessage message={formik.status} />
+            ) : null}
           </form>
         </div>
       </div>
