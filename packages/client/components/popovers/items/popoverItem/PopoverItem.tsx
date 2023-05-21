@@ -6,10 +6,10 @@ interface Props {
 
 export const PopoverItem: React.FC<Props> = ({ text, onClick }) => {
   return (
-    <li className="flex hover:bg-light/10">
+    <li className="flex hover:bg-gray-200">
       <button
         onClick={onClick}
-        className="flex w-full py-[6px] px-4 text-sm font-normal text-white"
+        className="flex w-full py-2 px-4 text-sm font-normal text-gray-900"
       >
         {text}
       </button>
