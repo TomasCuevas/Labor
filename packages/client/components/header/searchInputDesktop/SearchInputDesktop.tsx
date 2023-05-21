@@ -1,10 +1,8 @@
 import { useRef, useEffect } from "react";
+import { useFormik } from "formik";
 
 //* icon *//
 import { RiSearch2Line } from "react-icons/ri";
-
-//* hook *//
-import { useForm } from "@/hooks";
 
 //* stores *//
 import { useHeaderStore, useSearchStore } from "@/store";
@@ -13,11 +11,16 @@ export const SearchInputDesktop: React.FC = () => {
   const { onChangeMenuOpen } = useHeaderStore();
   const { clearData, onSearch } = useSearchStore();
 
-  const { search, onInputChange } = useForm({ search: "" });
+  const formik = useFormik({
+    initialValues: { search: "" },
+    onSubmit: () => {},
+  });
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    const search = formik.values.search;
+
     if (search.length < 1) {
       clearData();
       return;
@@ -28,7 +31,7 @@ export const SearchInputDesktop: React.FC = () => {
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [search]);
+  }, [formik.values.search]);
 
   return (
     <div className="ml-auto hidden h-full items-center rounded-md bg-light/50 sm:flex">
@@ -38,12 +41,13 @@ export const SearchInputDesktop: React.FC = () => {
         placeholder="Buscar en Labor"
         onFocus={() => onChangeMenuOpen("search")}
         ref={inputRef}
-        value={search}
-        onChange={onInputChange}
+        value={formik.values.search}
+        onChange={formik.handleChange}
         name="search"
         autoComplete="off"
       />
       <button
+        type="button"
         onClick={() => inputRef.current?.focus()}
         className="h-full rounded-md px-4"
       >
