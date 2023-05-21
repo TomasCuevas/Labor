@@ -4,7 +4,7 @@ export const FullLoader: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Labor</title>
+        <title>Cargando</title>
       </Head>
       <main>
         <div className="flex h-screen w-full items-center justify-center bg-[url(/background/labor_background.svg)] bg-cover bg-center">

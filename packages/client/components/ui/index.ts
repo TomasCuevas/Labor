@@ -1,1 +1,1 @@
-export * from "./FullLoader";
+export * from "./fullLoader/FullLoader";
