@@ -1,3 +1,3 @@
-export * from "./SearchBoard";
-export * from "./SearchCard";
-export * from "./SearchContainer";
+export * from "./searchBoard/SearchBoard";
+export * from "./searchCard/SearchCard";
+export * from "./searchContainer/SearchContainer";
