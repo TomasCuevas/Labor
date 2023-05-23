@@ -2,6 +2,8 @@ export * from "./board/Board";
 export * from "./boardCard/BoardCard";
 export * from "./boardHeader/BoardHeader";
 export * from "./boardIsClosed/BoardIsClosed";
+export * from "./closedBoardCard/ClosedBoardCard";
+export * from "./closedBoardsModal/ClosedBoardsModal";
 export * from "./newBoardCard/NewBoardCard";
 export * from "./yourBoards/YourBoards";
 export * from "./boardSidebar/boardSidebar/BoardSidebar";
