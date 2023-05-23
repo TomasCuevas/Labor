@@ -1,58 +1,48 @@
 //* axios instance *//
-import { authApi } from "@/api";
+import { authApi } from "@/axios";
 
 //* interfaces *//
-import { IRegister, ILogin } from "@/interfaces";
+import { IRegister, ILogin, IUser } from "@/interfaces";
 
 //! register service
-export const registerService = async (registerData: IRegister) => {
+export const registerService = async (
+  registerData: IRegister
+): Promise<{ token: string; user: IUser }> => {
   try {
     const { data } = await authApi.post("/register", registerData);
 
-    return {
-      ok: true,
-      data,
-    };
+    return data;
   } catch (error: any) {
-    console.log(error);
-    return {
-      ok: false,
-      message: error.response.data.message[0],
-    };
+    console.error(error);
+    throw error.response.data.message[0];
   }
 };
 
 //! login service
-export const loginService = async (loginData: ILogin) => {
+export const loginService = async (
+  loginData: ILogin
+): Promise<{ token: string; user: IUser }> => {
   try {
     const { data } = await authApi.post("/login", loginData);
 
-    return {
-      ok: true,
-      data,
-    };
+    return data;
   } catch (error: any) {
-    console.log(error);
-    return {
-      ok: false,
-      message: error.response.data.message[0],
-    };
+    console.error(error);
+    throw error.response.data.message[0];
   }
 };
 
 //! check service
-export const checkService = async () => {
+export const checkService = async (): Promise<{
+  token: string;
+  user: IUser;
+}> => {
   try {
     const { data } = await authApi.get("/check");
 
-    return {
-      ok: true,
-      data,
-    };
+    return data;
   } catch (error) {
-    console.log(error);
-    return {
-      ok: false,
-    };
+    console.error(error);
+    throw error;
   }
 };

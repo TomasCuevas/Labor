@@ -12,8 +12,8 @@ interface useAuthState extends IAuthState {
   setLogout(): void;
   setChecking(): void;
   onCheckAuthentication(): Promise<void>;
-  onLogin(data: ILogin): Promise<{ ok: boolean; message?: string }>;
-  onRegister(data: IRegister): Promise<{ ok: boolean; message?: string }>;
+  onLogin(data: ILogin): Promise<void>;
+  onRegister(data: IRegister): Promise<void>;
 }
 
 export const useAuthStore = create<useAuthState>((set, get) => ({
@@ -43,48 +43,36 @@ export const useAuthStore = create<useAuthState>((set, get) => ({
     const { setChecking, setLogin, setLogout } = get();
     setChecking();
 
-    const result = await checkService();
-    if (!result.ok) {
+    try {
+      const { token, user } = await checkService();
+      setLogin(user, token);
+    } catch (error) {
       setLogout();
-      return;
+      throw error;
     }
-
-    setLogin(result.data.user, result.data.token);
   },
   async onLogin(loginData: ILogin) {
     const { setChecking, setLogin, setLogout } = get();
     setChecking();
 
-    const result = await loginService(loginData);
-    if (!result.ok) {
+    try {
+      const { token, user } = await loginService(loginData);
+      setLogin(user, token);
+    } catch (error) {
       setLogout();
-      return {
-        ok: false,
-        message: result.message,
-      };
+      throw error;
     }
-
-    setLogin(result.data.user, result.data.token);
-    return {
-      ok: true,
-    };
   },
   async onRegister(registerData: IRegister) {
     const { setChecking, setLogin, setLogout } = get();
     setChecking();
 
-    const result = await registerService(registerData);
-    if (!result.ok) {
+    try {
+      const { token, user } = await registerService(registerData);
+      setLogin(user, token);
+    } catch (error) {
       setLogout();
-      return {
-        ok: false,
-        message: result.message,
-      };
+      throw error;
     }
-
-    setLogin(result.data.user, result.data.token);
-    return {
-      ok: true,
-    };
   },
 }));
