@@ -1,52 +1,42 @@
 //* axios instance *//
-import { boardsApi } from "@/api";
+import { boardsApi } from "@/axios";
 
 //* interfaces *//
 import { IBoard, IBoardForCreate, IBoardForUpdate } from "@/interfaces";
 
-//! create board service
+//! create board [service]
 export const createBoardService = async (
   board: IBoardForCreate
-): Promise<{ ok: boolean; board?: IBoard }> => {
+): Promise<IBoard> => {
   try {
     const { data } = await boardsApi.post("/create", board);
 
-    return {
-      ok: true,
-      board: data,
-    };
+    return data;
   } catch (error) {
     console.error(error);
-    return {
-      ok: false,
-    };
+    throw error;
   }
 };
 
-//! update board service
+//! update board [service]
 export const updateBoardService = async (
   boardId: string,
   board: IBoardForUpdate
-): Promise<{ ok: boolean; board?: IBoard }> => {
+): Promise<IBoard> => {
   try {
     const { data } = await boardsApi.patch(`/update/${boardId}`, board);
 
-    return {
-      ok: true,
-      board: data,
-    };
+    return data;
   } catch (error) {
     console.error(error);
-    return {
-      ok: false,
-    };
+    throw error;
   }
 };
 
-//! get all boards service
-export const getAllBoardsService = async (): Promise<IBoard[]> => {
+//! get all open boards [service]
+export const getAllOpenBoardsService = async (): Promise<IBoard[]> => {
   try {
-    const { data } = await boardsApi.get("/all");
+    const { data } = await boardsApi.get("/all/open");
 
     return data;
   } catch (error) {
@@ -55,35 +45,38 @@ export const getAllBoardsService = async (): Promise<IBoard[]> => {
   }
 };
 
-//! get board by name service
-export const getBoardByName = async (
-  boardName: string
-): Promise<{ ok: boolean; board?: IBoard }> => {
+//! get board by name [service]
+export const getBoardByName = async (boardName: string): Promise<IBoard> => {
   try {
     const { data } = await boardsApi.get(`/${boardName}`);
 
-    return {
-      ok: true,
-      board: data,
-    };
-  } catch (error: any) {
+    return data;
+  } catch (error) {
     console.error(error);
-    return { ok: false };
+    throw error;
+  }
+};
+
+//! get all closed boards [service]
+export const getAllClosedBoards = async (): Promise<IBoard[]> => {
+  try {
+    const { data } = await boardsApi.get("/all/closed");
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 };
 
 //! delete board
 export const deleteBoard = async (boardId: string) => {
   try {
-    const { data } = await boardsApi.delete(`/delete/${boardId}`);
+    await boardsApi.delete(`/delete/${boardId}`);
 
-    return {
-      ok: true,
-    };
+    return;
   } catch (error) {
     console.error(error);
-    return {
-      ok: false,
-    };
+    throw error;
   }
 };
