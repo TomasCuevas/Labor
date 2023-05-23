@@ -20,7 +20,6 @@ export class CreateBoardDto {
   name: string;
 
   @IsString({ message: 'La descripcion debe ser un texto.' })
-  @MinLength(1, { message: 'La descripción debe tener mínimo 1 carácter.' })
   @MaxLength(300, {
     message: 'La descripción debe tener máximo 300 carácteres.',
   })
