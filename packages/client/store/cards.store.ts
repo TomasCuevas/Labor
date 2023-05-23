@@ -34,37 +34,42 @@ export const useCardsStore = create<useCardState>((set) => ({
   isCardDragging: false,
   cardModal: undefined,
   async onCreateCard(card: ICardForCreate, boardId: string) {
-    const result = await createCardService(card, boardId);
-    if (result.ok) {
+    try {
+      await createCardService(card, boardId);
       queryClient.invalidateQueries([`/boards/${boardId}/todos`]);
+    } catch (error: any) {
+      notiError(error.response.data.message[0] || "Error al crear la tarjeta.");
+      throw error;
     }
   },
   async onUpdateCard(card: ICardForUpdate, cardId: string, boardId: string) {
-    const result = await updateCardService(card, cardId);
-    if (result.ok) {
+    try {
+      await updateCardService(card, cardId);
       queryClient.invalidateQueries([`/boards/${boardId}/todos`]);
-      notiSuccess("Tarjeta actualizada.");
-    } else {
-      notiError("Error al actualizar la tarjeta.");
+      notiSuccess("Tarjeta actualizada con exito.");
+    } catch (error: any) {
+      notiError(
+        error.response.data.message[0] || "Error al actualizar la tarjeta."
+      );
+      throw error;
     }
   },
   async onDeleteCard(cardId: string, boardId: string) {
-    const result = await removeCardService(cardId);
-    if (result.ok) {
+    try {
+      await removeCardService(cardId);
       queryClient.invalidateQueries([`/boards/${boardId}/todos`]);
       notiSuccess("Tarjeta eliminada con exito.");
-    } else {
-      notiError("Error al eliminar la tarjeta.");
+    } catch (error: any) {
+      notiError(
+        error.response.data.message[0] || "Error al eliminar la tarjeta."
+      );
+      throw error;
     }
   },
   onToggleCardDragging(newValue: boolean) {
-    set(() => ({
-      isCardDragging: newValue,
-    }));
+    set(() => ({ isCardDragging: newValue }));
   },
   onToggleCardModal(card: ICard | undefined) {
-    set(() => ({
-      cardModal: card,
-    }));
+    set(() => ({ cardModal: card }));
   },
 }));
