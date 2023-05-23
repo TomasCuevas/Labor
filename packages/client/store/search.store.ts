@@ -10,14 +10,20 @@ export const useSearchStore = create<ISearch>((set) => ({
   boards: [],
   cards: [],
   async onSearch(search: string) {
-    const result = await searchAll(search);
-    if (!result.ok) return;
-
-    set((state) => ({
-      ...state,
-      boards: result.boards,
-      cards: result.cards,
-    }));
+    try {
+      const result = await searchAll(search);
+      set((state) => ({
+        ...state,
+        boards: result.boards,
+        cards: result.cards,
+      }));
+    } catch (error) {
+      set((state) => ({
+        ...state,
+        boards: [],
+        cards: [],
+      }));
+    }
   },
   clearData() {
     set(() => ({
