@@ -44,9 +44,9 @@ export class BoardsController {
   }
 
   //! get all open boards [controller]
-  @Get('all')
-  async findAll(@GetUser() user: User): Promise<Board[]> {
-    return this.boardsService.findAll(user.id);
+  @Get('all/open')
+  async findAllOpenBoards(@GetUser() user: User): Promise<Board[]> {
+    return this.boardsService.findAllOpenBoards(user.id);
   }
 
   //! get board by name [controller]
@@ -56,6 +56,12 @@ export class BoardsController {
     @GetUser() user: User,
   ): Promise<Board> {
     return await this.boardsService.findOneByName(name, user.id);
+  }
+
+  //! get all closed boards [controller]
+  @Get('all/closed')
+  async findAllClosedBoards(@GetUser() user: User): Promise<Board[]> {
+    return this.boardsService.findAllClosedBoards(user.id);
   }
 
   //! get all cards by board [controller]

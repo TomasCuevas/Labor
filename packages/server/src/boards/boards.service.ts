@@ -29,7 +29,7 @@ export class BoardsService {
   }
 
   //! get all open boards by user [service]
-  async findAll(userId: string): Promise<Board[]> {
+  async findAllOpenBoards(userId: string): Promise<Board[]> {
     return await this.BoardsRepository.findBy({
       user: { id: userId },
       status: 'open',
@@ -60,6 +60,14 @@ export class BoardsService {
     return await this.BoardsRepository.findOneBy({
       user: { id: userId },
       name: name,
+    });
+  }
+
+  //! get all closed boards [service]
+  async findAllClosedBoards(userId: string): Promise<Board[]> {
+    return await this.BoardsRepository.findBy({
+      user: { id: userId },
+      status: 'closed',
     });
   }
 
