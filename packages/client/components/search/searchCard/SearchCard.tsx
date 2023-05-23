@@ -13,7 +13,7 @@ interface Props {
 export const SearchCard: React.FC<Props> = ({ card }) => {
   return (
     <Link href={`/boards/${card.user!.id}/${card.board.name}?modal=${card.id}`}>
-      <article className="flex cursor-pointer items-center gap-4 rounded-md p-2 duration-200 hover:bg-light/10">
+      <article className="flex cursor-pointer items-center gap-4 rounded-md p-2 hover:bg-light/10">
         <div className="w-7">
           <FaPager className="text-2xl text-light" />
         </div>

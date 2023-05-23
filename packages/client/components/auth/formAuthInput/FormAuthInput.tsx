@@ -41,8 +41,8 @@ export const FormAuthInput: React.FC<Props> = ({
         htmlFor={inputName}
         className={
           focus
-            ? "absolute top-[5px] text-xs font-light text-light transition-all duration-300"
-            : "absolute font-medium text-light transition-all duration-300"
+            ? "absolute top-[5px] text-xs font-light text-light transition-all"
+            : "absolute font-medium text-light transition-all"
         }
       >
         {label}

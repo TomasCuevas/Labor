@@ -168,7 +168,7 @@ export const CardModal: React.FC = () => {
               {labelForm ? (
                 <button
                   type="button"
-                  className="group ml-auto cursor-pointer rounded-full shadow-md duration-200 hover:bg-black"
+                  className="group ml-auto cursor-pointer rounded-full shadow-md hover:bg-black"
                 >
                   <RiArrowUpSLine
                     onClick={() => setLabelForm(false)}
@@ -178,7 +178,7 @@ export const CardModal: React.FC = () => {
               ) : (
                 <button
                   type="button"
-                  className="group ml-auto cursor-pointer rounded-full shadow-md duration-200 hover:bg-black"
+                  className="group ml-auto cursor-pointer rounded-full shadow-md hover:bg-black"
                 >
                   <RiArrowDownSLine
                     onClick={() => setLabelForm(true)}
@@ -189,7 +189,7 @@ export const CardModal: React.FC = () => {
             </div>
             <div
               style={{ display: labelForm ? "flex" : "none" }}
-              className="flex flex-col gap-1 pl-9"
+              className="flex flex-col gap-1 pl-4 sm:pl-9"
             >
               <CheckboxInput
                 color={labelColors.blue}

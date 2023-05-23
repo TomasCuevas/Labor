@@ -18,7 +18,9 @@ export const BoardCard: React.FC<Props> = ({ board }) => {
           }}
         >
           <span className="absolute top-0 left-0 h-full w-full bg-black/5 hover:bg-black/0"></span>
-          <span className="text-lg font-bold text-white">{board.name}</span>
+          <span className="text-left text-lg font-bold text-white">
+            {board.name}
+          </span>
         </button>
       </Link>
     </li>

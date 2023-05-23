@@ -46,7 +46,7 @@ export const SearchMenuPopover: React.FC = () => {
         <hr />
         <div
           onClick={() => push("/search")}
-          className="flex cursor-pointer gap-5 rounded-md p-3 duration-200 hover:bg-light/10"
+          className="flex cursor-pointer gap-5 rounded-md p-3 hover:bg-light/10"
         >
           <button>
             <RiSearch2Line className="text-xl text-white" />

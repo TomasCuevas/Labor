@@ -37,7 +37,7 @@ export const SearchInputDesktop: React.FC = () => {
     <div className="ml-auto hidden h-full items-center rounded-md bg-light/50 sm:flex">
       <input
         type="text"
-        className="w-0 border-b bg-[#0000] text-white outline-none transition-all duration-300 placeholder:text-sm placeholder:text-light/0 focus:mx-4 focus:w-[340px] focus:px-2 focus:pb-[2px] focus:placeholder:text-light md:focus:w-[380px]"
+        className="w-0 border-b bg-[#0000] text-white outline-none transition-all placeholder:text-sm placeholder:text-light/0 focus:mx-4 focus:w-[340px] focus:px-2 focus:pb-[2px] focus:placeholder:text-light md:focus:w-[380px]"
         placeholder="Buscar en Labor"
         onFocus={() => onChangeMenuOpen("search")}
         ref={inputRef}

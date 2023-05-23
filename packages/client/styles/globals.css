@@ -16,6 +16,7 @@ input:-webkit-autofill:active {
   scrollbar-width: auto;
   scrollbar-color: #a7c7ab #0000;
   font-family: "Inter";
+  transition-duration: 0.2s;
 }
 
 /* Chrome, Edge, and Safari */

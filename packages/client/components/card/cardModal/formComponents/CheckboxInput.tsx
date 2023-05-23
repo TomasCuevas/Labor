@@ -18,7 +18,7 @@ export const CheckboxInput: React.FC<Props> = ({
   onChange,
 }) => {
   return (
-    <label className="flex cursor-pointer items-center gap-2 duration-200 hover:opacity-50">
+    <label className="flex cursor-pointer items-center gap-2 hover:opacity-50">
       <Checkbox
         name={name}
         value={value}
