@@ -4,15 +4,21 @@ import type { NextPage } from "next";
 import { MainLayout } from "@/layouts";
 
 //* components *//
-import { YourBoards } from "@/components/boards";
+import { YourBoards, ClosedBoardsModal } from "@/components/board";
+
+//* store *//
+import { useBoardInterfaceStore } from "@/store";
 
 const HomePage: NextPage = () => {
+  const { closedBoardsModal } = useBoardInterfaceStore();
+
   return (
     <MainLayout
       title="Tableros | Labor"
       description="Página principal de Labor"
     >
       <YourBoards />
+      {closedBoardsModal ? <ClosedBoardsModal /> : null}
     </MainLayout>
   );
 };
