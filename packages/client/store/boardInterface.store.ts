@@ -19,15 +19,23 @@ export const useBoardInterfaceStore = create<useBoardInterfaceState>((set) => ({
   sidebar: false,
   sidebarSection: "main",
   board: undefined,
+
+  //! toggle closed boards modal
   onToggleClosedBoardsModal(value: boolean) {
     set(() => ({ closedBoardsModal: value }));
   },
+
+  //! set board
   onSetBoard(board: IBoard) {
     set(() => ({ board }));
   },
+
+  //! set sidebar section
   onSetSidebarSection(section: IBoardSidebarSection) {
     set(() => ({ sidebarSection: section }));
   },
+
+  //! toggle sidebar
   onToggleSidebar(value: boolean) {
     set(() => ({ sidebar: value, sidebarSection: "main" }));
   },

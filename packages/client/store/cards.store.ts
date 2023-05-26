@@ -18,7 +18,7 @@ import { ICard, ICardForCreate, ICardForUpdate } from "@/interfaces";
 
 interface useCardState {
   isCardDragging: boolean;
-  cardModal: ICard | undefined;
+  cardModal?: ICard;
   onCreateCard(card: ICardForCreate, boardId: string): Promise<void>;
   onUpdateCard(
     card: ICardForUpdate,
@@ -27,12 +27,14 @@ interface useCardState {
   ): Promise<void>;
   onDeleteCard(cardId: string, boardId: string): Promise<void>;
   onToggleCardDragging(newValue: boolean): void;
-  onToggleCardModal(card: ICard | undefined): void;
+  onToggleCardModal(card?: ICard): void;
 }
 
 export const useCardsStore = create<useCardState>((set) => ({
   isCardDragging: false,
   cardModal: undefined,
+
+  //! create card
   async onCreateCard(card: ICardForCreate, boardId: string) {
     try {
       await createCardService(card, boardId);
@@ -42,6 +44,8 @@ export const useCardsStore = create<useCardState>((set) => ({
       throw error;
     }
   },
+
+  //! update card
   async onUpdateCard(card: ICardForUpdate, cardId: string, boardId: string) {
     try {
       await updateCardService(card, cardId);
@@ -54,6 +58,8 @@ export const useCardsStore = create<useCardState>((set) => ({
       throw error;
     }
   },
+
+  //! delete card
   async onDeleteCard(cardId: string, boardId: string) {
     try {
       await removeCardService(cardId);
@@ -66,9 +72,13 @@ export const useCardsStore = create<useCardState>((set) => ({
       throw error;
     }
   },
+
+  //! toggle card dragging
   onToggleCardDragging(newValue: boolean) {
     set(() => ({ isCardDragging: newValue }));
   },
+
+  //! toggle card modal
   onToggleCardModal(card: ICard | undefined) {
     set(() => ({ cardModal: card }));
   },

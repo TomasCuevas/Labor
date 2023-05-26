@@ -9,22 +9,18 @@ import { ISearch } from "@/interfaces";
 export const useSearchStore = create<ISearch>((set) => ({
   boards: [],
   cards: [],
+
+  //! search
   async onSearch(search: string) {
     try {
       const result = await searchAll(search);
-      set((state) => ({
-        ...state,
-        boards: result.boards,
-        cards: result.cards,
-      }));
+      set(() => ({ boards: result.boards, cards: result.cards }));
     } catch (error) {
-      set((state) => ({
-        ...state,
-        boards: [],
-        cards: [],
-      }));
+      set(() => ({ boards: [], cards: [] }));
     }
   },
+
+  //! clear data
   clearData() {
     set(() => ({
       boards: [],

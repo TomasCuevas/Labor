@@ -11,12 +11,16 @@ interface useHeaderState extends IHeader {
 export const useHeaderStore = create<useHeaderState>((set) => ({
   menuOpen: "nothing",
   createMenuState: "nothing",
+
+  //! change menu open
   onChangeMenuOpen(menu: MenuOpen) {
     set(() => ({
       menuOpen: menu,
       createMenuState: "nothing",
     }));
   },
+
+  //! change create menu state
   onChangeCreateMenuState(state: CreateMenuState) {
     set(() => ({
       createMenuState: state,
