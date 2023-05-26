@@ -41,7 +41,7 @@ export const getAllOpenBoardsService = async (): Promise<IBoard[]> => {
     return data;
   } catch (error) {
     console.error(error);
-    throw new Error("Error al obtener los tableros.");
+    throw error;
   }
 };
 
@@ -69,7 +69,7 @@ export const getAllClosedBoards = async (): Promise<IBoard[]> => {
   }
 };
 
-//! delete board
+//! delete board [service]
 export const deleteBoard = async (boardId: string) => {
   try {
     await boardsApi.delete(`/delete/${boardId}`);

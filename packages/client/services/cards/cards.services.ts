@@ -1,5 +1,5 @@
 //* axios instance *//
-import { boardsApi, cardsApi } from "@/api";
+import { boardsApi, cardsApi } from "@/axios";
 
 //* interfaces *//
 import { ICard, ICardForCreate, ICardForUpdate } from "@/interfaces";
@@ -8,19 +8,14 @@ import { ICard, ICardForCreate, ICardForUpdate } from "@/interfaces";
 export const createCardService = async (
   card: ICardForCreate,
   boardId: string
-): Promise<{ ok: boolean; card?: ICard }> => {
+): Promise<ICard> => {
   try {
     const { data } = await cardsApi.post("/create", { ...card, boardId });
 
-    return {
-      ok: true,
-      card: data,
-    };
+    return data;
   } catch (error: any) {
-    console.log(error);
-    return {
-      ok: false,
-    };
+    console.error(error);
+    throw error;
   }
 };
 
@@ -33,8 +28,8 @@ export const getAllCardsByBoardService = async (
 
     return data;
   } catch (error) {
-    console.log(error);
-    throw new Error("Error al obtener las tareas del tablero.");
+    console.error(error);
+    throw error;
   }
 };
 
@@ -42,19 +37,14 @@ export const getAllCardsByBoardService = async (
 export const updateCardService = async (
   cardToUpdate: ICardForUpdate,
   cardId: string
-): Promise<{ ok: boolean; todo?: ICard }> => {
+): Promise<ICard> => {
   try {
     const { data } = await cardsApi.patch(`/update/${cardId}`, cardToUpdate);
 
-    return {
-      ok: true,
-      todo: data,
-    };
+    return data;
   } catch (error: any) {
-    console.log(error);
-    return {
-      ok: false,
-    };
+    console.error(error);
+    throw error;
   }
 };
 
@@ -62,14 +52,8 @@ export const updateCardService = async (
 export const removeCardService = async (cardId: string) => {
   try {
     await cardsApi.delete(`/delete/${cardId}`);
-
-    return {
-      ok: true,
-    };
   } catch (error) {
-    console.log(error);
-    return {
-      ok: false,
-    };
+    console.error(error);
+    throw error;
   }
 };

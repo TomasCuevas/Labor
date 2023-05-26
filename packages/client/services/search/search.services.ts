@@ -1,25 +1,22 @@
 //* axios instance *//
-import { searchApi } from "@/api";
+import { searchApi } from "@/axios";
 
 //* interfaces *//
 import { IBoard, ICard } from "@/interfaces";
 
-//! search all services
+//! search all [services]
 export const searchAll = async (
   search: string
-): Promise<{ ok: boolean; boards?: IBoard[]; cards?: ICard[] }> => {
-  const { data } = await searchApi.get(`/all/${search}`);
-
+): Promise<{ boards: IBoard[]; cards: ICard[] }> => {
   try {
+    const { data } = await searchApi.get(`/all/${search}`);
+
     return {
-      ok: true,
-      boards: data.boards || [],
-      cards: data.cards || [],
+      boards: data.boards,
+      cards: data.cards,
     };
   } catch (error) {
-    console.log(error);
-    return {
-      ok: false,
-    };
+    console.error(error);
+    throw error;
   }
 };

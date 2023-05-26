@@ -4,7 +4,7 @@ import { authApi } from "@/axios";
 //* interfaces *//
 import { IRegister, ILogin, IUser } from "@/interfaces";
 
-//! register service
+//! register [service]
 export const registerService = async (
   registerData: IRegister
 ): Promise<{ token: string; user: IUser }> => {
@@ -18,7 +18,7 @@ export const registerService = async (
   }
 };
 
-//! login service
+//! login [service]
 export const loginService = async (
   loginData: ILogin
 ): Promise<{ token: string; user: IUser }> => {
@@ -32,7 +32,7 @@ export const loginService = async (
   }
 };
 
-//! check service
+//! check [service]
 export const checkService = async (): Promise<{
   token: string;
   user: IUser;
