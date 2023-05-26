@@ -37,6 +37,7 @@ export const useBoardsStore = create<useBoardsState>(() => ({
     try {
       const board = await updateBoardService(boardId, boardData);
       queryClient.invalidateQueries(["/boards"]);
+      queryClient.invalidateQueries(["/boards/closed"]);
       return board;
     } catch (error: any) {
       notiError(
@@ -49,6 +50,7 @@ export const useBoardsStore = create<useBoardsState>(() => ({
     try {
       await deleteBoard(boardId);
       queryClient.invalidateQueries(["/boards"]);
+      queryClient.invalidateQueries(["/boards/closed"]);
     } catch (error: any) {
       notiError(
         error.response.data.message[0] || "Error al eliminar el tablero."
