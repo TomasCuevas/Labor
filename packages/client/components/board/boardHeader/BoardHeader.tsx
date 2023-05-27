@@ -18,7 +18,7 @@ interface Props {
 
 export const BoardHeader: React.FC<Props> = ({ boardId, boardName }) => {
   const { onUpdateBoard } = useBoardsStore();
-  const { onToggleSidebar } = useBoardInterfaceStore();
+  const { onToggleSidebar, onSetBoard } = useBoardInterfaceStore();
   const [isInput, setIsInput] = useState<boolean>(false);
 
   const formik = useFormik({
@@ -26,16 +26,16 @@ export const BoardHeader: React.FC<Props> = ({ boardId, boardName }) => {
     validationSchema: formValidations(),
     onSubmit: async (formValues) => {
       try {
-        await onUpdateBoard(boardId, formValues);
+        const newBoard = await onUpdateBoard(boardId, formValues);
+        onSetBoard(newBoard);
       } catch (error) {
-        console.error(error);
+        formik.setFieldValue("name", boardName);
       }
     },
   });
 
   useEffect(() => {
     const $div = document.getElementById("name__edit");
-
     if (isInput) $div?.focus();
   }, [isInput]);
 

@@ -10,13 +10,13 @@ import { BoardSidebarHeader } from "@/components/board";
 //* form-initial-values and form-validations *//
 import { formValidations, initialValues } from "./aboutSection.form";
 
-//* store *//
+//* stores *//
 import { useAuthStore, useBoardInterfaceStore, useBoardsStore } from "@/store";
 
 export const AboutSection = () => {
   const { user } = useAuthStore();
-  const { board, onSetBoard } = useBoardInterfaceStore();
   const { onUpdateBoard } = useBoardsStore();
+  const { board, onSetBoard } = useBoardInterfaceStore();
   const [isInputOpen, setIsInputOpen] = useState<boolean>(false);
 
   const formik = useFormik({
@@ -24,10 +24,11 @@ export const AboutSection = () => {
     validationSchema: formValidations(),
     onSubmit: async (formValues) => {
       try {
-        const result = await onUpdateBoard(board!.id, formValues);
+        const description = formValues.description.trim();
+        const result = await onUpdateBoard(board!.id, { description });
         onSetBoard(result);
       } catch (error) {
-        console.error(error);
+        return;
       }
 
       setIsInputOpen(false);

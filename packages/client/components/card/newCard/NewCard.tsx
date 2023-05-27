@@ -26,7 +26,6 @@ export const NewCard: React.FC<Props> = ({ boardId, status }) => {
     initialValues: initialValues(),
     validationSchema: formValidations(),
     validateOnMount: true,
-    validateOnChange: true,
     onSubmit: async (formValues) => {
       const { title } = formValues;
 

@@ -17,8 +17,8 @@ export const initialValues = (
 
 export const formValidations = () => {
   return Yup.object({
-    title: Yup.string().min(1).max(50).required().trim(),
-    description: Yup.string().min(1).max(300),
+    title: Yup.string().min(1).max(50).required(),
+    description: Yup.string().min(0).max(300),
     status: Yup.string()
       .oneOf(["pending", "in-progress", "completed"])
       .required(),

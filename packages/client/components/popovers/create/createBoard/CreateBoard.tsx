@@ -22,7 +22,6 @@ export const CreateBoard: React.FC = () => {
     initialValues: initialValues(),
     validationSchema: formValidations(),
     validateOnMount: true,
-    validateOnChange: true,
     onSubmit: async (formValues) => {
       try {
         const board = await onCreateBoard(formValues);

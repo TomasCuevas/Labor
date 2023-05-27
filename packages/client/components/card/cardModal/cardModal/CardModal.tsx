@@ -41,7 +41,6 @@ export const CardModal: React.FC = () => {
     ),
     validationSchema: formValidations(),
     validateOnMount: true,
-    validateOnChange: true,
     onSubmit: async (formValues) => {
       try {
         await onUpdateCard(formValues, cardModal!.id, cardModal!.board.id);
@@ -115,9 +114,9 @@ export const CardModal: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => onToggleCardModal(undefined)}
-                  className="group rounded-full shadow-md hover:bg-dark"
+                  className="group rounded-full text-[27px] text-dark shadow-md hover:shadow-black/30"
                 >
-                  <RiCloseFill className=" text-[27px] text-dark group-hover:text-white" />
+                  <RiCloseFill />
                 </button>
               </div>
             </div>
@@ -162,28 +161,16 @@ export const CardModal: React.FC = () => {
             </div>
           </section>
           <section className="flex flex-col gap-1">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 [&>button]:cursor-pointer [&>button]:rounded-full [&>button]:text-[28px] [&>button]:text-black [&>button]:shadow-md [&>button]:hover:shadow-black/30">
               <RiBookmarkLine className="text-xl text-dark" />
-              <h3 className="mt-[2px] text-dark">Etiqueta</h3>
+              <h3 className="mt-[2px] mr-auto text-dark">Etiqueta</h3>
               {labelForm ? (
-                <button
-                  type="button"
-                  className="group ml-auto cursor-pointer rounded-full shadow-md hover:bg-black"
-                >
-                  <RiArrowUpSLine
-                    onClick={() => setLabelForm(false)}
-                    className="text-[28px] text-dark group-hover:text-white"
-                  />
+                <button type="button">
+                  <RiArrowUpSLine onClick={() => setLabelForm(false)} />
                 </button>
               ) : (
-                <button
-                  type="button"
-                  className="group ml-auto cursor-pointer rounded-full shadow-md hover:bg-black"
-                >
-                  <RiArrowDownSLine
-                    onClick={() => setLabelForm(true)}
-                    className="text-[28px] text-dark group-hover:text-white"
-                  />
+                <button type="button">
+                  <RiArrowDownSLine onClick={() => setLabelForm(true)} />
                 </button>
               )}
             </div>
