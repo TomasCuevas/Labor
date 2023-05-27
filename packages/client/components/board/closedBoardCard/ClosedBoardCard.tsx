@@ -41,9 +41,7 @@ export const ClosedBoardCard: React.FC<Props> = ({ closedBoard }) => {
       if (result.isConfirmed) {
         try {
           await onDeleteBoard(closedBoard.id);
-        } catch (error) {
-          console.error(error);
-        }
+        } catch (error) {}
       }
     });
   };
@@ -71,9 +69,9 @@ export const ClosedBoardCard: React.FC<Props> = ({ closedBoard }) => {
         <div>
           <button
             onClick={startDeleteBoard}
-            className="bg-gray-500/[15%] text-gray-500 hover:bg-gray-500/30"
+            className="bg-slate-300 text-dark hover:bg-slate-200"
           >
-            <RiCloseFill className="text-xl font-light" />
+            <RiCloseFill className="text-xl" />
             <span>Eliminar</span>
           </button>
         </div>
