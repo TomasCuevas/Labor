@@ -6,6 +6,6 @@ export const initialValues = (description?: string) => ({
 
 export const formValidations = () => {
   return Yup.object({
-    description: Yup.string().min(1).max(300).required(),
+    description: Yup.string().max(300),
   });
 };

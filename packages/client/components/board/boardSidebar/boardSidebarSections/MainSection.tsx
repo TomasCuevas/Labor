@@ -10,7 +10,7 @@ import { useBoardInterfaceStore, useBoardsStore } from "@/store";
 export const MainSection: React.FC = () => {
   const { onUpdateBoard } = useBoardsStore();
   const { board, onToggleSidebar } = useBoardInterfaceStore();
-  const { replace } = useRouter();
+  const router = useRouter();
 
   //! start close board
   const startCloseBoard = async () => {
@@ -28,9 +28,9 @@ export const MainSection: React.FC = () => {
       if (result.isConfirmed) {
         try {
           await onUpdateBoard(board!.id, { status: "closed" });
-          replace(`/boards/${board?.user.id}/${board?.name}`);
-        } catch (error) {
-          console.error(error);
+          router.replace(`/boards/${board?.user.id}/${board?.name}`);
+        } catch (error: any) {
+          return;
         }
 
         onToggleSidebar(false);

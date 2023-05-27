@@ -13,13 +13,13 @@ interface Props {
 
 export const BoardIsClosed: React.FC<Props> = ({ board }) => {
   const { onDeleteBoard, onUpdateBoard } = useBoardsStore();
-  const { replace } = useRouter();
+  const router = useRouter();
 
   //! start open board
   const startOpenBoard = async () => {
     try {
       await onUpdateBoard(board.id, { status: "open" });
-      replace(`/boards/${board.user.id}/${board.name}`);
+      router.replace(`/boards/${board.user.id}/${board.name}`);
     } catch (error) {
       console.error(error);
     }
@@ -40,7 +40,7 @@ export const BoardIsClosed: React.FC<Props> = ({ board }) => {
       if (result.isConfirmed) {
         try {
           await onDeleteBoard(board.id);
-          replace("/");
+          router.replace("/");
         } catch (error) {
           console.error(error);
         }

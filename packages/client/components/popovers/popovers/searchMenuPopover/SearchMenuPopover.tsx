@@ -13,7 +13,7 @@ export const SearchMenuPopover: React.FC = () => {
   const { menuOpen, onChangeMenuOpen } = useHeaderStore();
   const { boards, cards } = useSearchStore();
 
-  const { push } = useRouter();
+  const router = useRouter();
 
   if (menuOpen !== "search") return <></>;
 
@@ -45,7 +45,7 @@ export const SearchMenuPopover: React.FC = () => {
         )}
         <hr />
         <div
-          onClick={() => push("/search")}
+          onClick={() => router.push("/search")}
           className="flex cursor-pointer gap-5 rounded-md p-3 hover:bg-light/10"
         >
           <button>

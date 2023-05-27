@@ -1,8 +1,8 @@
 //* components *//
 import { BoardCard, NewBoardCard } from "@/components/board";
 
-import { useBoards } from "@/hooks";
 //* hooks *//
+import { useBoards } from "@/hooks";
 
 //* store *//
 import { useBoardInterfaceStore } from "@/store";
