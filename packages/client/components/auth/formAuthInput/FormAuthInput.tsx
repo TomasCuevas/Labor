@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 
+//* icons *//
+import { BsEye, BsEyeSlash } from "react-icons/bs";
+
 //* interface *//
 interface Props {
   inputChange: any;
@@ -18,8 +21,9 @@ export const FormAuthInput: React.FC<Props> = ({
   label,
   max,
 }) => {
-  const [focus, setFocus] = useState(false);
-  const inputFocus = () => setFocus(true);
+  const [viewPassword, setViewPassword] = useState<boolean>(false);
+  const [focus, setFocus] = useState<boolean>(false);
+
   const inputBlur = () => {
     if (typeof inputValue === "string" && inputValue.length < 1) {
       setFocus(false);
@@ -36,9 +40,8 @@ export const FormAuthInput: React.FC<Props> = ({
   }, [inputValue]);
 
   return (
-    <div className="relative flex h-[60px] items-center rounded-md border border-emerald px-5">
-      <label
-        htmlFor={inputName}
+    <label className="relative flex h-[60px] items-center rounded-md border border-emerald px-5">
+      <span
         className={
           focus
             ? "absolute top-[5px] text-xs font-light text-light transition-all"
@@ -46,18 +49,31 @@ export const FormAuthInput: React.FC<Props> = ({
         }
       >
         {label}
-      </label>
+      </span>
       <input
         maxLength={max}
-        onFocus={inputFocus}
+        onFocus={() => setFocus(true)}
         onBlur={inputBlur}
-        type={inputType}
+        type={viewPassword ? "text" : inputType}
         name={inputName}
         id={inputName}
         value={inputValue}
         onChange={inputChange}
         className="w-full border-none bg-[#0000] pt-[10px] text-lg font-medium text-white outline-none autofill:bg-[#0000]"
       />
-    </div>
+      {inputType === "password" ? (
+        viewPassword ? (
+          <BsEyeSlash
+            onClick={() => setViewPassword(false)}
+            className="mt-1 cursor-pointer text-2xl text-white"
+          />
+        ) : (
+          <BsEye
+            onClick={() => setViewPassword(true)}
+            className="mt-1 cursor-pointer text-2xl text-white"
+          />
+        )
+      ) : null}
+    </label>
   );
 };
