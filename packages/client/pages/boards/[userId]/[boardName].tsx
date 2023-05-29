@@ -8,8 +8,8 @@ import {
   BoardHeader,
   BoardIsClosed,
   BoardSidebar,
-} from "@/components/boards";
-import { CardModal } from "@/components/cards";
+} from "@/components/board";
+import { CardModal } from "@/components/card";
 
 //* layout *//
 import { MainLayout } from "@/layouts";
@@ -32,23 +32,32 @@ const BoardPage: NextPage<Props> = ({ boardProp, modalCard }) => {
   useEffect(() => {
     if (modalCard && boardProp.status === "open") onToggleCardModal(modalCard);
     onSetBoard(boardProp);
-  }, []);
+  }, [boardProp]);
+
+  useEffect(() => {
+    const newUrl = `/boards/${board?.user.id}/${board?.name}`;
+    window.history.replaceState({}, "", newUrl);
+  }, [board?.name]);
 
   return (
     <MainLayout
-      title={`${boardProp?.name} | Labor`}
-      description={`Pagina dedicada al tablero ${boardProp?.name} creado por ${boardProp?.user.name}`}
+      title={`${board ? board.name : boardProp.name} | Labor`}
+      description={`Pagina dedicada al tablero ${
+        board ? board.name : boardProp.name
+      } creado por ${board ? board.user.name : boardProp.user.name}`}
     >
       <div
         className="relative flex h-full w-full flex-col bg-cover bg-center bg-no-repeat pt-11"
         style={{
-          backgroundImage: `url(/board_background/${board?.background}.svg)`,
+          backgroundImage: `url(/board_background/${
+            board ? board.background : boardProp.background
+          }.svg)`,
         }}
       >
         {boardProp.status === "open" ? (
           <>
-            <BoardHeader boardName={boardProp?.name} />
-            <Board boardId={boardProp?.id} />
+            <BoardHeader boardName={boardProp.name} boardId={boardProp.id} />
+            <Board boardId={boardProp.id} />
           </>
         ) : (
           <BoardIsClosed board={boardProp} />
