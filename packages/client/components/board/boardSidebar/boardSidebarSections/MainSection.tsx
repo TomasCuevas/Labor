@@ -1,6 +1,9 @@
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 
+//* icon *//
+import { Board } from "@/components/icons";
+
 //* comppnents *//
 import { BoardSidebarHeader, BoardSidebarItem } from "@/components/board";
 
@@ -46,11 +49,7 @@ export const MainSection: React.FC = () => {
           description="Añada una descripción a su tablero"
           title="Acerca de este tablero"
           navigate="about"
-          icon={
-            <span>
-              <img src="/labor.svg" alt="Labor icon" />
-            </span>
-          }
+          icon={<Board className="w-[27px] rounded-md text-emerald" />}
         />
         <BoardSidebarItem
           title="Cambiar fondo"
