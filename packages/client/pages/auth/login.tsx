@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
@@ -6,24 +7,32 @@ import * as Yup from "yup";
 //* components *//
 import {
   FormAuthButton,
+  FormAuthCheckbox,
   FormAuthInput,
   FormErrorMessage,
   RegisterLoginSwitch,
 } from "@/components/auth";
 
+//* utils *//
+import { clearLoginData, getLoginData, saveLoginData } from "@/utils";
+
 //* layout *//
 import { AuthLayout } from "@/layouts";
 
 //* form-initial-values and form-validations *//
-const initialValues = () => ({
-  email: "",
-  password: "",
-});
+const initialValues = () => {
+  return {
+    email: "",
+    password: "",
+    rememberMe: false,
+  };
+};
 
 const formValidations = () => {
   return Yup.object({
-    email: Yup.string().email().required().trim(),
-    password: Yup.string().min(6).max(50).required().trim(),
+    email: Yup.string().email().required(),
+    password: Yup.string().min(6).max(50).required(),
+    rememberMe: Yup.boolean(),
   });
 };
 
@@ -37,15 +46,36 @@ const LoginPage: NextPage = () => {
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: formValidations(),
-    onSubmit: async (formValues, { setStatus }) => {
+    validateOnMount: true,
+    onSubmit: async (formValues) => {
+      const { rememberMe, ...loginData } = formValues;
+
       try {
-        await onLogin(formValues);
+        await onLogin(loginData);
+        rememberMe ? saveLoginData(loginData) : clearLoginData();
+
         router.replace("/");
       } catch (error) {
-        setStatus(error as string);
+        formik.setStatus(error);
       }
     },
   });
+
+  useEffect(() => {
+    const loginData = getLoginData();
+    if (loginData) {
+      formik.setFieldValue("email", loginData.email);
+      formik.setFieldValue("password", loginData.password);
+      formik.setFieldValue("rememberMe", true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const loginData = getLoginData();
+    formik.validateForm();
+
+    if (loginData) formik.submitForm();
+  }, [formik.values]);
 
   return (
     <AuthLayout
@@ -72,10 +102,14 @@ const LoginPage: NextPage = () => {
               inputType="password"
               label="Contraseña"
             />
+            <FormAuthCheckbox
+              label="Recordarme"
+              name="rememberMe"
+              onChange={formik.handleChange}
+              value={formik.values.rememberMe}
+            />
             <FormAuthButton
-              isDisabled={
-                formik.errors.email || formik.errors.password ? true : false
-              }
+              isDisabled={Object.keys(formik.errors).length > 0}
               label="Iniciar sesión"
               type="submit"
             />

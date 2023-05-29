@@ -6,10 +6,14 @@ import * as Yup from "yup";
 //* components *//
 import {
   FormAuthButton,
+  FormAuthCheckbox,
   FormAuthInput,
   FormErrorMessage,
   RegisterLoginSwitch,
 } from "@/components/auth";
+
+//* utils *//
+import { clearLoginData, saveLoginData } from "@/utils";
 
 //* layout *//
 import { AuthLayout } from "@/layouts";
@@ -20,14 +24,16 @@ const initialValues = () => ({
   name: "",
   password: "",
   repeatPassword: "",
+  rememberMe: false,
 });
 
 const formValidations = () => {
   return Yup.object({
-    email: Yup.string().email().required().trim(),
-    name: Yup.string().min(1).max(46).required().trim(),
-    password: Yup.string().min(6).max(50).required().trim(),
-    repeatPassword: Yup.string().min(6).max(50).required().trim(),
+    email: Yup.string().email().required(),
+    name: Yup.string().min(1).max(46).required(),
+    password: Yup.string().min(6).max(50).required(),
+    repeatPassword: Yup.string().min(6).max(50).required(),
+    rememberMe: Yup.boolean(),
   });
 };
 
@@ -41,18 +47,27 @@ const RegisterPage: NextPage = () => {
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: formValidations(),
+    validateOnMount: true,
     onSubmit: async (formValues, { setStatus }) => {
-      if (formValues.password !== formValues.repeatPassword) {
+      const { rememberMe, repeatPassword, ...registerData } = formValues;
+
+      if (registerData.password !== repeatPassword) {
         setStatus("Las contraseñas no coinciden.");
         return;
       }
 
       try {
-        const { repeatPassword, ...values } = formValues;
-        await onRegister(values);
+        await onRegister(registerData);
+        rememberMe
+          ? saveLoginData({
+              email: registerData.email,
+              password: registerData.password,
+            })
+          : clearLoginData();
+
         router.replace("/");
       } catch (error) {
-        setStatus(error as string);
+        setStatus(error);
       }
     },
   });
@@ -95,15 +110,14 @@ const RegisterPage: NextPage = () => {
               inputType="password"
               label="Repita la contraseña"
             />
+            <FormAuthCheckbox
+              label="Recordarme"
+              name="rememberMe"
+              onChange={formik.handleChange}
+              value={formik.values.rememberMe}
+            />
             <FormAuthButton
-              isDisabled={
-                formik.errors.email ||
-                formik.errors.name ||
-                formik.errors.password ||
-                formik.errors.repeatPassword
-                  ? true
-                  : false
-              }
+              isDisabled={Object.keys(formik.errors).length > 0}
               label="Registrarme"
               type="submit"
             />
