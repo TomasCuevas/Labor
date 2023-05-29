@@ -13,7 +13,6 @@ export const registerService = async (
 
     return data;
   } catch (error: any) {
-    console.error(error);
     throw error.response.data.message[0];
   }
 };
@@ -27,7 +26,6 @@ export const loginService = async (
 
     return data;
   } catch (error: any) {
-    console.error(error);
     throw error.response.data.message[0];
   }
 };
@@ -42,7 +40,6 @@ export const checkService = async (): Promise<{
 
     return data;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };

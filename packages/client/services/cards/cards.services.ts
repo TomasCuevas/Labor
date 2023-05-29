@@ -14,7 +14,6 @@ export const createCardService = async (
 
     return data;
   } catch (error: any) {
-    console.error(error);
     throw error;
   }
 };
@@ -28,7 +27,6 @@ export const getAllCardsByBoardService = async (
 
     return data;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };
@@ -43,7 +41,6 @@ export const updateCardService = async (
 
     return data;
   } catch (error: any) {
-    console.error(error);
     throw error;
   }
 };
@@ -53,7 +50,6 @@ export const removeCardService = async (cardId: string) => {
   try {
     await cardsApi.delete(`/delete/${cardId}`);
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };

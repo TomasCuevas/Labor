@@ -13,7 +13,6 @@ export const createBoardService = async (
 
     return data;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };
@@ -28,7 +27,6 @@ export const updateBoardService = async (
 
     return data;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };
@@ -40,7 +38,6 @@ export const getAllOpenBoardsService = async (): Promise<IBoard[]> => {
 
     return data;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };
@@ -52,7 +49,6 @@ export const getBoardByName = async (boardName: string): Promise<IBoard> => {
 
     return data;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };
@@ -64,7 +60,6 @@ export const getAllClosedBoards = async (): Promise<IBoard[]> => {
 
     return data;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };
@@ -76,7 +71,6 @@ export const deleteBoard = async (boardId: string) => {
 
     return;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };

@@ -16,7 +16,6 @@ export const searchAll = async (
       cards: data.cards,
     };
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };
