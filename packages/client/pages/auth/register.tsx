@@ -12,9 +12,6 @@ import {
   RegisterLoginSwitch,
 } from "@/components/auth";
 
-//* utils *//
-import { clearLoginData, saveLoginData } from "@/utils";
-
 //* layout *//
 import { AuthLayout } from "@/layouts";
 
@@ -49,7 +46,7 @@ const RegisterPage: NextPage = () => {
     validationSchema: formValidations(),
     validateOnMount: true,
     onSubmit: async (formValues, { setStatus }) => {
-      const { rememberMe, repeatPassword, ...registerData } = formValues;
+      const { repeatPassword, ...registerData } = formValues;
 
       if (registerData.password !== repeatPassword) {
         setStatus("Las contraseñas no coinciden.");
@@ -58,12 +55,9 @@ const RegisterPage: NextPage = () => {
 
       try {
         await onRegister(registerData);
-        rememberMe
-          ? saveLoginData({
-              email: registerData.email,
-              password: registerData.password,
-            })
-          : clearLoginData();
+
+        if (formValues.rememberMe) localStorage.setItem("rememberMe", "true");
+        else localStorage.removeItem("rememberMe");
 
         router.replace("/");
       } catch (error) {

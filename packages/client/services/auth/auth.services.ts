@@ -35,8 +35,12 @@ export const checkService = async (): Promise<{
   token: string;
   user: IUser;
 }> => {
+  const rememberMe = localStorage.getItem("rememberMe");
+
   try {
-    const { data } = await authApi.get("/check");
+    const { data } = await authApi.post("/check", {
+      rememberMe: rememberMe === "true" ? true : false,
+    });
 
     return data;
   } catch (error) {

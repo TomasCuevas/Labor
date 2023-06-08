@@ -32,6 +32,7 @@ export const useAuthStore = create<useAuthState>((set, get) => ({
   //! set logout
   setLogout() {
     Cookies.remove("labortoken");
+    localStorage.removeItem("rememberMe");
     set(() => ({
       user: undefined,
       status: "not-authenticated",
@@ -61,7 +62,7 @@ export const useAuthStore = create<useAuthState>((set, get) => ({
   },
 
   //! login
-  async onLogin(loginData: ILogin) {
+  async onLogin(loginData) {
     const { setChecking, setLogin, setLogout } = get();
     setChecking();
 
@@ -75,7 +76,7 @@ export const useAuthStore = create<useAuthState>((set, get) => ({
   },
 
   //! register
-  async onRegister(registerData: IRegister) {
+  async onRegister(registerData) {
     const { setChecking, setLogin, setLogout } = get();
     setChecking();
 

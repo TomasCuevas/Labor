@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
@@ -12,9 +11,6 @@ import {
   FormErrorMessage,
   RegisterLoginSwitch,
 } from "@/components/auth";
-
-//* utils *//
-import { clearLoginData, getLoginData, saveLoginData } from "@/utils";
 
 //* layout *//
 import { AuthLayout } from "@/layouts";
@@ -48,11 +44,11 @@ const LoginPage: NextPage = () => {
     validationSchema: formValidations(),
     validateOnMount: true,
     onSubmit: async (formValues) => {
-      const { rememberMe, ...loginData } = formValues;
-
       try {
-        await onLogin(loginData);
-        rememberMe ? saveLoginData(loginData) : clearLoginData();
+        await onLogin(formValues);
+
+        if (formValues.rememberMe) localStorage.setItem("rememberMe", "true");
+        else localStorage.removeItem("rememberMe");
 
         router.replace("/");
       } catch (error) {
@@ -60,22 +56,6 @@ const LoginPage: NextPage = () => {
       }
     },
   });
-
-  useEffect(() => {
-    const loginData = getLoginData();
-    if (loginData) {
-      formik.setFieldValue("email", loginData.email);
-      formik.setFieldValue("password", loginData.password);
-      formik.setFieldValue("rememberMe", true);
-    }
-  }, []);
-
-  useEffect(() => {
-    const loginData = getLoginData();
-    formik.validateForm();
-
-    if (loginData) formik.submitForm();
-  }, [formik.values]);
 
   return (
     <AuthLayout
