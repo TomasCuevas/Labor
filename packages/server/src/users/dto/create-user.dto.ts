@@ -1,4 +1,10 @@
-import { IsEmail, Matches, MaxLength, MinLength } from 'class-validator';
+import {
+  IsBoolean,
+  IsEmail,
+  Matches,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class CreateUserDto {
   @IsEmail({}, { message: 'El email debe tener un formato valido.' })
@@ -25,4 +31,9 @@ export class CreateUserDto {
       'La contraseña solo puede tener letras, numeros, guiones y puntos.',
   })
   password: string;
+
+  @IsBoolean({
+    message: 'La propiedad "rememberMe" debe ser un valor booleano.',
+  })
+  rememberMe: boolean;
 }
