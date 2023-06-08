@@ -7,8 +7,8 @@ import {
 } from 'typeorm';
 
 //* entities *//
-import { Board } from '../../boards/entities';
-import { User } from '../../users/entities';
+import { Board } from '@/boards/entities';
+import { User } from '@/users/entities';
 
 @Entity('cards')
 export class Card {

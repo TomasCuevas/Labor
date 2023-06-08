@@ -2,17 +2,17 @@ import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 //* dto *//
-import { CreateUserDto } from '../users/dto';
-import { LoginUserDto, CheckTokenDto } from './dto';
+import { CreateUserDto } from '@/users/dto';
+import { LoginUserDto, CheckTokenDto } from '@/auth/dto';
 
 //* decorators *//
-import { GetUser } from './decorators';
+import { GetUser } from '@/auth/decorators';
 
 //* services *//
-import { AuthService } from './auth.service';
+import { AuthService } from '@/auth/auth.service';
 
 //* entities *//
-import { User } from '../users/entities/user.entity';
+import { User } from '@/users/entities';
 
 @Controller('auth')
 export class AuthController {

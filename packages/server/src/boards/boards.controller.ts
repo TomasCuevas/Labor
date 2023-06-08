@@ -12,19 +12,19 @@ import { ParseUUIDPipe } from '@nestjs/common/pipes';
 import { AuthGuard } from '@nestjs/passport';
 
 //* decorators *//
-import { GetUser } from '../auth/decorators';
+import { GetUser } from '@/auth/decorators';
 
 //* services *//
-import { BoardsService } from './boards.service';
-import { CardsService } from '../cards/cards.service';
+import { BoardsService } from '@/boards/boards.service';
+import { CardsService } from '@/cards/cards.service';
 
 //* dtos *//
-import { CreateBoardDto, UpdateBoardDto } from './dto';
+import { CreateBoardDto, UpdateBoardDto } from '@/boards/dto';
 
 //* entities *//
-import { Board } from './entities';
-import { Card } from '../cards/entities';
-import { User } from '../users/entities';
+import { Board } from '@/boards/entities';
+import { Card } from '@/cards/entities';
+import { User } from '@/users/entities';
 
 @Controller('boards')
 @UseGuards(AuthGuard('jwt'))

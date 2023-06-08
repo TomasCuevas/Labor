@@ -7,14 +7,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 //* dtos *//
-import { CreateCardDto, UpdateCardDto } from './dto';
+import { CreateCardDto, UpdateCardDto } from '@/cards/dto';
 
 //* services *//
-import { BoardsService } from '../boards/boards.service';
+import { BoardsService } from '@/boards/boards.service';
 
 //* entities *//
-import { Card } from './entities';
-import { User } from '../users/entities';
+import { Card } from '@/cards/entities';
+import { User } from '@/users/entities';
 
 @Injectable()
 export class CardsService {

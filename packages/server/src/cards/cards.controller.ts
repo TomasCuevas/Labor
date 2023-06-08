@@ -11,17 +11,17 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 
 //* services *//
-import { CardsService } from './cards.service';
+import { CardsService } from '@/cards/cards.service';
 
 //* dtos *//
-import { CreateCardDto, UpdateCardDto } from './dto';
+import { CreateCardDto, UpdateCardDto } from '@/cards/dto';
 
 //* decorators *//
-import { GetUser } from 'src/auth/decorators';
+import { GetUser } from '@/auth/decorators';
 
 //* entities *//
-import { Card } from './entities';
-import { User } from '../users/entities';
+import { Card } from '@/cards/entities';
+import { User } from '@/users/entities';
 
 @Controller('cards')
 @UseGuards(AuthGuard('jwt'))

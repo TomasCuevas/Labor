@@ -2,16 +2,16 @@ import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 //* controllers *//
-import { BoardsController } from './boards.controller';
+import { BoardsController } from '@/boards/boards.controller';
 
 //* services *//
-import { BoardsService } from './boards.service';
+import { BoardsService } from '@/boards/boards.service';
 
 //* entities *//
-import { Board } from './entities/board.entity';
+import { Board } from '@/boards/entities';
 
 //* modules *//
-import { CardsModule } from '../cards/cards.module';
+import { CardsModule } from '@/cards/cards.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Board]), forwardRef(() => CardsModule)],
