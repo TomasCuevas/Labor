@@ -76,16 +76,46 @@ export const getServerSideProps: GetServerSideProps = async ({
   req: { cookies },
 }) => {
   const token = cookies.labortoken;
+  const { modal } = query as { modal: string };
   const { boardName } = params as {
     boardName: string;
   };
 
-  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/boards/${boardName}`
-  );
+  try {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/boards/${boardName}`
+    );
 
-  if (!data) {
+    if (!data) throw new Error();
+
+    if (!modal) {
+      return {
+        props: {
+          boardProp: data,
+        },
+      };
+    }
+
+    try {
+      const { data: modalData } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/cards/${modal}`
+      );
+
+      return {
+        props: {
+          boardProp: data,
+          modalCard: modalData,
+        },
+      };
+    } catch (error) {
+      return {
+        props: {
+          boardProp: data,
+        },
+      };
+    }
+  } catch (error) {
     return {
       redirect: {
         destination: "/",
@@ -93,27 +123,6 @@ export const getServerSideProps: GetServerSideProps = async ({
       },
     };
   }
-
-  const { modal } = query as { modal: string };
-
-  if (!modal) {
-    return {
-      props: {
-        boardProp: data,
-      },
-    };
-  }
-
-  const { data: modalData } = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/cards/${modal}`
-  );
-
-  return {
-    props: {
-      boardProp: data,
-      modalCard: modalData,
-    },
-  };
 };
 
 export default BoardPage;
