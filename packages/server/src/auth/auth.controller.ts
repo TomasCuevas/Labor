@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 //* dto *//
 import { CreateUserDto } from '../users/dto';
-import { LoginUserDto } from './dto';
+import { LoginUserDto, CheckTokenDto } from './dto';
 
 //* decorators *//
 import { GetUser } from './decorators';
@@ -31,9 +31,9 @@ export class AuthController {
   }
 
   //! check controller
-  @Get('check')
+  @Post('check')
   @UseGuards(AuthGuard('jwt'))
-  async check(@GetUser() user: User) {
-    return this.authService.check(user);
+  async check(@GetUser() user: User, @Body() checkTokenDto: CheckTokenDto) {
+    return this.authService.check(user, checkTokenDto.rememberMe);
   }
 }

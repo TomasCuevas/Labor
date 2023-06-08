@@ -17,7 +17,7 @@ export class UsersService {
 
   //! create user service
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const { password, ...userData } = createUserDto;
+    const { password, rememberMe, ...userData } = createUserDto;
 
     const existUser = await this.findByEmail(userData.email);
     if (existUser) {

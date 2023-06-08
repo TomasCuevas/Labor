@@ -29,15 +29,19 @@ export class AuthService {
   async register(createAuthDto: CreateUserDto) {
     const user = await this.usersService.create(createAuthDto);
 
+    const { rememberMe } = createAuthDto;
+
     return {
-      token: this.getJwtToken({ id: user.id }),
+      token: rememberMe
+        ? this.getJwtTokenWithoutExpiration({ id: user.id })
+        : this.getJwtToken({ id: user.id }),
       user,
     };
   }
 
   //! login service
   async login(loginUserDto: LoginUserDto) {
-    const { email, password } = loginUserDto;
+    const { email, password, rememberMe } = loginUserDto;
 
     const user = await this.userRepository.findOne({
       where: { email },
@@ -53,22 +57,32 @@ export class AuthService {
     delete user.password;
 
     return {
-      token: this.getJwtToken({ id: user.id }),
+      token: rememberMe
+        ? this.getJwtTokenWithoutExpiration({ id: user.id })
+        : this.getJwtToken({ id: user.id }),
       user,
     };
   }
 
   //! check service
-  async check(user: User) {
+  async check(user: User, rememberMe: boolean) {
     return {
-      token: this.getJwtToken({ id: user.id }),
+      token: rememberMe
+        ? this.getJwtTokenWithoutExpiration({ id: user.id })
+        : this.getJwtToken({ id: user.id }),
       user,
     };
   }
 
-  //! get jwt
+  //! get jwt with expiration
   private getJwtToken(payload: IJwtPayload) {
     const token = this.jwtService.sign(payload);
+    return token;
+  }
+
+  //! get jwt without expiration
+  private getJwtTokenWithoutExpiration(payload: IJwtPayload) {
+    const token = this.jwtService.sign(payload, { expiresIn: '60d' });
     return token;
   }
 }
