@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 //* utils *//
-import { notiError, notiSuccess } from "@/utils/notistack.utils";
+import { notiError, notiSuccess } from "@/utils";
 
 //* services *//
 import {

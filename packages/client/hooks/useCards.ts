@@ -7,18 +7,18 @@ import { getAllCardsByBoardService } from "@/services";
 import { ICard } from "@/interfaces";
 
 interface Return {
-  isLoading: boolean;
   cards: ICard[];
+  isLoading: boolean;
 }
 
 export const useCards = (boardId: string): Return => {
-  const { data: cards, isLoading } = useQuery(
+  const { data: cards = [], isLoading } = useQuery(
     [`/boards/${boardId}/todos`],
     () => getAllCardsByBoardService(boardId)
   );
 
   return {
+    cards,
     isLoading,
-    cards: cards || [],
   };
 };

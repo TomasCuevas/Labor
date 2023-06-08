@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { RiCloseFill } from "react-icons/ri";
 
 //* store *//
-import { useBoardsStore } from "@/store";
+import { useBoardInterfaceStore, useBoardsStore } from "@/store";
 
 //* interface *//
 import { IBoard } from "@/interfaces";
@@ -16,6 +16,7 @@ interface Props {
 
 export const ClosedBoardCard: React.FC<Props> = ({ closedBoard }) => {
   const { onUpdateBoard, onDeleteBoard } = useBoardsStore();
+  const { onToggleClosedBoardsModal } = useBoardInterfaceStore();
 
   //! start open board
   const startOpenBoard = async () => {
@@ -58,7 +59,10 @@ export const ClosedBoardCard: React.FC<Props> = ({ closedBoard }) => {
         </div>
         <div className="w-[calc(100%_-_40px)]">
           <Link href={`/boards/${closedBoard.user.id}/${closedBoard.name}`}>
-            <h3 className="cursor-pointer text-sm underline">
+            <h3
+              onClick={() => onToggleClosedBoardsModal(false)}
+              className="cursor-pointer text-sm underline"
+            >
               {closedBoard.name}
             </h3>
           </Link>

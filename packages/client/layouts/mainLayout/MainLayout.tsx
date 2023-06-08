@@ -13,7 +13,7 @@ import {
 //* store *//
 import { useAuthStore } from "@/store";
 
-//* interface
+//* interface *//
 interface Props {
   children: React.ReactNode;
   description: string;
@@ -26,9 +26,9 @@ export const MainLayout: React.FC<Props> = ({
   title,
 }) => {
   const { status } = useAuthStore();
-  const { replace } = useRouter();
+  const router = useRouter();
 
-  if (status === "not-authenticated") replace("/auth/login");
+  if (status === "not-authenticated") router.replace("/auth/login");
   if (status === "authenticated") {
     return (
       <>

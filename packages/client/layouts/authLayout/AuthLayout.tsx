@@ -20,9 +20,9 @@ export const AuthLayout: React.FC<Props> = ({
   title,
 }) => {
   const { status } = useAuthStore();
-  const { replace } = useRouter();
+  const router = useRouter();
 
-  if (status === "authenticated") replace("/");
+  if (status === "authenticated") router.replace("/");
   if (status === "not-authenticated") {
     return (
       <>
