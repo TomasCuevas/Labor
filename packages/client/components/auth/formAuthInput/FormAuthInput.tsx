@@ -63,12 +63,12 @@ export const FormAuthInput: React.FC<Props> = ({
       />
       {inputType === "password" ? (
         viewPassword ? (
-          <BsEyeSlash
+          <BsEye
             onClick={() => setViewPassword(false)}
             className="mt-1 cursor-pointer text-2xl text-white"
           />
         ) : (
-          <BsEye
+          <BsEyeSlash
             onClick={() => setViewPassword(true)}
             className="mt-1 cursor-pointer text-2xl text-white"
           />
