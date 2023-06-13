@@ -41,6 +41,7 @@ lerna-debug.log*
 mongo
 postgres
 .env
+.env.production
 
 # dependencies
 /node_modules
