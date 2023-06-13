@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -20,6 +20,17 @@ export class BoardsService {
 
   //! create board [service]
   async create(createBoardDto: CreateBoardDto, createBy: User): Promise<Board> {
+    const existBoard = await this.BoardsRepository.findBy({
+      name: createBoardDto.name,
+      user: { id: createBy.id },
+    });
+
+    if (existBoard) {
+      throw new ConflictException(
+        'No se puede crear el tablero. Ya existe otro tablero con el mismo nombre.',
+      );
+    }
+
     const newBoard = await this.BoardsRepository.create({
       ...createBoardDto,
       user: createBy,
@@ -77,6 +88,17 @@ export class BoardsService {
     updateBoardDto: UpdateBoardDto,
     updateBy: User,
   ): Promise<Board> {
+    const existBoard = await this.BoardsRepository.findBy({
+      name: updateBoardDto.name,
+      user: { id: updateBy.id },
+    });
+
+    if (existBoard) {
+      throw new ConflictException(
+        'No se puede crear el tablero. Ya existe otro tablero con el mismo nombre.',
+      );
+    }
+
     await this.findOneById(boardId, updateBy.id);
 
     const board = await this.BoardsRepository.preload({
