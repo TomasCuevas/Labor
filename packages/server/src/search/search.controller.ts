@@ -2,15 +2,15 @@ import { Controller, Get, UseGuards, Param } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 //* decorators */
-import { GetUser } from '@/auth/decorators';
+import { GetUser } from '../auth/decorators';
 
 //* services *//
-import { SearchService } from '@/search/search.service';
+import { SearchService } from './search.service';
 
 //* entity *//
-import { Board } from '@/boards/entities';
-import { Card } from '@/cards/entities';
-import { User } from '@/users/entities';
+import { Board } from '../boards/entities';
+import { Card } from '../cards/entities';
+import { User } from '../users/entities';
 
 @Controller('search')
 @UseGuards(AuthGuard('jwt'))

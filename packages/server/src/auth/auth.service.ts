@@ -5,17 +5,17 @@ import { Repository } from 'typeorm';
 import * as bcryptjs from 'bcryptjs';
 
 //* dto *//
-import { CreateUserDto } from '@/users/dto';
-import { LoginUserDto } from '@/auth/dto';
+import { CreateUserDto } from '../users/dto';
+import { LoginUserDto } from '../auth/dto';
 
 //* interfaces *//
-import { IJwtPayload } from '@/auth/interfaces';
+import { IJwtPayload } from './interfaces';
 
 //* services *//
-import { UsersService } from '@/users/users.service';
+import { UsersService } from '../users/users.service';
 
 //* entities *//
-import { User } from '@/users/entities';
+import { User } from '../users/entities';
 
 @Injectable()
 export class AuthService {

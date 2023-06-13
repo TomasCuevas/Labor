@@ -4,16 +4,16 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
 //* controllers *//
-import { AuthController } from '@/auth/auth.controller';
+import { AuthController } from './auth.controller';
 
 //* services *//
-import { AuthService } from '@/auth/auth.service';
+import { AuthService } from './auth.service';
 
 //* strategies *//
-import { JwtStrategy } from '@/auth/strategies';
+import { JwtStrategy } from './strategies';
 
 //* modules *//
-import { UsersModule } from '@/users/users.module';
+import { UsersModule } from '../users/users.module';
 
 @Module({
   imports: [

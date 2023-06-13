@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 
 //* services *//
-import { BoardsService } from '@/boards/boards.service';
-import { CardsService } from '@/cards/cards.service';
+import { BoardsService } from '../boards/boards.service';
+import { CardsService } from '../cards/cards.service';
 
 //* entities *//
-import { Board } from '@/boards/entities';
-import { Card } from '@/cards/entities';
+import { Board } from '../boards/entities';
+import { Card } from '../cards/entities';
 
 @Injectable()
 export class SearchService {

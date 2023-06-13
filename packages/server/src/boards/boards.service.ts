@@ -3,12 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 //* dtos *//
-import { CreateBoardDto, UpdateBoardDto } from '@/boards/dto';
+import { CreateBoardDto, UpdateBoardDto } from '../boards/dto';
 
 //* entities *//
-import { Board } from '@/boards/entities';
-import { Card } from '@/cards/entities';
-import { User } from '@/users/entities';
+import { Board } from '../boards/entities';
+import { Card } from '../cards/entities';
+import { User } from '../users/entities';
 
 @Injectable()
 export class BoardsService {
