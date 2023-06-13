@@ -23,16 +23,19 @@ interface useBoardsState {
 }
 
 export const useBoardsStore = create<useBoardsState>(() => ({
+  //! create board
   async onCreateBoard(boardData: IBoardForCreate) {
     try {
       const board = await createBoardService(boardData);
       queryClient.invalidateQueries(["/boards"]);
       return board;
     } catch (error: any) {
-      notiError(error.response.data.message[0] || "Error al crear el tablero.");
+      notiError(error.response.data.message || "Error al crear el tablero.");
       throw error;
     }
   },
+
+  //! update board
   async onUpdateBoard(boardId: string, boardData: IBoardForUpdate) {
     try {
       const board = await updateBoardService(boardId, boardData);
@@ -41,20 +44,20 @@ export const useBoardsStore = create<useBoardsState>(() => ({
       return board;
     } catch (error: any) {
       notiError(
-        error.response.data.message[0] || "Error al actualizar el tablero."
+        error.response.data.message || "Error al actualizar el tablero."
       );
       throw error;
     }
   },
+
+  //! delete board
   async onDeleteBoard(boardId: string) {
     try {
       await deleteBoard(boardId);
       queryClient.invalidateQueries(["/boards"]);
       queryClient.invalidateQueries(["/boards/closed"]);
     } catch (error: any) {
-      notiError(
-        error.response.data.message[0] || "Error al eliminar el tablero."
-      );
+      notiError(error.response.data.message || "Error al eliminar el tablero.");
       throw error;
     }
   },
