@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
@@ -25,4 +28,5 @@ async function bootstrap() {
 
   await app.listen(process.env.PORT);
 }
+
 bootstrap();
