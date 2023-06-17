@@ -8,7 +8,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
 //* origines permitidos por cors
-const origins = process.env.ORIGINS;
+const origins = process.env.ORIGINS || 'https://labor-client.vercel.app';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
