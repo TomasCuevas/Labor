@@ -19,7 +19,14 @@ async function bootstrap() {
 
   app.setGlobalPrefix('/api');
 
-  app.enableCors();
+  app.enableCors({
+    origin: true,
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  });
 
   await app.listen(process.env.PORT);
 }
