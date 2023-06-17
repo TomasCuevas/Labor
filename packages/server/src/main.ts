@@ -9,6 +9,7 @@ import { AppModule } from './app.module';
 
 //* origines permitidos por cors
 const origins = process.env.ORIGINS.split(' ');
+console.log(origins);
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
