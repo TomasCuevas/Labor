@@ -7,10 +7,6 @@ import { NestFactory } from '@nestjs/core';
 //* principal module *//
 import { AppModule } from './app.module';
 
-//* origines permitidos por cors
-const origins = process.env.ORIGINS.split(' ');
-console.log(origins);
-
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
 
@@ -22,15 +18,6 @@ async function bootstrap() {
   );
 
   app.setGlobalPrefix('/api');
-
-  app.enableCors({
-    origin: origins,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Content-Type,Authorization',
-    credentials: true,
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-  });
 
   await app.listen(process.env.PORT);
 }
