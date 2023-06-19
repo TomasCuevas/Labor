@@ -11,6 +11,8 @@
   "scripts": {
     "install:server": "yarn --cwd server install",
     "install:client": "yarn --cwd client install",
+    "build:server": "yarn --cwd packages/server build",
+    "start:server": "yarn --cwd packages/server start:prod",
     "dev:server": "yarn --cwd packages/server start:dev",
     "dev:client": "yarn --cwd packages/client dev"
   }
