@@ -14,6 +14,7 @@
     "build:server": "yarn --cwd packages/server build",
     "start:server": "yarn --cwd packages/server start:prod",
     "dev:server": "yarn --cwd packages/server start:dev",
-    "dev:client": "yarn --cwd packages/client dev"
+    "dev:client": "yarn --cwd packages/client dev",
+    "prepush": "yarn --cwd packages/server build && git add ./packages/server/dist && git commit -m \"add dist folder\" &&  git push"
   }
 }
