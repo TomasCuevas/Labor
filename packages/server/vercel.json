@@ -12,13 +12,17 @@
     {
       "src": "/api/(.*)",
       "dest": "src/main.ts",
+      "methods": ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"]
+    },
+    {
+      "src": "/(.*)",
       "headers": {
         "Access-Control-Allow-Origin": "${env.ORIGINS}",
         "Access-Control-Allow-Methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
         "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Requested-With,Accept-Language",
         "Access-Control-Allow-Credentials": "true"
       },
-      "methods": ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"]
+      "dest": "src/main.ts"
     }
   ]
 }
