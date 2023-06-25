@@ -72,6 +72,14 @@ const RegisterPage: NextPage = () => {
       description="Página para registrarse en Labor"
     >
       <div className="mx-auto flex w-full max-w-[600px] flex-col items-center justify-center px-4 md:px-0">
+        <div className="mb-10 flex w-full items-center justify-center gap-5 overflow-hidden rounded-2xl bg-gray-500/5 py-5 backdrop-blur-3xl sm:gap-8">
+          <img
+            src="/labor.svg"
+            alt="sdawdaw"
+            className="h-12 w-12 shadow-2xl shadow-black/50 sm:h-20 sm:w-20"
+          />
+          <h1 className="text-3xl font-bold text-white sm:text-5xl">Labor</h1>
+        </div>
         <div className="flex w-full flex-col justify-center rounded-2xl bg-white/5 p-4 backdrop-blur-3xl sm:py-6 md:py-8 lg:py-10">
           <RegisterLoginSwitch />
           <form
