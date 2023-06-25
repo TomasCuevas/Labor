@@ -6,17 +6,35 @@ export const Board: React.FC<Props> = ({ className }) => {
   return (
     <svg
       className={className}
-      role="presentation"
-      focusable="false"
-      viewBox="0 0 24 24"
+      width="800"
+      height="800"
+      viewBox="0 0 256 256"
       xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid"
     >
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M3 5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5ZM5 6C5 5.44772 5.44772 5 6 5H10C10.5523 5 11 5.44772 11 6V16C11 16.5523 10.5523 17 10 17H6C5.44772 17 5 16.5523 5 16V6ZM14 5C13.4477 5 13 5.44772 13 6V12C13 12.5523 13.4477 13 14 13H18C18.5523 13 19 12.5523 19 12V6C19 5.44772 18.5523 5 18 5H14Z"
-        fill="currentColor"
-      ></path>
+      <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="a">
+          <stop stopColor="#1f8675" offset="0%" />
+          <stop stopColor="#1f8675" offset="100%" />
+        </linearGradient>
+      </defs>
+      <rect fill="url(#a)" width="256" height="256" rx="25" />
+      <rect
+        fill="#FFF"
+        x="144.64"
+        y="33.28"
+        width="78.08"
+        height="112"
+        rx="12"
+      />
+      <rect
+        fill="#FFF"
+        x="33.28"
+        y="33.28"
+        width="78.08"
+        height="176"
+        rx="12"
+      />
     </svg>
   );
 };

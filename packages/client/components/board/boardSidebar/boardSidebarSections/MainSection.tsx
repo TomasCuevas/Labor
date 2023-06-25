@@ -49,7 +49,7 @@ export const MainSection: React.FC = () => {
           description="Añada una descripción a su tablero"
           title="Acerca de este tablero"
           navigate="about"
-          icon={<Board className="w-[27px] rounded-md text-emerald" />}
+          icon={<Board className="h-6 w-6 rounded-md text-emerald" />}
         />
         <BoardSidebarItem
           title="Cambiar fondo"
