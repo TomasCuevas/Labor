@@ -20,9 +20,11 @@ export class BoardsService {
 
   //! create board [service]
   async create(createBoardDto: CreateBoardDto, createBy: User): Promise<Board> {
-    const existBoard = await this.BoardsRepository.findBy({
-      name: createBoardDto.name,
-      user: { id: createBy.id },
+    const existBoard = await this.BoardsRepository.findOne({
+      where: {
+        name: createBoardDto.name,
+        user: { id: createBy.id },
+      },
     });
 
     if (existBoard) {
@@ -41,9 +43,11 @@ export class BoardsService {
 
   //! get all open boards by user [service]
   async findAllOpenBoards(userId: string): Promise<Board[]> {
-    return await this.BoardsRepository.findBy({
-      user: { id: userId },
-      status: 'open',
+    return await this.BoardsRepository.find({
+      where: {
+        user: { id: userId },
+        status: 'open',
+      },
     });
   }
 
@@ -60,25 +64,31 @@ export class BoardsService {
 
   //! get one board by id [service]
   async findOneById(boardId: string, userId: string): Promise<Board> {
-    return await this.BoardsRepository.findOneBy({
-      id: boardId,
-      user: { id: userId },
+    return await this.BoardsRepository.findOne({
+      where: {
+        id: boardId,
+        user: { id: userId },
+      },
     });
   }
 
   //! get board by name [service]
   async findOneByName(name: string, userId: string): Promise<Board> {
-    return await this.BoardsRepository.findOneBy({
-      user: { id: userId },
-      name: name,
+    return await this.BoardsRepository.findOne({
+      where: {
+        name: `${name}`,
+        user: { id: userId },
+      },
     });
   }
 
   //! get all closed boards [service]
   async findAllClosedBoards(userId: string): Promise<Board[]> {
-    return await this.BoardsRepository.findBy({
-      user: { id: userId },
-      status: 'closed',
+    return await this.BoardsRepository.find({
+      where: {
+        user: { id: userId },
+        status: 'closed',
+      },
     });
   }
 
@@ -88,15 +98,19 @@ export class BoardsService {
     updateBoardDto: UpdateBoardDto,
     updateBy: User,
   ): Promise<Board> {
-    const existBoard = await this.BoardsRepository.findBy({
-      name: updateBoardDto.name,
-      user: { id: updateBy.id },
-    });
+    if (updateBoardDto.name) {
+      const existBoard = await this.BoardsRepository.findOne({
+        where: {
+          name: updateBoardDto.name,
+          user: { id: updateBy.id },
+        },
+      });
 
-    if (existBoard) {
-      throw new ConflictException(
-        'No se puede crear el tablero. Ya existe otro tablero con el mismo nombre.',
-      );
+      if (existBoard) {
+        throw new ConflictException(
+          'No se puede actualizar el nombre del tablero. Ya tienes un tablero con el mismo nombre.',
+        );
+      }
     }
 
     await this.findOneById(boardId, updateBy.id);
