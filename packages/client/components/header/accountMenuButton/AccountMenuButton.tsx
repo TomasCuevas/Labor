@@ -15,7 +15,7 @@ export const AccountMenuButton: React.FC = () => {
       className="cursor flex h-full items-center rounded-md hover:bg-light/50"
     >
       <button
-        className="h-full px-2"
+        className="h-full px-2 shadow-inner"
         onClick={() => onChangeMenuOpen("account")}
       >
         <RiAppsFill className="text-xl text-white" />

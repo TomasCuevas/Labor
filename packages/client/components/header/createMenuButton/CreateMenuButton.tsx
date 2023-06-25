@@ -22,7 +22,7 @@ export const CreateMenuButton: React.FC = () => {
       className="flex h-full items-center rounded-md hover:bg-light/50"
     >
       <button
-        className="h-full px-2"
+        className="h-full px-2 shadow-inner"
         onClick={() => onChangeMenuOpen("create")}
       >
         <RiAddFill className="text-xl text-white" />
