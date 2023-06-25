@@ -11,6 +11,10 @@ export class CreateBoardDto {
     message:
       'El nombre del tablero, no puede tener espacios al principio ni al final.',
   })
+  @Matches(/^[^?!]+$/, {
+    message:
+      'El nombre del tablero no puede contener signos de interrogación ni exclamación.',
+  })
   @MinLength(1, {
     message: 'El nombre del tablero debe tener mínimo 1 carácter.',
   })
